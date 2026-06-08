@@ -1,0 +1,42 @@
+{
+  "name": "ImpulseGuard",
+  "short_name": "ImpulseGuard",
+  "description": "Your wallet's bestie — track and control impulse spending",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08090d",
+  "theme_color": "#c6f135",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "productivity"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Add Transaction",
+      "short_name": "Add",
+      "description": "Quickly add a new transaction",
+      "url": "/?action=add",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "View your spending dashboard",
+      "url": "/",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
