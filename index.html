@@ -27,8 +27,6 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
   height:100vh;overflow-y:auto;overflow-x:hidden;
   background:var(--bg);
 }
-
-/* NAV */
 .land-nav{
   display:flex;align-items:center;justify-content:space-between;
   padding:20px 60px;position:sticky;top:0;z-index:100;
@@ -42,8 +40,6 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
 .btn-ghost-sm:hover{color:var(--txt);border-color:var(--txt3);}
 .btn-lime-sm{padding:8px 20px;border:none;border-radius:9px;background:var(--lime);color:#0a0d08;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;}
 .btn-lime-sm:hover{background:var(--lime2);}
-
-/* HERO */
 .hero{
   flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:60px 40px 40px;text-align:center;position:relative;
@@ -65,40 +61,14 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
   animation:fadeup .6s .1s ease both;
 }
 .hero-title .line2{color:var(--lime);}
-.hero-sub{
-  font-size:16px;color:var(--txt2);max-width:480px;line-height:1.7;
-  margin-bottom:40px;
-  animation:fadeup .6s .2s ease both;
-}
-.hero-btns{
-  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
-  margin-bottom:60px;
-  animation:fadeup .6s .3s ease both;
-}
-.btn-hero-main{
-  padding:14px 36px;background:var(--lime);border:none;border-radius:12px;
-  color:#0a0d08;font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:800;
-  cursor:pointer;transition:.2s;
-}
+.hero-sub{font-size:16px;color:var(--txt2);max-width:480px;line-height:1.7;margin-bottom:40px;animation:fadeup .6s .2s ease both;}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:60px;animation:fadeup .6s .3s ease both;}
+.btn-hero-main{padding:14px 36px;background:var(--lime);border:none;border-radius:12px;color:#0a0d08;font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:800;cursor:pointer;transition:.2s;}
 .btn-hero-main:hover{background:var(--lime2);transform:translateY(-2px);}
-.btn-hero-ghost{
-  padding:14px 36px;background:none;border:1px solid var(--b2);border-radius:12px;
-  color:var(--txt);font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;
-  cursor:pointer;transition:.2s;
-}
+.btn-hero-ghost{padding:14px 36px;background:none;border:1px solid var(--b2);border-radius:12px;color:var(--txt);font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;}
 .btn-hero-ghost:hover{border-color:var(--txt3);}
-
-/* FLOATING CARDS */
-.float-cards{
-  display:flex;gap:16px;flex-wrap:wrap;justify-content:center;
-  animation:fadeup .6s .4s ease both;
-  margin-bottom:60px;
-}
-.fcard{
-  background:var(--s1);border:1px solid var(--b1);border-radius:16px;
-  padding:18px 22px;min-width:180px;text-align:left;
-  position:relative;overflow:hidden;
-}
+.float-cards{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;animation:fadeup .6s .4s ease both;margin-bottom:60px;}
+.fcard{background:var(--s1);border:1px solid var(--b1);border-radius:16px;padding:18px 22px;min-width:180px;text-align:left;position:relative;overflow:hidden;}
 .fcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
 .fcard.lime::before{background:var(--lime);}
 .fcard.purple::before{background:var(--purple);}
@@ -111,25 +81,12 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
 .fcard-val.purple{color:var(--purple);}
 .fcard-val.cyan{color:var(--cyan);}
 .fcard-sub{font-size:11px;color:var(--txt3);margin-top:4px;}
-
-/* TICKER */
-.ticker-wrap{
-  width:100%;overflow:hidden;border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);
-  padding:14px 0;background:var(--s1);margin-bottom:0;
-}
+.ticker-wrap{width:100%;overflow:hidden;border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);padding:14px 0;background:var(--s1);margin-bottom:0;}
 .ticker{display:flex;gap:48px;animation:ticker 18s linear infinite;white-space:nowrap;}
-.ticker-item{
-  display:flex;align-items:center;gap:10px;
-  font-size:13px;font-weight:600;color:var(--txt2);flex-shrink:0;
-}
+.ticker-item{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--txt2);flex-shrink:0;}
 .ticker-item em{color:var(--lime);font-style:normal;}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-/* FEATURES SECTION */
-.features{
-  padding:80px 60px;
-  background:var(--s1);
-}
+.features{padding:80px 60px;background:var(--s1);}
 .sec-label{font-size:11px;font-weight:700;color:var(--lime);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;text-align:center;}
 .sec-title{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:800;text-align:center;margin-bottom:50px;letter-spacing:-.5px;}
 .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px;margin:0 auto;}
@@ -137,51 +94,34 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
 .feat-icon{font-size:36px;margin-bottom:16px;}
 .feat-title{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:700;margin-bottom:8px;}
 .feat-desc{font-size:13px;color:var(--txt2);line-height:1.6;}
-
-/* MEME SECTION */
-.meme-sec{
-  padding:80px 60px;text-align:center;
-  background:var(--bg);
-}
+.meme-sec{padding:80px 60px;text-align:center;background:var(--bg);}
 .meme-grid{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:40px;}
-.meme-card{
-  background:var(--s1);border:1px solid var(--b1);border-radius:16px;
-  padding:24px 20px;width:200px;
-}
+.meme-card{background:var(--s1);border:1px solid var(--b1);border-radius:16px;padding:24px 20px;width:200px;}
 .meme-emoji{font-size:48px;margin-bottom:12px;}
 .meme-top{font-size:11px;font-weight:700;color:var(--txt3);text-transform:uppercase;margin-bottom:6px;}
 .meme-txt{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;color:var(--txt);}
 .meme-sub{font-size:11px;color:var(--txt3);margin-top:4px;}
-
-/* STATS SECTION */
-.stats-sec{
-  padding:60px;background:var(--s1);
-  display:flex;gap:0;border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);
-}
+.stats-sec{padding:60px;background:var(--s1);display:flex;gap:0;border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);}
 .stat-item{flex:1;text-align:center;padding:20px;border-right:1px solid var(--b1);}
 .stat-item:last-child{border-right:none;}
 .stat-num{font-family:'Bricolage Grotesque',sans-serif;font-size:42px;font-weight:800;color:var(--lime);}
 .stat-lbl{font-size:13px;color:var(--txt2);margin-top:6px;}
-
-/* CTA SECTION */
-.cta-sec{
-  padding:100px 60px;text-align:center;
-  background:radial-gradient(ellipse at 50% 50%,rgba(198,241,53,.08) 0%,transparent 60%);
-}
+.cta-sec{padding:100px 60px;text-align:center;background:radial-gradient(ellipse at 50% 50%,rgba(198,241,53,.08) 0%,transparent 60%);}
 .cta-title{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(32px,5vw,60px);font-weight:800;letter-spacing:-.5px;margin-bottom:16px;}
 .cta-sub{font-size:15px;color:var(--txt2);margin-bottom:40px;}
-
-/* FOOTER */
 .footer{padding:30px 60px;border-top:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;}
 .footer-logo{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:800;}
 .footer-logo em{color:var(--lime);font-style:normal;}
 .footer-txt{font-size:12px;color:var(--txt3);}
-
-/* ANIMATIONS */
 @keyframes fadeup{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.float-cards .fcard:nth-child(1){animation:float 4s ease-in-out infinite;}
+.float-cards .fcard:nth-child(2){animation:float 4s 1s ease-in-out infinite;}
+.float-cards .fcard:nth-child(3){animation:float 4s .5s ease-in-out infinite;}
+.float-cards .fcard:nth-child(4){animation:float 4s 1.5s ease-in-out infinite;}
 
-/* AI INSIGHTS */
+/* ===== AI INSIGHTS (existing) ===== */
 .ai-insight-card{background:var(--s2);border:1px solid var(--b1);border-radius:14px;padding:18px;margin-bottom:12px;}
 .ai-insight-card.roast{border-color:rgba(255,107,107,.3);background:rgba(255,107,107,.05);}
 .ai-insight-card.tip{border-color:rgba(198,241,53,.25);background:rgba(198,241,53,.05);}
@@ -193,39 +133,21 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
 .ai-card-label.roast{color:#ff6b6b;}
 .ai-card-label.tip{color:var(--lime);}
 .ai-card-label.warning{color:var(--orange);}
-.ai-card-label.good{color:var(--accent2);}
+.ai-card-label.good{color:#6ee7b7;}
 .ai-card-text{font-size:13px;color:var(--txt);line-height:1.6;}
-.ai-personality{
-  background:linear-gradient(135deg,rgba(155,93,255,.15),rgba(0,212,255,.1));
-  border:1px solid rgba(155,93,255,.3);border-radius:16px;
-  padding:22px;margin-bottom:16px;text-align:center;
-}
+.ai-personality{background:linear-gradient(135deg,rgba(155,93,255,.15),rgba(0,212,255,.1));border:1px solid rgba(155,93,255,.3);border-radius:16px;padding:22px;margin-bottom:16px;text-align:center;}
 .ai-personality-title{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px;}
 .ai-personality-sub{font-size:13px;color:var(--txt2);}
-.ai-score{
-  display:flex;align-items:center;justify-content:center;gap:16px;
-  background:var(--s2);border:1px solid var(--b1);border-radius:14px;
-  padding:18px;margin-bottom:12px;
-}
+.ai-score{display:flex;align-items:center;justify-content:center;gap:16px;background:var(--s2);border:1px solid var(--b1);border-radius:14px;padding:18px;margin-bottom:12px;}
 .ai-score-num{font-family:'Bricolage Grotesque',sans-serif;font-size:48px;font-weight:800;}
 .ai-score-num.good{color:var(--lime);}
 .ai-score-num.mid{color:var(--orange);}
 .ai-score-num.bad{color:#ff6b6b;}
 .ai-score-info strong{font-size:15px;font-weight:700;display:block;}
 .ai-score-info small{font-size:12px;color:var(--txt2);}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.float-cards .fcard:nth-child(1){animation:float 4s ease-in-out infinite;}
-.float-cards .fcard:nth-child(2){animation:float 4s 1s ease-in-out infinite;}
-.float-cards .fcard:nth-child(3){animation:float 4s .5s ease-in-out infinite;}
-.float-cards .fcard:nth-child(4){animation:float 4s 1.5s ease-in-out infinite;}
 
 /* ===== AUTH ===== */
-#authScreen{
-  display:none;align-items:center;justify-content:center;
-  height:100vh;
-  background:radial-gradient(ellipse at 20% 50%,rgba(155,93,255,.12) 0%,transparent 50%),
-             radial-gradient(ellipse at 80% 20%,rgba(0,212,255,.08) 0%,transparent 40%),var(--bg);
-}
+#authScreen{display:none;align-items:center;justify-content:center;height:100vh;background:radial-gradient(ellipse at 20% 50%,rgba(155,93,255,.12) 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(0,212,255,.08) 0%,transparent 40%),var(--bg);}
 .auth-box{background:var(--s1);border:1px solid var(--b1);border-radius:24px;padding:48px 44px;width:420px;position:relative;overflow:hidden;}
 .auth-box::before{content:'';position:absolute;top:-80px;right:-80px;width:220px;height:220px;background:radial-gradient(circle,rgba(198,241,53,.07),transparent 70%);pointer-events:none;}
 .logo{font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:800;margin-bottom:6px;}
@@ -345,99 +267,147 @@ tr:hover td{background:rgba(198,241,53,.03);}
 .toast.ok{color:var(--lime);border-color:rgba(198,241,53,.3);}
 .toast.err{color:#ff6b6b;border-color:rgba(255,107,107,.3);}
 
+/* ===== NEW FEATURES CSS ===== */
+
+/* --- ROAST MY SPENDING --- */
+.roast-feature-card{background:var(--s2);border:1px solid rgba(255,107,107,.25);border-radius:20px;padding:24px;margin-bottom:20px;}
+.roast-feature-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.roast-feature-header h3{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;margin:0;}
+.roast-feature-header p{font-size:12px;color:var(--txt3);margin:2px 0 0;}
+.roast-fire{font-size:28px;}
+.btn-roast{padding:10px 22px;background:linear-gradient(135deg,#ff5fa3,#ff7a35);border:none;border-radius:10px;color:#fff;font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:.2s;}
+.btn-roast:hover{opacity:.9;transform:scale(1.02);}
+.btn-roast:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.roast-output-box{margin-top:14px;background:rgba(255,107,107,.06);border:1px solid rgba(255,107,107,.2);border-radius:14px;padding:18px;display:none;animation:fadeup .3s ease;}
+.roast-output-text{font-size:14px;line-height:1.7;font-style:italic;color:var(--txt);margin-bottom:8px;}
+.roast-credit{font-size:11px;color:var(--txt3);}
+.roast-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;}
+.btn-share-roast{padding:8px 18px;background:transparent;border:1px solid rgba(255,107,107,.4);border-radius:9px;color:#ff6b6b;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;}
+.btn-share-roast:hover{background:rgba(255,107,107,.1);}
+
+/* --- SPENDING WRAPPED --- */
+.wrapped-feature-card{background:var(--s2);border:1px solid var(--b1);border-radius:20px;padding:24px;margin-bottom:20px;}
+.wrapped-feature-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px;}
+.wrapped-feature-header h3{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;margin:0;}
+.wrapped-card-inner{
+  background:linear-gradient(160deg,#0f0a1e 0%,#1a0a1f 50%,#0a1020 100%);
+  border:1px solid #2e1a4e;border-radius:16px;padding:24px 20px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.wrapped-card-inner::before{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle,rgba(155,93,255,.3),transparent 70%);pointer-events:none;}
+.wrapped-top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-size:11px;}
+.wrapped-logo-text{color:var(--purple);font-weight:700;font-size:12px;}
+.wrapped-year-text{color:var(--txt3);}
+.wrapped-hero-amt{margin-bottom:16px;}
+.wrapped-hero-lbl{font-size:11px;color:var(--txt3);margin-bottom:4px;}
+.wrapped-big-num{font-family:'Bricolage Grotesque',sans-serif;font-size:2.4rem;font-weight:800;background:linear-gradient(90deg,var(--purple),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.wrapped-big-sub{font-size:12px;color:var(--txt3);margin-top:2px;}
+.wrapped-stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+.wrapped-stat-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:12px 10px;text-align:center;}
+.wrapped-stat-emoji{font-size:1.3rem;display:block;margin-bottom:4px;}
+.wrapped-stat-label{font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;}
+.wrapped-stat-val{font-size:13px;font-weight:700;color:var(--txt);}
+.wrapped-stat-sub{font-size:10px;color:var(--txt3);}
+.wrapped-personality-box{background:linear-gradient(135deg,rgba(155,93,255,.15),rgba(255,95,163,.1));border:1px solid rgba(155,93,255,.25);border-radius:12px;padding:16px;margin-bottom:14px;}
+.wrapped-personality-lbl{font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
+.wrapped-personality-type{font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:4px;}
+.wrapped-personality-desc{font-size:12px;color:var(--txt3);font-style:italic;}
+.wrapped-footer-text{font-size:10px;color:rgba(255,255,255,.2);}
+.wrapped-action-btns{display:flex;gap:10px;margin-top:14px;}
+.btn-wrapped-share{flex:1;padding:10px;background:linear-gradient(135deg,var(--purple),var(--pink));border:none;border-radius:10px;color:#fff;font-family:'Bricolage Grotesque',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;}
+.btn-wrapped-share:hover{opacity:.9;}
+.btn-wrapped-copy{flex:1;padding:10px;background:transparent;border:1px solid var(--b2);border-radius:10px;color:var(--txt);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;}
+.btn-wrapped-copy:hover{background:var(--s3);}
+
+/* --- IMPULSE SCORE GAUGE --- */
+.score-feature-card{background:var(--s2);border:1px solid var(--b1);border-radius:20px;padding:24px;margin-bottom:20px;}
+.score-feature-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.score-feature-header h3{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;margin:0;}
+.gauge-container{display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.gauge-svg-wrap{flex-shrink:0;text-align:center;}
+.gauge-svg{width:180px;height:110px;overflow:visible;}
+.gauge-verdict-text{font-size:13px;font-weight:700;margin-top:4px;text-align:center;}
+.gauge-breakdown{flex:1;min-width:200px;}
+.gauge-breakdown-title{font-size:11px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px;}
+.gauge-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.gauge-bar-emoji{font-size:1rem;width:22px;flex-shrink:0;}
+.gauge-bar-cat{font-size:12px;color:var(--txt2);width:90px;flex-shrink:0;}
+.gauge-bar-track{flex:1;background:var(--b1);border-radius:99px;height:7px;overflow:hidden;}
+.gauge-bar-fill{height:100%;border-radius:99px;transition:width .8s ease;}
+.gauge-bar-pct{font-size:11px;color:var(--txt3);width:28px;text-align:right;flex-shrink:0;}
+.score-tip-box{display:flex;gap:10px;background:rgba(155,93,255,.07);border:1px solid rgba(155,93,255,.2);border-radius:12px;padding:12px 14px;margin-top:14px;font-size:13px;line-height:1.5;color:var(--txt2);}
+.score-tip-box span{font-size:1.1rem;flex-shrink:0;}
+
+/* --- MOOD TRACKER --- */
+.mood-feature-card{background:var(--s2);border:1px solid var(--b1);border-radius:20px;padding:24px;margin-bottom:20px;}
+.mood-feature-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.mood-feature-header h3{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;margin:0;}
+.mood-chart-area{margin-bottom:16px;}
+.mood-chart-title{font-size:11px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
+.mood-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+.mood-emoji-icon{font-size:1rem;width:24px;flex-shrink:0;}
+.mood-bar-track{flex:1;background:var(--b1);border-radius:99px;height:7px;overflow:hidden;}
+.mood-bar-fill{height:100%;border-radius:99px;transition:width .6s ease;}
+.mood-bar-pct{font-size:11px;color:var(--txt3);width:28px;text-align:right;flex-shrink:0;}
+.mood-tx-section{margin-top:14px;}
+.mood-tx-title{font-size:11px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
+.mood-tx-list{display:flex;flex-direction:column;gap:8px;max-height:280px;overflow-y:auto;}
+.mood-tx-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;background:rgba(255,255,255,.03);border:1px solid var(--b1);border-radius:12px;}
+.mood-tx-info{flex:1;min-width:0;}
+.mood-tx-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.mood-tx-meta{font-size:11px;color:var(--txt3);margin-top:2px;}
+.mood-btn-row{display:flex;gap:4px;flex-shrink:0;}
+.mood-emoji-btn{background:transparent;border:1px solid var(--b1);border-radius:7px;width:30px;height:30px;font-size:.9rem;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;}
+.mood-emoji-btn:hover{background:rgba(255,255,255,.08);transform:scale(1.1);}
+.mood-emoji-btn.active{background:rgba(155,93,255,.2);border-color:var(--purple);transform:scale(1.15);}
+.mood-insight-box{display:flex;gap:10px;align-items:flex-start;background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.2);border-radius:12px;padding:12px 14px;margin-top:14px;font-size:13px;color:var(--txt2);line-height:1.55;}
+.mood-insight-emoji{font-size:1.3rem;flex-shrink:0;}
+
 /* ===== MOBILE RESPONSIVE ===== */
 @media(max-width:768px){
   html,body{overflow:auto;}
-
-  /* LANDING NAV */
   .land-nav{padding:16px 20px;}
   .land-logo{font-size:18px;}
-
-  /* HERO */
   .hero{padding:40px 20px 30px;}
   .hero-title{font-size:36px;letter-spacing:-1px;}
   .hero-sub{font-size:14px;}
   .hero-btns{flex-direction:column;align-items:center;}
   .btn-hero-main,.btn-hero-ghost{width:100%;max-width:320px;text-align:center;}
-
-  /* FLOAT CARDS */
   .float-cards{flex-direction:column;align-items:center;}
   .fcard{width:100%;max-width:320px;}
-
-  /* FEATURES */
   .features{padding:50px 20px;}
   .feat-grid{grid-template-columns:1fr;}
-
-  /* MEME */
   .meme-sec{padding:50px 20px;}
   .meme-grid{flex-direction:column;align-items:center;}
   .meme-card{width:100%;max-width:320px;}
-
-  /* STATS */
   .stats-sec{flex-direction:column;padding:30px 20px;}
   .stat-item{border-right:none;border-bottom:1px solid var(--b1);padding:20px 0;}
   .stat-item:last-child{border-bottom:none;}
-
-  /* CTA */
   .cta-sec{padding:60px 20px;}
   .cta-title{font-size:28px;}
-
-  /* FOOTER */
   .footer{flex-direction:column;gap:8px;text-align:center;padding:24px 20px;}
-
-  /* APP - hide sidebar, show bottom nav */
   #app.show{flex-direction:column;}
-  .sidebar{
-    width:100%;height:auto;flex-direction:row;
-    border-right:none;border-bottom:1px solid var(--b1);
-    position:fixed;bottom:0;left:0;right:0;z-index:100;
-    background:var(--s1);
-  }
+  .sidebar{width:100%;height:auto;flex-direction:row;border-right:none;border-bottom:1px solid var(--b1);position:fixed;bottom:0;left:0;right:0;z-index:100;background:var(--s1);}
   .sb-logo{display:none;}
-  .nav{
-    display:flex;flex-direction:row;padding:0;
-    flex:1;overflow-x:auto;
-  }
-  .nav-item{
-    flex-direction:column;gap:4px;padding:10px 8px;
-    font-size:10px;border-left:none;border-top:3px solid transparent;
-    flex:1;justify-content:center;align-items:center;text-align:center;
-    white-space:nowrap;
-  }
+  .nav{display:flex;flex-direction:row;padding:0;flex:1;overflow-x:auto;}
+  .nav-item{flex-direction:column;gap:4px;padding:10px 8px;font-size:10px;border-left:none;border-top:3px solid transparent;flex:1;justify-content:center;align-items:center;text-align:center;white-space:nowrap;}
   .nav-item.on{border-left:none;border-top-color:var(--lime);}
   .nav-icon{font-size:20px;}
   .sb-user{display:none;}
   .sb-mood{display:none;}
-
-  /* MAIN - add bottom padding for bottom nav */
   .main{padding:20px 16px 90px;}
-
-  /* CARDS - 2 col on mobile */
   .cards{grid-template-columns:1fr 1fr;}
-
-  /* CHARTS - stack on mobile */
-  #pg-dashboard > div[style*="grid"]{
-    display:flex!important;flex-direction:column;
-  }
-
-  /* SETTINGS */
+  #pg-dashboard > div[style*="grid"]{display:flex!important;flex-direction:column;}
   .sett-grid{grid-template-columns:1fr;}
   .sett-card[style*="grid-column"]{grid-column:auto!important;}
-
-  /* TABLE scroll */
   .tbl-wrap{overflow-x:auto;}
   table{min-width:500px;}
-
-  /* AUTH */
   .auth-box{padding:32px 24px;width:95%;max-width:400px;}
-
-  /* PAGE TITLE */
   .ph-title{font-size:24px;}
-
-  /* MODAL */
   .modal{padding:24px 20px;width:95%;}
+  .gauge-container{flex-direction:column;}
+  .wrapped-stats-grid{grid-template-columns:1fr 1fr;}
 }
-
 @media(max-width:400px){
   .cards{grid-template-columns:1fr;}
   .hero-title{font-size:30px;}
@@ -456,42 +426,21 @@ tr:hover td{background:rgba(198,241,53,.03);}
       <button class="btn-lime-sm" onclick="goAuth('register')">Get Started →</button>
     </div>
   </nav>
-
   <div class="hero">
     <div class="hero-badge">🔥 your financially responsible era starts now</div>
-    <h1 class="hero-title">
-      your impulses<br>are expensive.<br><span class="line2">we fixed that.</span>
-    </h1>
+    <h1 class="hero-title">your impulses<br>are expensive.<br><span class="line2">we fixed that.</span></h1>
     <p class="hero-sub">track spending, expose your bad habits, and finally understand where your money actually goes. spoiler: it's food. it's always food.</p>
     <div class="hero-btns">
       <button class="btn-hero-main" onclick="goAuth('register')">start saving (for real) →</button>
       <button class="btn-hero-ghost" onclick="goAuth('login')">i already have an account</button>
     </div>
     <div class="float-cards">
-      <div class="fcard lime">
-        <div class="fcard-label">saved this month</div>
-        <div class="fcard-val lime" id="counterSaved">PKR 0</div>
-        <div class="fcard-sub">budget remaining 💚</div>
-      </div>
-      <div class="fcard red">
-        <div class="fcard-label">impulse damage</div>
-        <div class="fcard-val red" id="counterImpulse">PKR 0</div>
-        <div class="fcard-sub">oops moments ⚡</div>
-      </div>
-      <div class="fcard purple">
-        <div class="fcard-label">transactions</div>
-        <div class="fcard-val purple" id="counterTx">0</div>
-        <div class="fcard-sub">logged so far 💳</div>
-      </div>
-      <div class="fcard cyan">
-        <div class="fcard-label">budget used</div>
-        <div class="fcard-val cyan" id="counterPct">0%</div>
-        <div class="fcard-sub">of monthly limit 📊</div>
-      </div>
+      <div class="fcard lime"><div class="fcard-label">saved this month</div><div class="fcard-val lime" id="counterSaved">PKR 0</div><div class="fcard-sub">budget remaining 💚</div></div>
+      <div class="fcard red"><div class="fcard-label">impulse damage</div><div class="fcard-val red" id="counterImpulse">PKR 0</div><div class="fcard-sub">oops moments ⚡</div></div>
+      <div class="fcard purple"><div class="fcard-label">transactions</div><div class="fcard-val purple" id="counterTx">0</div><div class="fcard-sub">logged so far 💳</div></div>
+      <div class="fcard cyan"><div class="fcard-label">budget used</div><div class="fcard-val cyan" id="counterPct">0%</div><div class="fcard-sub">of monthly limit 📊</div></div>
     </div>
   </div>
-
-  <!-- TICKER -->
   <div class="ticker-wrap">
     <div class="ticker">
       <span class="ticker-item">💸 impulse buy logged</span>
@@ -512,93 +461,39 @@ tr:hover td{background:rgba(198,241,53,.03);}
       <span class="ticker-item">🏦 savings goal updated</span>
     </div>
   </div>
-
-  <!-- FEATURES -->
   <div class="features">
     <div class="sec-label">why impulseguard hits different</div>
     <div class="sec-title">built for people who say<br>"it was on sale" 💀</div>
     <div class="feat-grid">
-      <div class="feat-card">
-        <div class="feat-icon">⚡</div>
-        <div class="feat-title">impulse tracker</div>
-        <div class="feat-desc">categorize every spend as a need, want, or impulse. the receipts don't lie bestie.</div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon">📊</div>
-        <div class="feat-title">real-time dashboard</div>
-        <div class="feat-desc">see exactly where your money went. spoiler: it was the iced coffee. multiple times.</div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon">🚨</div>
-        <div class="feat-title">budget alerts</div>
-        <div class="feat-desc">get roasted when you hit your budget threshold. tough love only.</div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon">📈</div>
-        <div class="feat-title">monthly reports</div>
-        <div class="feat-desc">visual breakdowns of your spending habits. it's giving financial therapy.</div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon">🔐</div>
-        <div class="feat-title">secure & private</div>
-        <div class="feat-desc">firebase auth + firestore. your broke era stays between you and the app.</div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon">💅</div>
-        <div class="feat-title">actually cute ui</div>
-        <div class="feat-desc">dark mode only. lime green accents. we don't do boring finance apps here.</div>
-      </div>
+      <div class="feat-card"><div class="feat-icon">⚡</div><div class="feat-title">impulse tracker</div><div class="feat-desc">categorize every spend as a need, want, or impulse. the receipts don't lie bestie.</div></div>
+      <div class="feat-card"><div class="feat-icon">📊</div><div class="feat-title">real-time dashboard</div><div class="feat-desc">see exactly where your money went. spoiler: it was the iced coffee. multiple times.</div></div>
+      <div class="feat-card"><div class="feat-icon">🚨</div><div class="feat-title">budget alerts</div><div class="feat-desc">get roasted when you hit your budget threshold. tough love only.</div></div>
+      <div class="feat-card"><div class="feat-icon">🔥</div><div class="feat-title">roast my spending</div><div class="feat-desc">AI gives you a savage but loving roast of your spending habits. very viral-worthy.</div></div>
+      <div class="feat-card"><div class="feat-icon">🎁</div><div class="feat-title">spending wrapped</div><div class="feat-desc">spotify wrapped-style card for your spending. screenshot and share it bestie.</div></div>
+      <div class="feat-card"><div class="feat-icon">🎭</div><div class="feat-title">mood tracker</div><div class="feat-desc">log how each purchase made you feel. guilt included, no judgment. mostly.</div></div>
     </div>
   </div>
-
-  <!-- MEME SECTION -->
   <div class="meme-sec">
     <div class="sec-label">relatable content only</div>
     <div class="sec-title">we know your type 👀</div>
     <div class="meme-grid">
-      <div class="meme-card">
-        <div class="meme-emoji">🛍️</div>
-        <div class="meme-top">the shopping addict</div>
-        <div class="meme-txt">"it was 50% off"</div>
-        <div class="meme-sub">still spent PKR 8,000</div>
-      </div>
-      <div class="meme-card">
-        <div class="meme-emoji">☕</div>
-        <div class="meme-top">the coffee girl</div>
-        <div class="meme-txt">"just one latte"</div>
-        <div class="meme-sub">daily. since 2022.</div>
-      </div>
-      <div class="meme-card">
-        <div class="meme-emoji">🍔</div>
-        <div class="meme-top">the food orderer</div>
-        <div class="meme-txt">"i'll cook tomorrow"</div>
-        <div class="meme-sub">foodpanda has receipts</div>
-      </div>
-      <div class="meme-card">
-        <div class="meme-emoji">😭</div>
-        <div class="meme-top">end of month</div>
-        <div class="meme-txt">"where did it go"</div>
-        <div class="meme-sub">ImpulseGuard knows</div>
-      </div>
+      <div class="meme-card"><div class="meme-emoji">🛍️</div><div class="meme-top">the shopping addict</div><div class="meme-txt">"it was 50% off"</div><div class="meme-sub">still spent PKR 8,000</div></div>
+      <div class="meme-card"><div class="meme-emoji">☕</div><div class="meme-top">the coffee girl</div><div class="meme-txt">"just one latte"</div><div class="meme-sub">daily. since 2022.</div></div>
+      <div class="meme-card"><div class="meme-emoji">🍔</div><div class="meme-top">the food orderer</div><div class="meme-txt">"i'll cook tomorrow"</div><div class="meme-sub">foodpanda has receipts</div></div>
+      <div class="meme-card"><div class="meme-emoji">😭</div><div class="meme-top">end of month</div><div class="meme-txt">"where did it go"</div><div class="meme-sub">ImpulseGuard knows</div></div>
     </div>
   </div>
-
-  <!-- STATS -->
   <div class="stats-sec">
     <div class="stat-item"><div class="stat-num">PKR 50K</div><div class="stat-lbl">average monthly budget tracked</div></div>
     <div class="stat-item"><div class="stat-num">3x</div><div class="stat-lbl">categories to classify spending</div></div>
     <div class="stat-item"><div class="stat-num">100%</div><div class="stat-lbl">free. forever. no cap.</div></div>
     <div class="stat-item"><div class="stat-num">0</div><div class="stat-lbl">excuses left after using this</div></div>
   </div>
-
-  <!-- CTA -->
   <div class="cta-sec">
     <div class="cta-title">your wallet is waiting.<br>are you ready? 🛡️</div>
     <div class="cta-sub">stop wondering where your money went. start knowing.</div>
     <button class="btn-hero-main" onclick="goAuth('register')">create free account →</button>
   </div>
-
-  <!-- FOOTER -->
   <div class="footer">
     <div class="footer-logo">Impulse<em>Guard</em> 🛡️</div>
     <div class="footer-txt">built with 💚 — your wallet's bestie</div>
@@ -640,7 +535,7 @@ tr:hover td{background:rgba(198,241,53,.03);}
       <div class="nav-item on" onclick="showPage('dashboard')"><span class="nav-icon">📊</span> Dashboard</div>
       <div class="nav-item" onclick="showPage('transactions')"><span class="nav-icon">💳</span> Transactions</div>
       <div class="nav-item" onclick="showPage('reports')"><span class="nav-icon">📈</span> Reports</div>
-      <div class="nav-item" onclick="showPage('reports');setTimeout(()=>document.getElementById('aiInsightsBox').scrollIntoView({behavior:'smooth'}),300)"><span class="nav-icon">💡</span> AI Insights</div>
+      <div class="nav-item" onclick="showPage('vibes')"><span class="nav-icon">✨</span> Vibes</div>
       <div class="nav-item" onclick="showPage('settings')"><span class="nav-icon">⚙️</span> Settings</div>
     </div>
     <div class="sb-user" onclick="doLogout()">
@@ -649,6 +544,8 @@ tr:hover td{background:rgba(198,241,53,.03);}
     </div>
   </nav>
   <main class="main">
+
+    <!-- DASHBOARD -->
     <div class="page on" id="pg-dashboard">
       <div class="ph"><div class="ph-title" id="dashTitle">hey bestie 👋</div><div class="ph-sub">here's where your money ran off to</div></div>
       <div class="alert-strip hide" id="alertStrip"></div>
@@ -662,6 +559,8 @@ tr:hover td{background:rgba(198,241,53,.03);}
         <table><thead><tr><th>what u bought</th><th>category</th><th>type</th><th>amount</th><th>date</th></tr></thead><tbody id="dashTbody"></tbody></table>
       </div>
     </div>
+
+    <!-- TRANSACTIONS -->
     <div class="page" id="pg-transactions">
       <div class="ph" style="display:flex;align-items:flex-start;justify-content:space-between">
         <div><div class="ph-title">all transactions 💳</div><div class="ph-sub">every single rupee accounted for</div></div>
@@ -671,13 +570,13 @@ tr:hover td{background:rgba(198,241,53,.03);}
         <table><thead><tr><th>description</th><th>category</th><th>type</th><th>amount (pkr)</th><th>date</th><th></th></tr></thead><tbody id="txTbody"></tbody></table>
       </div>
     </div>
+
+    <!-- REPORTS -->
     <div class="page" id="pg-reports">
       <div class="ph"><div class="ph-title">reports & vibes 📈</div><div class="ph-sub">numbers don't lie (unfortunately)</div></div>
       <div class="cards" id="repCards"></div>
       <div class="chart-box"><div class="chart-title">budget usage per category ☕</div><div id="progBars"></div></div>
       <div class="chart-box"><div class="chart-title">impulse vs planned 👀</div><div class="bar-row" id="repTypeChart"></div></div>
-
-      <!-- AI INSIGHTS -->
       <div class="chart-box" id="aiInsightsBox">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
           <div class="chart-title" style="margin-bottom:0">💡 AI spending insights</div>
@@ -686,7 +585,7 @@ tr:hover td{background:rgba(198,241,53,.03);}
         <div id="aiLoading" style="display:none;text-align:center;padding:30px;">
           <div style="font-size:36px;margin-bottom:12px;display:inline-block;animation:spin 1s linear infinite">🤖</div>
           <div style="font-size:14px;font-weight:600;color:var(--lime);">gemini is judging your spending...</div>
-          <div style="font-size:12px;color:var(--txt3);margin-top:6px)">this might hurt bestie 💀</div>
+          <div style="font-size:12px;color:var(--txt3);margin-top:6px">this might hurt bestie 💀</div>
         </div>
         <div id="aiResult" style="display:none;"></div>
         <div id="aiEmpty" style="text-align:center;padding:30px;color:var(--txt3);">
@@ -695,6 +594,122 @@ tr:hover td{background:rgba(198,241,53,.03);}
         </div>
       </div>
     </div>
+
+    <!-- ✨ VIBES PAGE — all 4 new features -->
+    <div class="page" id="pg-vibes">
+      <div class="ph"><div class="ph-title">vibes check ✨</div><div class="ph-sub">the fun stuff — built for your socials</div></div>
+
+      <!-- ROAST MY SPENDING -->
+      <div class="roast-feature-card">
+        <div class="roast-feature-header">
+          <span class="roast-fire">🔥</span>
+          <div>
+            <h3>Roast My Spending</h3>
+            <p>let AI drag you — lovingly 💀</p>
+          </div>
+          <button class="btn-roast" id="roastBtn" onclick="doRoast()" style="margin-left:auto">Roast Me 💀</button>
+        </div>
+        <div class="roast-output-box" id="roastOutput">
+          <div class="roast-output-text" id="roastText"></div>
+          <div class="roast-credit">— ImpulseGuard AI 🤖🔥</div>
+          <div class="roast-actions">
+            <button class="btn-roast" onclick="doRoast()" style="font-size:12px;padding:8px 14px">Roast Again 🔁</button>
+            <button class="btn-share-roast" id="roastShareBtn">Share the Roast 🔥</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SPENDING WRAPPED -->
+      <div class="wrapped-feature-card">
+        <div class="wrapped-feature-header">
+          <h3>🎁 Spending Wrapped</h3>
+          <button class="btn primary" onclick="renderWrapped()" style="font-size:12px;padding:8px 16px">Generate My Wrapped ✨</button>
+        </div>
+        <div id="wrappedOutput" style="display:none">
+          <div class="wrapped-card-inner" id="wrappedCard">
+            <div class="wrapped-top-bar">
+              <span class="wrapped-logo-text">⚡ ImpulseGuard</span>
+              <span class="wrapped-year-text" id="wrappedYear">2025 Wrapped</span>
+            </div>
+            <div class="wrapped-hero-amt">
+              <div class="wrapped-hero-lbl">you spent a total of</div>
+              <div class="wrapped-big-num" id="wrappedTotal">PKR 0</div>
+              <div class="wrapped-big-sub" id="wrappedTotalSub"></div>
+            </div>
+            <div class="wrapped-stats-grid">
+              <div class="wrapped-stat-box"><span class="wrapped-stat-emoji">🏆</span><div class="wrapped-stat-label">Top Category</div><div class="wrapped-stat-val" id="wrappedTopCat">—</div><div class="wrapped-stat-sub" id="wrappedTopCatAmt"></div></div>
+              <div class="wrapped-stat-box"><span class="wrapped-stat-emoji">💸</span><div class="wrapped-stat-label">Biggest Splurge</div><div class="wrapped-stat-val" id="wrappedSplurge">—</div><div class="wrapped-stat-sub" id="wrappedSplurgeAmt"></div></div>
+              <div class="wrapped-stat-box"><span class="wrapped-stat-emoji">📊</span><div class="wrapped-stat-label">Transactions</div><div class="wrapped-stat-val" id="wrappedTxCount">0</div><div class="wrapped-stat-sub">this period</div></div>
+              <div class="wrapped-stat-box"><span class="wrapped-stat-emoji">⚡</span><div class="wrapped-stat-label">Impulse Score</div><div class="wrapped-stat-val" id="wrappedImpScore">0/100</div><div class="wrapped-stat-sub" id="wrappedImpLabel"></div></div>
+            </div>
+            <div class="wrapped-personality-box">
+              <div class="wrapped-personality-lbl">your spending personality</div>
+              <div class="wrapped-personality-type" id="wrappedPersonality">—</div>
+              <div class="wrapped-personality-desc" id="wrappedPersonalityDesc"></div>
+            </div>
+            <div class="wrapped-footer-text">impulseguard.dev</div>
+          </div>
+          <div class="wrapped-action-btns">
+            <button class="btn-wrapped-share" onclick="shareWrapped()">Share My Wrapped 🚀</button>
+            <button class="btn-wrapped-copy" onclick="copyWrapped()">Copy Stats 📋</button>
+          </div>
+        </div>
+        <div id="wrappedEmpty" style="text-align:center;padding:20px;color:var(--txt3);font-size:13px;">add some transactions then hit generate ✨</div>
+      </div>
+
+      <!-- IMPULSE SCORE -->
+      <div class="score-feature-card">
+        <div class="score-feature-header">
+          <span style="font-size:28px">⚡</span>
+          <div>
+            <h3>Impulse Score</h3>
+            <p style="font-size:12px;color:var(--txt3);margin-top:2px">how chaotic is your spending, really?</p>
+          </div>
+        </div>
+        <div class="gauge-container">
+          <div class="gauge-svg-wrap">
+            <svg class="gauge-svg" viewBox="0 0 180 110" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 18 100 A 72 72 0 0 1 162 100" fill="none" stroke="#1c2333" stroke-width="16" stroke-linecap="round"/>
+              <path id="gaugeArc" d="M 18 100 A 72 72 0 0 1 162 100" fill="none" stroke="#c6f135" stroke-width="16" stroke-linecap="round" stroke-dasharray="226" stroke-dashoffset="226"/>
+              <text id="gaugeNum" x="90" y="82" text-anchor="middle" fill="#f0f4ff" font-size="28" font-weight="800" font-family="Bricolage Grotesque, sans-serif">0</text>
+              <text x="90" y="98" text-anchor="middle" fill="#4a5a78" font-size="11" font-family="Space Grotesk, sans-serif">/100</text>
+            </svg>
+            <div class="gauge-verdict-text" id="gaugeVerdict">calculating...</div>
+          </div>
+          <div class="gauge-breakdown">
+            <div class="gauge-breakdown-title">by category</div>
+            <div id="gaugeBreakdown"></div>
+          </div>
+        </div>
+        <div class="score-tip-box" id="scoreTip" style="display:none">
+          <span>💡</span><span id="scoreTipText"></span>
+        </div>
+      </div>
+
+      <!-- MOOD TRACKER -->
+      <div class="mood-feature-card">
+        <div class="mood-feature-header">
+          <span style="font-size:28px">🎭</span>
+          <div>
+            <h3>Spending Mood Tracker</h3>
+            <p style="font-size:12px;color:var(--txt3);margin-top:2px">how did each purchase make you feel?</p>
+          </div>
+        </div>
+        <div class="mood-chart-area" id="moodChartArea">
+          <div style="text-align:center;padding:16px;color:var(--txt3);font-size:13px;">tag transactions below to see your mood pattern ✨</div>
+        </div>
+        <div class="mood-tx-section">
+          <div class="mood-tx-title">tag your recent transactions</div>
+          <div class="mood-tx-list" id="moodTxList"></div>
+        </div>
+        <div class="mood-insight-box" id="moodInsightBox" style="display:none">
+          <span class="mood-insight-emoji" id="moodInsightEmoji">💡</span>
+          <span id="moodInsightText"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
     <div class="page" id="pg-settings">
       <div class="ph"><div class="ph-title">settings ⚙️</div><div class="ph-sub">you're in control. allegedly.</div></div>
       <div class="sett-grid">
@@ -734,9 +749,11 @@ tr:hover td{background:rgba(198,241,53,.03);}
         </div>
       </div>
     </div>
+
   </main>
 </div>
 
+<!-- ADD TRANSACTION MODAL -->
 <div class="overlay" id="modal">
   <div class="modal">
     <h3>add a transaction 💸</h3>
@@ -804,6 +821,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
+const GEMINI_KEY = 'AIzaSyBJM3oMBEVpYf9Z5_0A0JjEKZN_jEQ8Rf4';
 const MOODS=['saving szn 💸','broke but cute','budget era activated','no spend challenge (lying)','financially healing'];
 const ROASTS=["babe you've spent {pct}% of your budget 💀","your bank account is not ur enemy. YOU are. ({pct}% spent)","{pct}% gone. main character behavior? debatable."];
 const GREENS=["you're doing amazing sweetie ✨ only {pct}% spent","financially responsible era activated 🌱 {pct}% spent","budget looking clean fr fr. {pct}% spent 💚"];
@@ -811,18 +829,27 @@ const randFrom=arr=>arr[Math.floor(Math.random()*arr.length)];
 const $=id=>document.getElementById(id);
 
 let currentUser=null, userProfile=null, allTxs=[];
+// mood state stored in memory (also persisted to Firestore on each tag)
+let moodData = {}; // { txId: moodKey }
 
-// COUNTER ANIMATION
-function animateCounter(el, target, prefix='', suffix=''){
-  let start=0, duration=2000, step=target/60;
+// ===== MOODS CONFIG =====
+const MOOD_LIST = [
+  {emoji:'😊', label:'Happy',    key:'happy',    color:'#80ed99'},
+  {emoji:'😅', label:'Guilty',   key:'guilty',   color:'#ffb700'},
+  {emoji:'😈', label:'Impulsive',key:'impulsive',color:'#ff3860'},
+  {emoji:'🙂', label:'Necessary',key:'necessary',color:'#00d4aa'},
+  {emoji:'😐', label:'Meh',      key:'meh',      color:'#4a5a78'},
+  {emoji:'😭', label:'Regret',   key:'regret',   color:'#ff6b35'},
+];
+
+// ===== COUNTER ANIMATION =====
+function animateCounter(el,target,prefix='',suffix=''){
+  let start=0,duration=2000,step=target/60;
   const timer=setInterval(()=>{
-    start+=step;
-    if(start>=target){start=target;clearInterval(timer);}
+    start+=step;if(start>=target){start=target;clearInterval(timer);}
     el.textContent=prefix+Math.round(start).toLocaleString()+suffix;
   },duration/60);
 }
-
-// animate landing counters
 setTimeout(()=>{
   animateCounter($('counterSaved'),32500,'PKR ','');
   animateCounter($('counterImpulse'),8200,'PKR ','');
@@ -830,30 +857,13 @@ setTimeout(()=>{
   animateCounter($('counterPct'),68,'','%');
 },500);
 
-// LANDING NAV
-window.goAuth=(tab)=>{
-  $('landingScreen').style.display='none';
-  $('authScreen').style.display='flex';
-  switchTab(tab);
-};
-window.goLanding=()=>{
-  $('authScreen').style.display='none';
-  $('landingScreen').style.display='flex';
-};
+// ===== LANDING/AUTH =====
+window.goAuth=(tab)=>{ $('landingScreen').style.display='none'; $('authScreen').style.display='flex'; switchTab(tab); };
+window.goLanding=()=>{ $('authScreen').style.display='none'; $('landingScreen').style.display='flex'; };
 
-// AUTH STATE
-onAuthStateChanged(auth, async(user)=>{
-  if(user){
-    currentUser=user;
-    await loadProfile();
-    bootApp();
-  } else {
-    currentUser=null;
-    if($('app').classList.contains('show')){
-      $('app').classList.remove('show');
-      $('landingScreen').style.display='flex';
-    }
-  }
+onAuthStateChanged(auth,async(user)=>{
+  if(user){ currentUser=user; await loadProfile(); bootApp(); }
+  else { currentUser=null; if($('app').classList.contains('show')){ $('app').classList.remove('show'); $('landingScreen').style.display='flex'; } }
 });
 
 window.switchTab=(t)=>{
@@ -865,11 +875,8 @@ window.switchTab=(t)=>{
 window.doRegister=async()=>{
   const name=$('rName').value.trim(),email=$('rEmail').value.trim(),pass=$('rPass').value,budget=parseInt($('rBudget').value)||50000;
   if(!name||!email||pass.length<6){$('rErr').style.display='block';return;}
-  try{
-    const cred=await createUserWithEmailAndPassword(auth,email,pass);
-    await setDoc(doc(db,'users',cred.user.uid),{name,email,budget,threshold:70});
-    toast('account created! 🚀','ok');
-  }catch(e){$('rErr').textContent=e.message;$('rErr').style.display='block';}
+  try{ const cred=await createUserWithEmailAndPassword(auth,email,pass); await setDoc(doc(db,'users',cred.user.uid),{name,email,budget,threshold:70}); toast('account created! 🚀','ok'); }
+  catch(e){$('rErr').textContent=e.message;$('rErr').style.display='block';}
 };
 
 window.doLogin=async()=>{
@@ -901,31 +908,37 @@ async function bootApp(){
 }
 
 async function loadTxs(){
-  allTxs=[];
+  allTxs=[];moodData={};
   const q=query(collection(db,'transactions'),where('uid','==',currentUser.uid));
   const snap=await getDocs(q);
-  snap.forEach(d=>allTxs.push({id:d.id,...d.data()}));
+  snap.forEach(d=>{
+    const data={id:d.id,...d.data()};
+    allTxs.push(data);
+    if(data.mood) moodData[d.id]=data.mood;
+  });
   allTxs.sort((a,b)=>new Date(b.date)-new Date(a.date));
 }
 
+// ===== MODAL =====
 window.openModal=()=>{
   $('mDate').value=new Date().toISOString().split('T')[0];
   $('mDesc').value='';$('mAmt').value='';$('mCat').value='';$('mType').value='need';
   document.querySelectorAll('.cat-opt').forEach(b=>b.classList.remove('on'));
   document.querySelectorAll('.type-opt').forEach(b=>b.classList.remove('on'));
   document.querySelector('.type-opt.need').classList.add('on');
+  resetScanner();
   $('modal').classList.add('show');
 };
 window.closeModal=()=>$('modal').classList.remove('show');
-window.pickCat=(b)=>{document.querySelectorAll('.cat-opt').forEach(x=>x.classList.remove('on'));b.classList.add('on');$('mCat').value=b.dataset.v;};
-window.pickType=(b)=>{document.querySelectorAll('.type-opt').forEach(x=>x.classList.remove('on'));b.classList.add('on');$('mType').value=b.dataset.v;};
+window.pickCat=(b)=>{ document.querySelectorAll('.cat-opt').forEach(x=>x.classList.remove('on')); b.classList.add('on'); $('mCat').value=b.dataset.v; };
+window.pickType=(b)=>{ document.querySelectorAll('.type-opt').forEach(x=>x.classList.remove('on')); b.classList.add('on'); $('mType').value=b.dataset.v; };
 
 window.addTx=async()=>{
   const desc=$('mDesc').value.trim(),amt=parseFloat($('mAmt').value),cat=$('mCat').value,type=$('mType').value,date=$('mDate').value;
   if(!desc||!amt||!cat||!date){toast('fill everything in bestie 😭','err');return;}
   try{
-    const ref=await addDoc(collection(db,'transactions'),{uid:currentUser.uid,desc,amt,cat,type,date});
-    allTxs.unshift({id:ref.id,uid:currentUser.uid,desc,amt,cat,type,date});
+    const ref=await addDoc(collection(db,'transactions'),{uid:currentUser.uid,desc,amt,cat,type,date,mood:null});
+    allTxs.unshift({id:ref.id,uid:currentUser.uid,desc,amt,cat,type,date,mood:null});
     closeModal();
     toast(type==='impulse'?'added 😬 impulse logged...':'added! 💸','ok');
     renderTx();renderDash();
@@ -937,20 +950,26 @@ window.delTx=async(id)=>{
   try{
     await deleteDoc(doc(db,'transactions',id));
     allTxs=allTxs.filter(t=>t.id!==id);
+    delete moodData[id];
     renderTx();renderDash();toast('deleted 🗑️','ok');
   }catch(e){toast('error 😭','err');}
 };
 
+// ===== PAGE ROUTING =====
 window.showPage=(p)=>{
   document.querySelectorAll('.page').forEach(el=>el.classList.remove('on'));
   document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('on'));
   $('pg-'+p).classList.add('on');
-  document.querySelectorAll('.nav-item').forEach(el=>{if(el.textContent.toLowerCase().includes(p.substring(0,4)))el.classList.add('on');});
-  if(p==='dashboard')renderDash();
-  if(p==='transactions')renderTx();
-  if(p==='reports')renderReports();
+  const navItems=document.querySelectorAll('.nav-item');
+  const map={dashboard:0,transactions:1,reports:2,vibes:3,settings:4};
+  if(map[p]!==undefined) navItems[map[p]].classList.add('on');
+  if(p==='dashboard') renderDash();
+  if(p==='transactions') renderTx();
+  if(p==='reports') renderReports();
+  if(p==='vibes') renderVibes();
 };
 
+// ===== DASHBOARD =====
 function renderDash(){
   const now=new Date();
   const mTxs=allTxs.filter(t=>{const d=new Date(t.date);return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();});
@@ -982,12 +1001,14 @@ function renderDash(){
   tbody.innerHTML=rec.map(t=>`<tr><td>${t.desc}</td><td>${t.cat}</td><td><span class="badge ${t.type}">${t.type}</span></td><td style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700">PKR ${t.amt.toLocaleString()}</td><td style="color:var(--txt3)">${t.date}</td></tr>`).join('');
 }
 
+// ===== TRANSACTIONS =====
 function renderTx(){
   const tbody=$('txTbody');
   if(!allTxs.length){tbody.innerHTML='<tr><td colspan="6"><div class="empty-state"><div class="e-icon">🫙</div><p>empty. great self control or no money. either way.</p></div></td></tr>';return;}
   tbody.innerHTML=allTxs.map(t=>`<tr><td>${t.desc}</td><td>${t.cat}</td><td><span class="badge ${t.type}">${t.type}</span></td><td style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700">PKR ${t.amt.toLocaleString()}</td><td style="color:var(--txt3)">${t.date}</td><td><button class="btn danger" onclick="delTx('${t.id}')" style="padding:5px 12px;font-size:11px">delete</button></td></tr>`).join('');
 }
 
+// ===== REPORTS =====
 function renderReports(){
   const now=new Date();
   const mTxs=allTxs.filter(t=>{const d=new Date(t.date);return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();});
@@ -1011,6 +1032,371 @@ function renderReports(){
   $('repTypeChart').innerHTML=[['needs ✅',need,'lime'],['wants 🤔',want,'purple'],['impulse ⚡',impulse,'red']].map(([l,v,cls])=>`<div class="bar-col" style="flex:1;max-width:120px"><div class="bar ${cls}" style="height:${Math.max(4,Math.round((v/maxT)*90))}px"></div><div class="bar-lbl">${l}</div></div>`).join('');
 }
 
+// ===== AI INSIGHTS (existing) =====
+window.getAIInsights=async()=>{
+  if(!allTxs.length){toast('add some transactions first bestie 😭','err');return;}
+  $('aiEmpty').style.display='none';$('aiResult').style.display='none';$('aiLoading').style.display='block';
+  $('aiBtn').disabled=true;$('aiBtn').textContent='analysing... 🤖';
+  try{
+    const now=new Date();
+    const mTxs=allTxs.filter(t=>{const d=new Date(t.date);return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();});
+    const total=mTxs.reduce((s,t)=>s+t.amt,0);
+    const impulse=mTxs.filter(t=>t.type==='impulse').reduce((s,t)=>s+t.amt,0);
+    const need=mTxs.filter(t=>t.type==='need').reduce((s,t)=>s+t.amt,0);
+    const want=mTxs.filter(t=>t.type==='want').reduce((s,t)=>s+t.amt,0);
+    const budget=userProfile.budget||50000;const pct=Math.round((total/budget)*100);
+    const cats=['Food','Transport','Shopping','Entertainment','Bills','Health','Education','Other'];
+    const catBreakdown=cats.map(c=>{const amt=mTxs.filter(t=>t.cat===c).reduce((s,t)=>s+t.amt,0);return amt>0?`${c}: PKR ${amt.toLocaleString()}`:''}).filter(Boolean).join(', ');
+    const txList=allTxs.slice(0,10).map(t=>`${t.desc} (${t.cat}, ${t.type}, PKR ${t.amt})`).join('\n');
+    const prompt=`You are a funny, brutally honest but caring Gen Z financial advisor for a Pakistani user. Analyze their spending data and give insights.
+SPENDING DATA:
+- Monthly budget: PKR ${budget.toLocaleString()}
+- Total spent this month: PKR ${total.toLocaleString()} (${pct}% of budget)
+- Needs: PKR ${need.toLocaleString()}
+- Wants: PKR ${want.toLocaleString()}
+- Impulse spending: PKR ${impulse.toLocaleString()}
+- Category breakdown: ${catBreakdown}
+- Recent transactions: ${txList}
+Give a response in this EXACT JSON format (no markdown, no backticks, just raw JSON):
+{"score":75,"personality":"The Foodie Spender 🍔","personality_desc":"one line funny description","roast":"funny but kind roast (2 sentences, Gen Z tone)","warning":"biggest spending risk (1-2 sentences)","tip1":"specific actionable tip","tip2":"another specific tip","positive":"something genuinely good about their spending"}
+Score 0-100 (financial health score). Be specific to their data. Use Gen Z language.`;
+    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})});
+    const data=await res.json();
+    const text=data.candidates?.[0]?.content?.parts?.[0]?.text||'';
+    const ai=JSON.parse(text.replace(/```json|```/g,'').trim());
+    const scoreClass=ai.score>=70?'good':ai.score>=40?'mid':'bad';
+    const scoreLabel=ai.score>=70?'financially stable ngl 💚':ai.score>=40?'mid era financially 😬':'broke behavior detected 💀';
+    $('aiResult').innerHTML=`
+      <div class="ai-personality"><div class="ai-personality-title">${ai.personality}</div><div class="ai-personality-sub">${ai.personality_desc}</div></div>
+      <div class="ai-score"><div class="ai-score-num ${scoreClass}">${ai.score}</div><div class="ai-score-info"><strong>Financial Health Score</strong><small>${scoreLabel}</small></div></div>
+      <div class="ai-insight-card roast"><div class="ai-card-top"><span class="ai-card-icon">💀</span><span class="ai-card-label roast">the roast</span></div><div class="ai-card-text">${ai.roast}</div></div>
+      <div class="ai-insight-card warning"><div class="ai-card-top"><span class="ai-card-icon">⚠️</span><span class="ai-card-label warning">heads up bestie</span></div><div class="ai-card-text">${ai.warning}</div></div>
+      <div class="ai-insight-card tip"><div class="ai-card-top"><span class="ai-card-icon">💡</span><span class="ai-card-label tip">tip #1</span></div><div class="ai-card-text">${ai.tip1}</div></div>
+      <div class="ai-insight-card tip"><div class="ai-card-top"><span class="ai-card-icon">💡</span><span class="ai-card-label tip">tip #2</span></div><div class="ai-card-text">${ai.tip2}</div></div>
+      <div class="ai-insight-card good"><div class="ai-card-top"><span class="ai-card-icon">✅</span><span class="ai-card-label good">what you're doing right</span></div><div class="ai-card-text">${ai.positive}</div></div>`;
+    $('aiLoading').style.display='none';$('aiResult').style.display='block';toast('AI insights ready 💡','ok');
+  }catch(e){
+    $('aiLoading').style.display='none';$('aiEmpty').style.display='block';
+    $('aiEmpty').innerHTML='<div style="font-size:36px;margin-bottom:10px;">😭</div><div style="font-size:13px;color:#ff6b6b;">could not load insights. try again!</div>';
+    toast('AI error 😭 try again','err');console.error(e);
+  }finally{$('aiBtn').disabled=false;$('aiBtn').textContent='analyse again 🤖';}
+};
+
+// ===== RECEIPT SCANNER =====
+window.handleDrop=(e)=>{e.preventDefault();const file=e.dataTransfer.files[0];if(file&&file.type.startsWith('image/'))processReceipt(file);};
+window.scanReceipt=(input)=>{if(input.files[0])processReceipt(input.files[0]);};
+window.resetScanner=()=>{
+  $('scannerIdle').style.display='block';
+  $('scannerLoading').style.display='none';
+  $('scannerDone').style.display='none';
+  $('scannerErr').style.display='none';
+  $('receiptInput').value='';
+};
+async function processReceipt(file){
+  $('scannerIdle').style.display='none';$('scannerLoading').style.display='block';
+  $('scannerDone').style.display='none';$('scannerErr').style.display='none';
+  try{
+    const base64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(file);});
+    const response=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({contents:[{parts:[
+        {text:`You are a receipt scanner for a finance app. Analyze this receipt image and extract:
+1. Store/vendor name and what was purchased (short description, max 40 chars)
+2. Total amount paid (just the number, no currency symbol)
+3. Best category from: Food, Transport, Shopping, Entertainment, Bills, Health, Education, Savings, Other
+4. Date of purchase (YYYY-MM-DD format, use today ${new Date().toISOString().split('T')[0]} if not visible)
+5. Spending type: need (essential), want (non-essential but planned), impulse (unplanned)
+Respond ONLY in this exact JSON format, nothing else:
+{"desc":"store name - item","amount":1234,"category":"Food","date":"2024-01-01","type":"need"}`},
+        {inline_data:{mime_type:file.type,data:base64}}
+      ]}]})
+    });
+    const data=await response.json();
+    const text=data.candidates?.[0]?.content?.parts?.[0]?.text||'';
+    const parsed=JSON.parse(text.replace(/```json|```/g,'').trim());
+    $('mDesc').value=parsed.desc||'';
+    $('mAmt').value=parsed.amount||'';
+    $('mDate').value=parsed.date||new Date().toISOString().split('T')[0];
+    document.querySelectorAll('.cat-opt').forEach(b=>{b.classList.remove('on');if(b.dataset.v===parsed.category)b.classList.add('on');});
+    $('mCat').value=parsed.category||'';
+    document.querySelectorAll('.type-opt').forEach(b=>{b.classList.remove('on');if(b.dataset.v===parsed.type)b.classList.add('on');});
+    $('mType').value=parsed.type||'need';
+    $('scannerLoading').style.display='none';$('scannerDone').style.display='block';
+    toast('receipt scanned! ✅ check the form','ok');
+  }catch(e){
+    $('scannerLoading').style.display='none';$('scannerErr').style.display='block';
+    $('scanErrTxt').textContent='could not read receipt 😭 fill manually';console.error(e);
+  }
+}
+
+// ============================================
+// ===== ✨ VIBES PAGE — 4 NEW FEATURES =====
+// ============================================
+
+function renderVibes(){
+  renderImpulseScore();
+  renderMoodTracker();
+  // Wrapped renders on button click
+  // Roast renders on button click
+}
+
+// ----- HELPERS -----
+function getImpulseScore(){
+  if(!allTxs.length) return {score:0,color:'#4a5a78',verdict:'no data yet',tip:'add some transactions first!'};
+  const essential=['Food','Bills','Health','Education','Transport'];
+  const total=allTxs.reduce((s,t)=>s+t.amt,0);
+  const impulseAmt=allTxs.filter(t=>!essential.includes(t.cat)).reduce((s,t)=>s+t.amt,0);
+  const score=Math.min(100,Math.round((impulseAmt/total)*100));
+  const levels=[
+    {min:80,color:'#ff3860',verdict:'💀 financially unhinged',tip:"bestie you need a budget like yesterday 😭"},
+    {min:60,color:'#ff6b35',verdict:'🌪️ chaos mode activated',tip:"consider the 50/30/20 rule before your next splurge."},
+    {min:40,color:'#ffb700',verdict:'🎭 impulsive icon',tip:"you're doing okay but those little treats add up fast."},
+    {min:20,color:'#00d4aa',verdict:'⚖️ balanced bestie',tip:"your future self is proud of you rn 💚"},
+    {min:0, color:'#7c4dff',verdict:'🧘 budget enlightened',tip:"you're literally the main character of responsible finance."},
+  ];
+  const lvl=levels.find(l=>score>=l.min);
+  return{score,color:lvl.color,verdict:lvl.verdict,tip:lvl.tip};
+}
+
+function getPersonality(score){
+  const list=[
+    {min:80,emoji:'🌪️',type:'The Chaos Spender',desc:'Budget? Never heard of her.'},
+    {min:60,emoji:'🎭',type:'The Impulsive Icon',desc:'Add to cart. Regret later. Repeat.'},
+    {min:40,emoji:'⚖️',type:'The Balanced Bestie',desc:'Sometimes sensible, sometimes not.'},
+    {min:20,emoji:'🧘',type:'The Mindful Minimalist',desc:'Your wallet actually respects you.'},
+    {min:0, emoji:'🏦',type:'The Budget God',desc:'Are you even human? Teach us.'},
+  ];
+  return list.find(l=>score>=l.min);
+}
+
+// ----- 1. IMPULSE SCORE GAUGE -----
+function renderImpulseScore(){
+  if(!allTxs.length){
+    $('gaugeBreakdown').innerHTML='<div style="color:var(--txt3);font-size:13px;">add transactions to see your score</div>';
+    $('gaugeVerdict').textContent='no data yet';
+    $('scoreTip').style.display='none';
+    return;
+  }
+  const {score,color,verdict,tip}=getImpulseScore();
+  // animate gauge
+  const arc=$('gaugeArc');const numEl=$('gaugeNum');
+  arc.setAttribute('stroke',color);
+  const totalLen=226;
+  const targetOffset=totalLen-(score/100)*totalLen;
+  let current=totalLen;
+  const dur=1200,start=performance.now();
+  function tick(now){
+    const prog=Math.min((now-start)/dur,1);
+    const eased=1-Math.pow(1-prog,3);
+    const curScore=Math.round(eased*score);
+    arc.style.strokeDashoffset=totalLen-(curScore/100)*totalLen;
+    numEl.textContent=curScore;
+    if(prog<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+  $('gaugeVerdict').textContent=verdict;
+  $('gaugeVerdict').style.color=color;
+
+  // breakdown by category
+  const cats=[
+    {name:'Food',emoji:'🍔',color:'#ff6b35'},
+    {name:'Shopping',emoji:'🛍️',color:'#ff3860'},
+    {name:'Entertainment',emoji:'🎬',color:'#ffb700'},
+    {name:'Transport',emoji:'🚗',color:'#00d4aa'},
+    {name:'Health',emoji:'💊',color:'#7c4dff'},
+  ];
+  const total=allTxs.reduce((s,t)=>s+t.amt,0)||1;
+  $('gaugeBreakdown').innerHTML=cats.map(c=>{
+    const amt=allTxs.filter(t=>t.cat===c.name).reduce((s,t)=>s+t.amt,0);
+    const pct=Math.round((amt/total)*100);
+    return `<div class="gauge-bar-row">
+      <span class="gauge-bar-emoji">${c.emoji}</span>
+      <span class="gauge-bar-cat">${c.name}</span>
+      <div class="gauge-bar-track"><div class="gauge-bar-fill" style="width:${pct}%;background:${c.color}"></div></div>
+      <span class="gauge-bar-pct">${pct}%</span>
+    </div>`;
+  }).join('');
+
+  $('scoreTip').style.display='flex';
+  $('scoreTipText').textContent=tip;
+}
+
+// ----- 2. SPENDING WRAPPED -----
+window.renderWrapped=()=>{
+  if(!allTxs.length){toast('add some transactions first bestie 😭','err');return;}
+  const total=allTxs.reduce((s,t)=>s+t.amt,0);
+  const byCategory=allTxs.reduce((acc,t)=>{acc[t.cat]=(acc[t.cat]||0)+t.amt;return acc;},{});
+  const [topCat,topCatAmt]=Object.entries(byCategory).sort((a,b)=>b[1]-a[1])[0]||['—',0];
+  const biggestSplurge=[...allTxs].sort((a,b)=>b.amt-a.amt)[0]||{desc:'—',amt:0};
+  const {score,verdict}=getImpulseScore();
+  const personality=getPersonality(score);
+  const totalLabel=total>100000?'That\'s a whole vibe 💅':total>50000?'Spending like main character 🎬':'Keeping it lowkey 🤏';
+  const impulseLabel=score>=70?'chaos mode 😈':score>=40?'mid slay 😅':'disciplined bestie 🧘';
+  const year=new Date().getFullYear();
+
+  $('wrappedYear').textContent=`${year} Wrapped`;
+  $('wrappedTotal').textContent=`PKR ${total.toLocaleString()}`;
+  $('wrappedTotalSub').textContent=totalLabel;
+  $('wrappedTopCat').textContent=topCat;
+  $('wrappedTopCatAmt').textContent=`PKR ${topCatAmt.toLocaleString()}`;
+  $('wrappedSplurge').textContent=biggestSplurge.desc;
+  $('wrappedSplurgeAmt').textContent=`PKR ${biggestSplurge.amt.toLocaleString()}`;
+  $('wrappedTxCount').textContent=allTxs.length;
+  $('wrappedImpScore').textContent=`${score}/100`;
+  $('wrappedImpLabel').textContent=impulseLabel;
+  $('wrappedPersonality').textContent=`${personality.emoji} ${personality.type}`;
+  $('wrappedPersonalityDesc').textContent=personality.desc;
+
+  $('wrappedOutput').style.display='block';
+  $('wrappedEmpty').style.display='none';
+};
+
+window.shareWrapped=()=>{
+  const total=allTxs.reduce((s,t)=>s+t.amt,0);
+  const {score}=getImpulseScore();
+  const personality=getPersonality(score);
+  const text=`My ImpulseGuard Spending Wrapped 🔥\n\n💸 Total Spent: PKR ${total.toLocaleString()}\n⚡ Impulse Score: ${score}/100\n🎭 I'm "${personality.emoji} ${personality.type}"\n\nCheck yours at impulseguard.dev`;
+  if(navigator.share){navigator.share({title:'My Spending Wrapped ⚡',text});}
+  else{navigator.clipboard.writeText(text);toast('Wrapped copied! Paste it bestie 🚀','ok');}
+};
+
+window.copyWrapped=()=>{
+  const total=allTxs.reduce((s,t)=>s+t.amt,0);
+  const {score}=getImpulseScore();
+  const personality=getPersonality(score);
+  const byCategory=allTxs.reduce((acc,t)=>{acc[t.cat]=(acc[t.cat]||0)+t.amt;return acc;},{});
+  const [topCat]=Object.entries(byCategory).sort((a,b)=>b[1]-a[1])[0]||['—'];
+  const text=`⚡ ImpulseGuard ${new Date().getFullYear()} Wrapped\n💸 Total: PKR ${total.toLocaleString()}\n🏆 Top Category: ${topCat}\n🎭 Personality: ${personality.emoji} ${personality.type}\n⚡ Impulse Score: ${score}/100\n\nimpulseguard.dev`;
+  navigator.clipboard.writeText(text);
+  toast('stats copied! 📋','ok');
+};
+
+// ----- 3. ROAST MY SPENDING -----
+window.doRoast=async()=>{
+  if(!allTxs.length){toast('add some transactions first bestie 😭','err');return;}
+  const btn=$('roastBtn');
+  btn.textContent='Roasting you... 🍳';btn.disabled=true;
+  $('roastOutput').style.display='none';
+  try{
+    const total=allTxs.reduce((s,t)=>s+t.amt,0);
+    const byCategory=allTxs.reduce((acc,t)=>{acc[t.cat]=(acc[t.cat]||0)+t.amt;return acc;},{});
+    const topCatEntry=Object.entries(byCategory).sort((a,b)=>b[1]-a[1])[0]||['Unknown',0];
+    const topTx=[...allTxs].sort((a,b)=>b.amt-a.amt)[0]||{desc:'nothing',amt:0};
+    const budget=userProfile.budget||50000;
+    const pct=Math.round((total/budget)*100);
+    const prompt=`You are a brutally honest but hilarious and lovable Gen-Z financial roast comedian for a Pakistani user.
+Roast their spending in 3-4 sentences. Be savage, funny, use Gen-Z slang and emojis. End with one tiny real advice wrapped in humor. Under 100 words. Keep it spicy but kind.
+Their data:
+- Total spent: PKR ${total.toLocaleString()} (${pct}% of PKR ${budget.toLocaleString()} budget)
+- Top category: ${topCatEntry[0]} (PKR ${topCatEntry[1].toLocaleString()})
+- Biggest splurge: ${topTx.desc} — PKR ${topTx.amt.toLocaleString()}
+- Transactions: ${allTxs.length}`;
+    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})
+    });
+    const data=await res.json();
+    const roastText=data.candidates?.[0]?.content?.parts?.[0]?.text||"Your spending is so bad even AI gave up trying to roast it. 💀";
+    $('roastText').textContent=roastText;
+    $('roastOutput').style.display='block';
+    $('roastShareBtn').onclick=()=>{
+      const shareText=`"${roastText}"\n— ImpulseGuard AI 🤖🔥\nimpulseguard.dev`;
+      if(navigator.share){navigator.share({title:'ImpulseGuard roasted me 🔥',text:shareText});}
+      else{navigator.clipboard.writeText(shareText);toast('roast copied! 🔥','ok');}
+    };
+    toast('you got roasted 🔥','ok');
+  }catch(e){
+    $('roastText').textContent="AI is too shook by your spending to respond. 😭 Try again bestie!";
+    $('roastOutput').style.display='block';
+    console.error(e);
+  }finally{btn.textContent='Roast Me Again 🔁';btn.disabled=false;}
+};
+
+// ----- 4. MOOD TRACKER -----
+function renderMoodTracker(){
+  // render transaction list with mood buttons
+  const recent=allTxs.slice(0,10);
+  if(!recent.length){
+    $('moodTxList').innerHTML='<div style="color:var(--txt3);font-size:13px;text-align:center;padding:20px;">add some transactions first bestie 💸</div>';
+    return;
+  }
+  $('moodTxList').innerHTML=recent.map(tx=>`
+    <div class="mood-tx-row">
+      <div class="mood-tx-info">
+        <div class="mood-tx-name">${tx.desc}</div>
+        <div class="mood-tx-meta">PKR ${tx.amt.toLocaleString()} · ${tx.cat}</div>
+      </div>
+      <div class="mood-btn-row">
+        ${MOOD_LIST.map(m=>`
+          <button class="mood-emoji-btn ${moodData[tx.id]===m.key?'active':''}"
+            title="${m.label}"
+            onclick="tagMood('${tx.id}','${m.key}',this)">${m.emoji}</button>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+  updateMoodChart();
+  updateMoodInsight();
+}
+
+window.tagMood=async(txId, moodKey, btn)=>{
+  // update UI
+  const row=btn.closest('.mood-btn-row');
+  row.querySelectorAll('.mood-emoji-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  // update memory
+  moodData[txId]=moodKey;
+  const tx=allTxs.find(t=>t.id===txId);
+  if(tx) tx.mood=moodKey;
+  // persist to Firestore
+  try{await updateDoc(doc(db,'transactions',txId),{mood:moodKey});}
+  catch(e){console.error('mood save error',e);}
+  updateMoodChart();
+  updateMoodInsight();
+  toast(`mood tagged ${MOOD_LIST.find(m=>m.key===moodKey)?.emoji||''}`, 'ok');
+};
+
+function updateMoodChart(){
+  const tagged=allTxs.filter(t=>t.mood);
+  if(tagged.length===0){
+    $('moodChartArea').innerHTML='<div style="text-align:center;padding:16px;color:var(--txt3);font-size:13px;">tag transactions below to see your mood pattern ✨</div>';
+    return;
+  }
+  const counts={};MOOD_LIST.forEach(m=>counts[m.key]=0);
+  tagged.forEach(t=>{if(counts[t.mood]!==undefined)counts[t.mood]++;});
+  $('moodChartArea').innerHTML=`
+    <div class="mood-chart-title">mood breakdown (${tagged.length}/${allTxs.length} tagged)</div>
+    ${MOOD_LIST.map(m=>{
+      const pct=tagged.length?Math.round((counts[m.key]/tagged.length)*100):0;
+      return `<div class="mood-bar-row">
+        <span class="mood-emoji-icon">${m.emoji}</span>
+        <div class="mood-bar-track"><div class="mood-bar-fill" style="width:${pct}%;background:${m.color}"></div></div>
+        <span class="mood-bar-pct">${pct}%</span>
+      </div>`;
+    }).join('')}`;
+}
+
+function updateMoodInsight(){
+  const tagged=allTxs.filter(t=>t.mood);
+  if(tagged.length<3){$('moodInsightBox').style.display='none';return;}
+  const counts={};MOOD_LIST.forEach(m=>counts[m.key]=0);
+  tagged.forEach(t=>{if(counts[t.mood]!==undefined)counts[t.mood]++;});
+  const topMood=MOOD_LIST.reduce((a,b)=>counts[a.key]>counts[b.key]?a:b);
+  const negAmt=tagged.filter(t=>['guilty','regret','impulsive'].includes(t.mood)).reduce((s,t)=>s+t.amt,0);
+  const insightMap={
+    happy:'Most of your spending actually makes you happy 🌟 That\'s a W bestie.',
+    guilty:`You feel guilty about a lot of purchases. Maybe time to audit those habits? 👀`,
+    impulsive:`PKR ${negAmt.toLocaleString()} in impulsive buys. The 24-hour rule could save you 💸`,
+    necessary:'Most of your spending feels necessary. Responsible behavior ngl 👑',
+    meh:'A lot of \'meh\' purchases — are they really worth it? 🤔',
+    regret:`PKR ${negAmt.toLocaleString()} in regret-spending. You already know what to do bestie 😭`,
+  };
+  $('moodInsightBox').style.display='flex';
+  $('moodInsightEmoji').textContent=topMood.emoji;
+  $('moodInsightText').textContent=insightMap[topMood.key]||'keep tracking to get insights!';
+}
+
+// ===== SETTINGS =====
 window.saveProfile=async()=>{
   const name=$('sName').value.trim()||userProfile.name;
   await updateDoc(doc(db,'users',currentUser.uid),{name});
@@ -1036,7 +1422,7 @@ window.clearTxs=async()=>{
   const q=query(collection(db,'transactions'),where('uid','==',currentUser.uid));
   const snap=await getDocs(q);
   await Promise.all(snap.docs.map(d=>deleteDoc(d.ref)));
-  allTxs=[];renderTx();renderDash();toast('cleared 🗑️','ok');
+  allTxs=[];moodData={};renderTx();renderDash();toast('cleared 🗑️','ok');
 };
 window.deleteAcc=async()=>{
   if(!confirm('delete your whole account? for real?'))return;
@@ -1052,214 +1438,6 @@ window.toast=(msg,type)=>{
   const t=$('toast');t.textContent=msg;t.className='toast show '+(type||'');
   setTimeout(()=>t.className='toast',2800);
 };
-
-// ---- AI INSIGHTS ----
-window.getAIInsights = async () => {
-  if(!allTxs.length){toast('add some transactions first bestie 😭','err');return;}
-  $('aiEmpty').style.display='none';
-  $('aiResult').style.display='none';
-  $('aiLoading').style.display='block';
-  $('aiBtn').disabled=true;
-  $('aiBtn').textContent='analysing... 🤖';
-
-  try {
-    const now=new Date();
-    const mTxs=allTxs.filter(t=>{const d=new Date(t.date);return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();});
-    const total=mTxs.reduce((s,t)=>s+t.amt,0);
-    const impulse=mTxs.filter(t=>t.type==='impulse').reduce((s,t)=>s+t.amt,0);
-    const need=mTxs.filter(t=>t.type==='need').reduce((s,t)=>s+t.amt,0);
-    const want=mTxs.filter(t=>t.type==='want').reduce((s,t)=>s+t.amt,0);
-    const budget=userProfile.budget||50000;
-    const pct=Math.round((total/budget)*100);
-
-    const cats=['Food','Transport','Shopping','Entertainment','Bills','Health','Education','Other'];
-    const catBreakdown=cats.map(c=>{
-      const amt=mTxs.filter(t=>t.cat===c).reduce((s,t)=>s+t.amt,0);
-      return amt>0?`${c}: PKR ${amt.toLocaleString()}`:'';
-    }).filter(Boolean).join(', ');
-
-    const txList=allTxs.slice(0,10).map(t=>`${t.desc} (${t.cat}, ${t.type}, PKR ${t.amt})`).join('\n');
-
-    const prompt=`You are a funny, brutally honest but caring Gen Z financial advisor for a Pakistani user. Analyze their spending data and give insights.
-
-SPENDING DATA:
-- Monthly budget: PKR ${budget.toLocaleString()}
-- Total spent this month: PKR ${total.toLocaleString()} (${pct}% of budget)
-- Needs: PKR ${need.toLocaleString()}
-- Wants: PKR ${want.toLocaleString()}
-- Impulse spending: PKR ${impulse.toLocaleString()}
-- Category breakdown: ${catBreakdown}
-- Recent transactions: ${txList}
-
-Give a response in this EXACT JSON format (no markdown, no backticks, just raw JSON):
-{
-  "score": 75,
-  "personality": "The Foodie Spender 🍔",
-  "personality_desc": "one line funny description of their spending personality",
-  "roast": "funny but kind roast about their spending (2 sentences, Gen Z tone)",
-  "warning": "biggest spending risk or problem (1-2 sentences)",
-  "tip1": "specific actionable money saving tip based on their data",
-  "tip2": "another specific tip",
-  "positive": "something genuinely good about their spending habits (even if small)"
-}
-
-Score should be 0-100 (financial health score). Be specific to their actual data. Use Gen Z language. Be funny but helpful.`;
-
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})
-    });
-
-    const data = await res.json();
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text||'';
-    const clean = text.replace(/```json|```/g,'').trim();
-    const ai = JSON.parse(clean);
-
-    const scoreClass = ai.score>=70?'good':ai.score>=40?'mid':'bad';
-    const scoreLabel = ai.score>=70?'financially stable ngl 💚':ai.score>=40?'mid era financially 😬':'broke behavior detected 💀';
-
-    $('aiResult').innerHTML=`
-      <div class="ai-personality">
-        <div class="ai-personality-title">${ai.personality}</div>
-        <div class="ai-personality-sub">${ai.personality_desc}</div>
-      </div>
-      <div class="ai-score">
-        <div class="ai-score-num ${scoreClass}">${ai.score}</div>
-        <div class="ai-score-info"><strong>Financial Health Score</strong><small>${scoreLabel}</small></div>
-      </div>
-      <div class="ai-insight-card roast">
-        <div class="ai-card-top"><span class="ai-card-icon">💀</span><span class="ai-card-label roast">the roast</span></div>
-        <div class="ai-card-text">${ai.roast}</div>
-      </div>
-      <div class="ai-insight-card warning">
-        <div class="ai-card-top"><span class="ai-card-icon">⚠️</span><span class="ai-card-label warning">heads up bestie</span></div>
-        <div class="ai-card-text">${ai.warning}</div>
-      </div>
-      <div class="ai-insight-card tip">
-        <div class="ai-card-top"><span class="ai-card-icon">💡</span><span class="ai-card-label tip">tip #1</span></div>
-        <div class="ai-card-text">${ai.tip1}</div>
-      </div>
-      <div class="ai-insight-card tip">
-        <div class="ai-card-top"><span class="ai-card-icon">💡</span><span class="ai-card-label tip">tip #2</span></div>
-        <div class="ai-card-text">${ai.tip2}</div>
-      </div>
-      <div class="ai-insight-card good">
-        <div class="ai-card-top"><span class="ai-card-icon">✅</span><span class="ai-card-label good">what you're doing right</span></div>
-        <div class="ai-card-text">${ai.positive}</div>
-      </div>
-    `;
-    $('aiLoading').style.display='none';
-    $('aiResult').style.display='block';
-    toast('AI insights ready 💡','ok');
-  } catch(e){
-    $('aiLoading').style.display='none';
-    $('aiEmpty').style.display='block';
-    $('aiEmpty').innerHTML='<div style="font-size:36px;margin-bottom:10px;">😭</div><div style="font-size:13px;color:#ff6b6b;">could not load insights. try again!</div>';
-    toast('AI error 😭 try again','err');
-    console.error(e);
-  } finally {
-    $('aiBtn').disabled=false;
-    $('aiBtn').textContent='analyse again 🤖';
-  }
-};
-
-// ---- RECEIPT SCANNER ----
-const GEMINI_KEY = 'AIzaSyBJM3oMBEVpYf9Z5_0A0JjEKZN_jEQ8Rf4';
-
-window.handleDrop = (e) => {
-  e.preventDefault();
-  const file = e.dataTransfer.files[0];
-  if(file && file.type.startsWith('image/')) processReceipt(file);
-};
-
-window.scanReceipt = (input) => {
-  if(input.files[0]) processReceipt(input.files[0]);
-};
-
-window.resetScanner = () => {
-  $('scannerIdle').style.display='block';
-  $('scannerLoading').style.display='none';
-  $('scannerDone').style.display='none';
-  $('scannerErr').style.display='none';
-  $('receiptInput').value='';
-};
-
-async function processReceipt(file){
-  // show loading
-  $('scannerIdle').style.display='none';
-  $('scannerLoading').style.display='block';
-  $('scannerDone').style.display='none';
-  $('scannerErr').style.display='none';
-
-  try {
-    // convert image to base64
-    const base64 = await new Promise((res,rej)=>{
-      const reader = new FileReader();
-      reader.onload = () => res(reader.result.split(',')[1]);
-      reader.onerror = rej;
-      reader.readAsDataURL(file);
-    });
-
-    // call Gemini Vision API
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-        contents:[{parts:[
-          {text: `You are a receipt scanner for a finance app. Analyze this receipt image and extract:
-1. Store/vendor name and what was purchased (short description, max 40 chars)
-2. Total amount paid (just the number, no currency symbol)
-3. Best category from: Food, Transport, Shopping, Entertainment, Bills, Health, Education, Savings, Other
-4. Date of purchase (YYYY-MM-DD format, use today ${new Date().toISOString().split('T')[0]} if not visible)
-5. Spending type: need (essential), want (non-essential but planned), impulse (unplanned)
-
-Respond ONLY in this exact JSON format, nothing else:
-{"desc":"store name - item","amount":1234,"category":"Food","date":"2024-01-01","type":"need"}`},
-          {inline_data:{mime_type:file.type, data:base64}}
-        ]}]
-      })
-    });
-
-    const data = await response.json();
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-    const clean = text.replace(/```json|```/g,'').trim();
-    const parsed = JSON.parse(clean);
-
-    // fill form
-    $('mDesc').value = parsed.desc || '';
-    $('mAmt').value = parsed.amount || '';
-    $('mDate').value = parsed.date || new Date().toISOString().split('T')[0];
-
-    // pick category
-    document.querySelectorAll('.cat-opt').forEach(b=>{
-      b.classList.remove('on');
-      if(b.dataset.v===parsed.category) b.classList.add('on');
-    });
-    $('mCat').value = parsed.category || '';
-
-    // pick type
-    document.querySelectorAll('.type-opt').forEach(b=>{
-      b.classList.remove('on');
-      if(b.dataset.v===parsed.type){
-        b.classList.add('on');
-      }
-    });
-    $('mType').value = parsed.type || 'need';
-
-    // show done
-    $('scannerLoading').style.display='none';
-    $('scannerDone').style.display='block';
-    toast('receipt scanned! ✅ check the form','ok');
-
-  } catch(e) {
-    $('scannerLoading').style.display='none';
-    $('scannerErr').style.display='block';
-    $('scanErrTxt').textContent = 'could not read receipt 😭 fill manually';
-    console.error(e);
-  }
-}
 </script>
 </body>
 </html>
-<!-- THIS IS WRONG - need to inject CSS properly -->
