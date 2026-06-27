@@ -1581,7 +1581,7 @@ window._renderWrapped=window.renderWrapped=()=>{
   const biggestSplurge=[...allTxs].sort((a,b)=>b.amt-a.amt)[0]||{desc:'—',amt:0};
   const {score,verdict}=getImpulseScore();
   const personality=getPersonality(score);
-  const totalLabel=total>100000?'That\'s a whole vibe 💅':total>50000?'Spending like main character 🎬':'Keeping it lowkey 🤏';
+  const totalLabel=total>100000?"Thats a whole vibe 💅":total>50000?"Spending like main character 🎬":"Keeping it lowkey 🤏";
   const impulseLabel=score>=70?'chaos mode 😈':score>=40?'mid slay 😅':'disciplined bestie 🧘';
   const year=new Date().getFullYear();
 
@@ -1735,11 +1735,11 @@ function updateMoodInsight(){
   const topMood=MOOD_LIST.reduce((a,b)=>counts[a.key]>counts[b.key]?a:b);
   const negAmt=tagged.filter(t=>['guilty','regret','impulsive'].includes(t.mood)).reduce((s,t)=>s+t.amt,0);
   const insightMap={
-    happy:'Most of your spending actually makes you happy 🌟 That\'s a W bestie.',
+    happy:"Most of your spending makes you happy 🌟 Thats a W bestie.",
     guilty:`You feel guilty about a lot of purchases. Maybe time to audit those habits? 👀`,
     impulsive:`PKR ${negAmt.toLocaleString()} in impulsive buys. The 24-hour rule could save you 💸`,
     necessary:'Most of your spending feels necessary. Responsible behavior ngl 👑',
-    meh:'A lot of \'meh\' purchases — are they really worth it? 🤔',
+    meh:"A lot of meh purchases — are they really worth it? 🤔",
     regret:`PKR ${negAmt.toLocaleString()} in regret-spending. You already know what to do bestie 😭`,
   };
   $('moodInsightBox').style.display='flex';
@@ -1864,7 +1864,7 @@ window.deleteGoal = async (id) => {
 function renderGoals() {
   const grid = $('goalsGrid');
   if(!allGoals.length) {
-    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--txt3);font-size:13px;">no goals yet — add one and start saving! 🎯</div>';
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--txt3);font-size:13px;">no goals yet — add one and start saving! 🎯</div>`;
     $('goalsOverview').innerHTML = '<div style="color:var(--txt3);font-size:13px;text-align:center;padding:20px;">add goals to see overview</div>';
     return;
   }
@@ -1976,7 +1976,7 @@ function renderBills() {
   else{alert.className='alert-strip hide';}
 
   if(!unpaid.length) {
-    list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--txt3);font-size:13px;">no upcoming bills! you're all caught up ✨</div>';
+    list.innerHTML = `<div style="text-align:center;padding:40px;color:var(--txt3);font-size:13px;">no upcoming bills! you're all caught up ✨</div>`;
     return;
   }
   list.innerHTML = unpaid.map(b => {
@@ -2029,7 +2029,7 @@ function renderLeaderboard() {
 }
 
 window.copyInviteLink = () => {
-  navigator.clipboard.writeText('Hey! Track your spending with ImpulseGuard 🛡️ impulseguard.dev — let's see who spends less 👀');
+  navigator.clipboard.writeText("Hey! Track your spending with ImpulseGuard 🛡️ impulseguard.dev — lets see who spends less 👀");
   toast('invite link copied! 🔗','ok');
 };
 
