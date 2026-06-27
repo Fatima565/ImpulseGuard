@@ -725,7 +725,7 @@ th { letter-spacing: .08em; }
       <div class="nav-item" onclick="showPage('settings')"><span class="nav-icon">⚙️</span> Settings</div>
     </div>
     <div style="padding:12px 22px;border-top:1px solid var(--b1)">
-  <button onclick="triggerInstall()" style="width:100%;padding:9px;background:rgba(198,241,53,.08);border:1px solid rgba(198,241,53,.2);border-radius:10px;color:var(--lime);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;justify-content:center;">
+  <button onclick="showInstallGuide()" style="width:100%;padding:9px;background:rgba(198,241,53,.08);border:1px solid rgba(198,241,53,.2);border-radius:10px;color:var(--lime);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;justify-content:center;">
     📲 install app
   </button>
 </div>
@@ -775,8 +775,8 @@ th { letter-spacing: .08em; }
         </div>
         <div id="aiLoading" style="display:none;text-align:center;padding:30px;">
           <div style="font-size:36px;margin-bottom:12px;display:inline-block;animation:spin 1s linear infinite">🤖</div>
-          <div style="font-size:14px;font-weight:600;color:var(--lime);">gemini is judging your spending...</div>
-          <div style="font-size:12px;color:var(--txt3);margin-top:6px">this might hurt bestie 💀</div>
+          <div style="font-size:14px;font-weight:600;color:var(--lime);" id="aiLoadingMsg">gemini is judging your spending...</div>
+          <div style="font-size:12px;color:var(--txt3);margin-top:6px">this might hurt bestie 💀 (auto-retries if rate limited)</div>
         </div>
         <div id="aiResult" style="display:none;"></div>
         <div id="aiEmpty" style="text-align:center;padding:30px;color:var(--txt3);">
@@ -1105,6 +1105,58 @@ th { letter-spacing: .08em; }
   <button class="btn-install-close" onclick="document.getElementById('installBanner').classList.add('hidden')">×</button>
 </div>
 
+
+<!-- INSTALL GUIDE MODAL -->
+<div class="overlay" id="installModal">
+  <div class="modal" style="max-width:420px">
+    <h3>install ImpulseGuard 📲</h3>
+    <p style="font-size:13px;color:var(--txt2);margin-bottom:20px">add to your home screen on any device!</p>
+
+    <div id="installChromeBanner" style="display:none;margin-bottom:16px">
+      <button class="btn primary" style="width:100%;padding:12px;font-size:14px" onclick="triggerInstall()">
+        ⚡ Install Now (Chrome)
+      </button>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <!-- Android Chrome -->
+      <div style="background:var(--s2);border:1px solid var(--b1);border-radius:12px;padding:14px">
+        <div style="font-size:13px;font-weight:700;margin-bottom:6px">🤖 Android (Chrome)</div>
+        <div style="font-size:12px;color:var(--txt2);line-height:1.6">
+          1. Tap the <strong style="color:var(--txt)">⋮ menu</strong> (3 dots, top right)<br>
+          2. Tap <strong style="color:var(--txt)">"Add to Home screen"</strong><br>
+          3. Tap <strong style="color:var(--lime)">Add</strong> ✅
+        </div>
+      </div>
+
+      <!-- iPhone Safari -->
+      <div style="background:var(--s2);border:1px solid var(--b1);border-radius:12px;padding:14px">
+        <div style="font-size:13px;font-weight:700;margin-bottom:6px">🍎 iPhone (Safari)</div>
+        <div style="font-size:12px;color:var(--txt2);line-height:1.6">
+          1. Open in <strong style="color:var(--txt)">Safari</strong> browser<br>
+          2. Tap the <strong style="color:var(--txt)">Share button</strong> (box with arrow ↑)<br>
+          3. Scroll down → tap <strong style="color:var(--txt)">"Add to Home Screen"</strong><br>
+          4. Tap <strong style="color:var(--lime)">Add</strong> ✅
+        </div>
+      </div>
+
+      <!-- Desktop Chrome -->
+      <div style="background:var(--s2);border:1px solid var(--b1);border-radius:12px;padding:14px">
+        <div style="font-size:13px;font-weight:700;margin-bottom:6px">💻 Desktop (Chrome)</div>
+        <div style="font-size:12px;color:var(--txt2);line-height:1.6">
+          1. Look for the <strong style="color:var(--txt)">install icon ⊕</strong> in the address bar<br>
+          2. Click it → click <strong style="color:var(--lime)">Install</strong> ✅<br>
+          <span style="color:var(--txt3);font-size:11px">(or Chrome menu → "Install ImpulseGuard")</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn ghost" onclick="document.getElementById('installModal').classList.remove('show')">close</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -1148,6 +1200,7 @@ function markBillPaid(id){ if(window._markBillPaid) window._markBillPaid(id); }
 function deleteBill(id){ if(window._deleteBill) window._deleteBill(id); }
 function copyInviteLink(){ if(window._copyInviteLink) window._copyInviteLink(); }
 function triggerInstall(){ if(window._triggerInstall) window._triggerInstall(); }
+function showInstallGuide(){ if(window._showInstallGuide) window._showInstallGuide(); else if(window.showInstallGuide) window.showInstallGuide(); }
 </script>
 
 <script type="module">
@@ -1411,10 +1464,8 @@ SPENDING DATA:
 Give a response in this EXACT JSON format (no markdown, no backticks, just raw JSON):
 {"score":75,"personality":"The Foodie Spender 🍔","personality_desc":"one line funny description","roast":"funny but kind roast (2 sentences, Gen Z tone)","warning":"biggest spending risk (1-2 sentences)","tip1":"specific actionable tip","tip2":"another specific tip","positive":"something genuinely good about their spending"}
 Score 0-100 (financial health score). Be specific to their data. Use Gen Z language.`;
-    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${GEMINI_KEY}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})});
-    const data=await res.json();
-    const text=data.candidates?.[0]?.content?.parts?.[0]?.text||'';
-    const ai=JSON.parse(text.replace(/```json|```/g,'').trim());
+    const rawText = await callGemini(prompt);
+    const ai=JSON.parse(rawText.replace(/```json|```/g,'').trim());
     const scoreClass=ai.score>=70?'good':ai.score>=40?'mid':'bad';
     const scoreLabel=ai.score>=70?'financially stable ngl 💚':ai.score>=40?'mid era financially 😬':'broke behavior detected 💀';
     $('aiResult').innerHTML=`
@@ -1448,23 +1499,15 @@ async function processReceipt(file){
   $('scannerDone').style.display='none';$('scannerErr').style.display='none';
   try{
     const base64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(file);});
-    const response=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${GEMINI_KEY}`,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({contents:[{parts:[
-        {text:`You are a receipt scanner for a finance app. Analyze this receipt image and extract:
-1. Store/vendor name and what was purchased (short description, max 40 chars)
-2. Total amount paid (just the number, no currency symbol)
-3. Best category from: Food, Transport, Shopping, Entertainment, Bills, Health, Education, Savings, Other
-4. Date of purchase (YYYY-MM-DD format, use today ${new Date().toISOString().split('T')[0]} if not visible)
-5. Spending type: need (essential), want (non-essential but planned), impulse (unplanned)
-Respond ONLY in this exact JSON format, nothing else:
-{"desc":"store name - item","amount":1234,"category":"Food","date":"2024-01-01","type":"need"}`},
-        {inline_data:{mime_type:file.type,data:base64}}
-      ]}]})
-    });
-    const data=await response.json();
-    const text=data.candidates?.[0]?.content?.parts?.[0]?.text||'';
-    const parsed=JSON.parse(text.replace(/```json|```/g,'').trim());
+    const scanPrompt = `You are a receipt scanner. Extract from this receipt image:
+1. Store/item description (max 40 chars)
+2. Total amount (number only)
+3. Category: Food/Transport/Shopping/Entertainment/Bills/Health/Education/Savings/Other
+4. Date YYYY-MM-DD (use ${new Date().toISOString().split('T')[0]} if not visible)
+5. Type: need/want/impulse
+Respond ONLY in JSON: {"desc":"...","amount":1234,"category":"Food","date":"2024-01-01","type":"need"}`;
+    const scanText = await callGemini(scanPrompt, base64, file.type);
+    const parsed = JSON.parse(scanText.replace(/\`\`\`json|\`\`\`/g,'').trim());
     $('mDesc').value=parsed.desc||'';
     $('mAmt').value=parsed.amount||'';
     $('mDate').value=parsed.date||new Date().toISOString().split('T')[0];
@@ -1642,12 +1685,14 @@ Their data:
 - Top category: ${topCatEntry[0]} (PKR ${topCatEntry[1].toLocaleString()})
 - Biggest splurge: ${topTx.desc} — PKR ${topTx.amt.toLocaleString()}
 - Transactions: ${allTxs.length}`;
-    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${GEMINI_KEY}`,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})
-    });
-    const data=await res.json();
-    const roastText=data.candidates?.[0]?.content?.parts?.[0]?.text||"Your spending is so bad even AI gave up trying to roast it. 💀";
+    let roastText;
+    try {
+      roastText = await callGemini(prompt);
+    } catch(re) {
+      roastText = re.message.includes('Rate limit') 
+        ? "AI is catching its breath 😮‍💨 wait 1 min and try again!" 
+        : "Your spending is so bad even AI gave up trying to roast it. 💀";
+    }
     $('roastText').textContent=roastText;
     $('roastOutput').style.display='block';
     $('roastShareBtn').onclick=()=>{
@@ -1789,6 +1834,54 @@ window._toast=window.toast=(msg,type)=>{
   const t=$('toast');t.textContent=msg;t.className='toast show '+(type||'');
   setTimeout(()=>t.className='toast',2800);
 };
+
+
+// ============================================================
+// GEMINI API HELPER — with retry on 429
+// ============================================================
+async function callGemini(prompt, imageData=null, mimeType=null, retries=3) {
+  for(let attempt=1; attempt<=retries; attempt++) {
+    try {
+      const parts = [];
+      if(imageData) parts.push({inline_data:{mime_type:mimeType, data:imageData}});
+      parts.push({text: prompt});
+      
+      const res = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${GEMINI_KEY}`,
+        {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({contents:[{parts}]})
+        }
+      );
+      
+      if(res.status === 429) {
+        if(attempt < retries) {
+          const wait = attempt * 8000; // 8s, 16s, 24s
+          console.log(`Rate limited, waiting ${wait/1000}s before retry ${attempt+1}...`);
+          await new Promise(r => setTimeout(r, wait));
+          continue;
+        } else {
+          throw new Error('Rate limit reached — please wait 1 minute and try again');
+        }
+      }
+      
+      if(!res.ok) {
+        const errData = await res.json().catch(()=>({}));
+        throw new Error(errData?.error?.message || `API error ${res.status}`);
+      }
+      
+      const data = await res.json();
+      const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+      if(!text) throw new Error('Empty response from AI');
+      return text;
+      
+    } catch(e) {
+      if(attempt === retries) throw e;
+      if(e.message.includes('Rate limit')) throw e;
+    }
+  }
+}
 
 // ============================================================
 // ===== GOALS FEATURE =====
@@ -2058,17 +2151,23 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.triggerInstall = async () => {
-  if(!deferredInstallPrompt) {
-    toast('open in Chrome on mobile to install! 📱','ok');
-    return;
+  if(deferredInstallPrompt) {
+    deferredInstallPrompt.prompt();
+    const {outcome} = await deferredInstallPrompt.userChoice;
+    if(outcome==='accepted') toast('installing... 🚀','ok');
+    deferredInstallPrompt = null;
+    $('installBanner')?.classList.add('hidden');
+    $('installModal')?.classList.remove('show');
+  } else {
+    showInstallGuide();
   }
-  deferredInstallPrompt.prompt();
-  const {outcome} = await deferredInstallPrompt.userChoice;
-  if(outcome==='accepted') toast('installing... 🚀','ok');
-  deferredInstallPrompt = null;
-  $('installBanner')?.classList.add('hidden');
-  const heroBtn = $('heroInstallBtn');
-  if(heroBtn) heroBtn.style.display='none';
+};
+
+window.showInstallGuide = () => {
+  // Show Chrome install button if prompt available
+  const chromeBanner = $('installChromeBanner');
+  if(chromeBanner) chromeBanner.style.display = deferredInstallPrompt ? 'block' : 'none';
+  $('installModal').classList.add('show');
 };
 
 // Show hero install btn when prompt available
