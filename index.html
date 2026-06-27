@@ -725,7 +725,7 @@ th { letter-spacing: .08em; }
       <div class="nav-item" onclick="showPage('settings')"><span class="nav-icon">⚙️</span> Settings</div>
     </div>
     <div style="padding:12px 22px;border-top:1px solid var(--b1)">
-  <button onclick="showInstallGuide()" style="width:100%;padding:9px;background:rgba(198,241,53,.08);border:1px solid rgba(198,241,53,.2);border-radius:10px;color:var(--lime);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;justify-content:center;">
+  <button onclick="triggerInstall()" style="width:100%;padding:9px;background:rgba(198,241,53,.08);border:1px solid rgba(198,241,53,.2);border-radius:10px;color:var(--lime);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;justify-content:center;">
     📲 install app
   </button>
 </div>
@@ -1106,56 +1106,6 @@ th { letter-spacing: .08em; }
 </div>
 
 
-<!-- INSTALL GUIDE MODAL -->
-<div class="overlay" id="installModal">
-  <div class="modal" style="max-width:420px">
-    <h3>install ImpulseGuard 📲</h3>
-    <p style="font-size:13px;color:var(--txt2);margin-bottom:20px">add to your home screen on any device!</p>
-
-    <div id="installChromeBanner" style="display:none;margin-bottom:16px">
-      <button class="btn primary" style="width:100%;padding:12px;font-size:14px" onclick="triggerInstall()">
-        ⚡ Install Now (Chrome)
-      </button>
-    </div>
-
-    <div style="display:flex;flex-direction:column;gap:12px">
-      <!-- Android Chrome -->
-      <div style="background:var(--s2);border:1px solid var(--b1);border-radius:12px;padding:14px">
-        <div style="font-size:13px;font-weight:700;margin-bottom:6px">🤖 Android (Chrome)</div>
-        <div style="font-size:12px;color:var(--txt2);line-height:1.6">
-          1. Tap the <strong style="color:var(--txt)">⋮ menu</strong> (3 dots, top right)<br>
-          2. Tap <strong style="color:var(--txt)">"Add to Home screen"</strong><br>
-          3. Tap <strong style="color:var(--lime)">Add</strong> ✅
-        </div>
-      </div>
-
-      <!-- iPhone Safari -->
-      <div style="background:var(--s2);border:1px solid var(--b1);border-radius:12px;padding:14px">
-        <div style="font-size:13px;font-weight:700;margin-bottom:6px">🍎 iPhone (Safari)</div>
-        <div style="font-size:12px;color:var(--txt2);line-height:1.6">
-          1. Open in <strong style="color:var(--txt)">Safari</strong> browser<br>
-          2. Tap the <strong style="color:var(--txt)">Share button</strong> (box with arrow ↑)<br>
-          3. Scroll down → tap <strong style="color:var(--txt)">"Add to Home Screen"</strong><br>
-          4. Tap <strong style="color:var(--lime)">Add</strong> ✅
-        </div>
-      </div>
-
-      <!-- Desktop Chrome -->
-      <div style="background:var(--s2);border:1px solid var(--b1);border-radius:12px;padding:14px">
-        <div style="font-size:13px;font-weight:700;margin-bottom:6px">💻 Desktop (Chrome)</div>
-        <div style="font-size:12px;color:var(--txt2);line-height:1.6">
-          1. Look for the <strong style="color:var(--txt)">install icon ⊕</strong> in the address bar<br>
-          2. Click it → click <strong style="color:var(--lime)">Install</strong> ✅<br>
-          <span style="color:var(--txt3);font-size:11px">(or Chrome menu → "Install ImpulseGuard")</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal-footer">
-      <button class="btn ghost" onclick="document.getElementById('installModal').classList.remove('show')">close</button>
-    </div>
-  </div>
-</div>
 
 <div class="toast" id="toast"></div>
 
@@ -1200,7 +1150,7 @@ function markBillPaid(id){ if(window._markBillPaid) window._markBillPaid(id); }
 function deleteBill(id){ if(window._deleteBill) window._deleteBill(id); }
 function copyInviteLink(){ if(window._copyInviteLink) window._copyInviteLink(); }
 function triggerInstall(){ if(window._triggerInstall) window._triggerInstall(); }
-function showInstallGuide(){ if(window._showInstallGuide) window._showInstallGuide(); else if(window.showInstallGuide) window.showInstallGuide(); }
+
 </script>
 
 <script type="module">
@@ -1222,7 +1172,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-const GEMINI_KEY = 'AQ.Ab8RN6K-CYpRxlLKwDLoRH6Y5m4pDjq-l3R_TQPAdELIeDJ6NQ';
+const GEMINI_KEY = 'AQ.Ab8RN6K-CYpRxlLKwDLoRH6Y5m4pDjq-l3R_TQPAdELIeDJ6NQ'; // kept for reference
 const MOODS=['saving szn 💸','broke but cute','budget era activated','no spend challenge (lying)','financially healing'];
 const ROASTS=["babe you've spent {pct}% of your budget 💀","your bank account is not ur enemy. YOU are. ({pct}% spent)","{pct}% gone. main character behavior? debatable."];
 const GREENS=["you're doing amazing sweetie ✨ only {pct}% spent","financially responsible era activated 🌱 {pct}% spent","budget looking clean fr fr. {pct}% spent 💚"];
@@ -1840,6 +1790,9 @@ window._toast=window.toast=(msg,type)=>{
 // GEMINI API HELPER — with retry on 429
 // ============================================================
 async function callGemini(prompt, imageData=null, mimeType=null, retries=3) {
+  // Use Firebase project API key — same project, just needs Generative Language API enabled
+  const API_KEY = 'AIzaSyBJM3oMBEVpYf9Z5_0A0JjEKZN_jEQ8Rf4';
+  
   for(let attempt=1; attempt<=retries; attempt++) {
     try {
       const parts = [];
@@ -1847,38 +1800,51 @@ async function callGemini(prompt, imageData=null, mimeType=null, retries=3) {
       parts.push({text: prompt});
       
       const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${GEMINI_KEY}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`,
         {
           method:'POST',
           headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({contents:[{parts}]})
+          body:JSON.stringify({
+            contents:[{parts}],
+            generationConfig:{temperature:0.9, maxOutputTokens:1000}
+          })
         }
       );
       
+      const data = await res.json();
+      
       if(res.status === 429) {
         if(attempt < retries) {
-          const wait = attempt * 8000; // 8s, 16s, 24s
-          console.log(`Rate limited, waiting ${wait/1000}s before retry ${attempt+1}...`);
-          await new Promise(r => setTimeout(r, wait));
+          await new Promise(r => setTimeout(r, attempt * 12000));
           continue;
-        } else {
-          throw new Error('Rate limit reached — please wait 1 minute and try again');
         }
+        throw new Error('Too many requests — wait 1 min and try again 😅');
+      }
+      
+      if(res.status === 400 || res.status === 403) {
+        const msg = data?.error?.message || '';
+        // API not enabled — tell user exactly what to do
+        if(msg.includes('API_KEY_INVALID') || msg.includes('not been used') || msg.includes('disabled')) {
+          throw new Error('ENABLE_API');
+        }
+        throw new Error(msg || 'API error ' + res.status);
       }
       
       if(!res.ok) {
-        const errData = await res.json().catch(()=>({}));
-        throw new Error(errData?.error?.message || `API error ${res.status}`);
+        throw new Error(data?.error?.message || 'API error ' + res.status);
       }
       
-      const data = await res.json();
       const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-      if(!text) throw new Error('Empty response from AI');
+      if(!text) throw new Error('Empty response');
       return text;
       
     } catch(e) {
+      if(e.message === 'ENABLE_API') {
+        throw new Error('ENABLE_API');
+      }
       if(attempt === retries) throw e;
-      if(e.message.includes('Rate limit')) throw e;
+      if(e.message.includes('wait 1 min')) throw e;
+      await new Promise(r => setTimeout(r, 2000));
     }
   }
 }
@@ -2154,20 +2120,23 @@ window.triggerInstall = async () => {
   if(deferredInstallPrompt) {
     deferredInstallPrompt.prompt();
     const {outcome} = await deferredInstallPrompt.userChoice;
-    if(outcome==='accepted') toast('installing... 🚀','ok');
+    if(outcome==='accepted') {
+      toast('ImpulseGuard installed! 🎉','ok');
+      $('installBanner')?.classList.add('hidden');
+    }
     deferredInstallPrompt = null;
-    $('installBanner')?.classList.add('hidden');
-    $('installModal')?.classList.remove('show');
   } else {
-    showInstallGuide();
+    // Detect device and show targeted tip
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isAndroid = /Android/.test(navigator.userAgent);
+    if(isIOS) {
+      toast('iPhone: Safari → Share button → "Add to Home Screen" 🍎','ok');
+    } else if(isAndroid) {
+      toast('Android: Chrome menu (⋮) → "Add to Home Screen" 🤖','ok');
+    } else {
+      toast('Desktop: Click ⊕ install icon in your browser address bar 💻','ok');
+    }
   }
-};
-
-window.showInstallGuide = () => {
-  // Show Chrome install button if prompt available
-  const chromeBanner = $('installChromeBanner');
-  if(chromeBanner) chromeBanner.style.display = deferredInstallPrompt ? 'block' : 'none';
-  $('installModal').classList.add('show');
 };
 
 // Show hero install btn when prompt available
