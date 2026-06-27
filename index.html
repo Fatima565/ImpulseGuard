@@ -1790,8 +1790,8 @@ window._toast=window.toast=(msg,type)=>{
 // GEMINI API HELPER — with retry on 429
 // ============================================================
 async function callGemini(prompt, imageData=null, mimeType=null, retries=3) {
-  // Use Firebase project API key — same project, just needs Generative Language API enabled
-  const API_KEY = 'AIzaSyBJM3oMBEVpYf9Z5_0A0JjEKZN_jEQ8Rf4';
+  // AQ. key from AI Studio - works with x-goog-api-key header
+  const API_KEY = 'AQ.Ab8RN6Lm1-K_olxA_NI4Y11KIBESK076C_V6nOvJPrZQ-Q8TnQ';
   
   for(let attempt=1; attempt<=retries; attempt++) {
     try {
@@ -1800,13 +1800,16 @@ async function callGemini(prompt, imageData=null, mimeType=null, retries=3) {
       parts.push({text: prompt});
       
       const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`,
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent',
         {
           method:'POST',
-          headers:{'Content-Type':'application/json'},
+          headers:{
+            'Content-Type':'application/json',
+            'x-goog-api-key': API_KEY
+          },
           body:JSON.stringify({
             contents:[{parts}],
-            generationConfig:{temperature:0.9, maxOutputTokens:1000}
+            generationConfig:{temperature:0.9, maxOutputTokens:800}
           })
         }
       );
@@ -1815,36 +1818,26 @@ async function callGemini(prompt, imageData=null, mimeType=null, retries=3) {
       
       if(res.status === 429) {
         if(attempt < retries) {
-          await new Promise(r => setTimeout(r, attempt * 12000));
+          await new Promise(r => setTimeout(r, attempt * 15000));
           continue;
         }
-        throw new Error('Too many requests — wait 1 min and try again 😅');
-      }
-      
-      if(res.status === 400 || res.status === 403) {
-        const msg = data?.error?.message || '';
-        // API not enabled — tell user exactly what to do
-        if(msg.includes('API_KEY_INVALID') || msg.includes('not been used') || msg.includes('disabled')) {
-          throw new Error('ENABLE_API');
-        }
-        throw new Error(msg || 'API error ' + res.status);
+        throw new Error('rate_limit');
       }
       
       if(!res.ok) {
-        throw new Error(data?.error?.message || 'API error ' + res.status);
+        const msg = data?.error?.message || '';
+        console.error('Gemini error:', res.status, msg);
+        throw new Error(msg || 'API error ' + res.status);
       }
       
       const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-      if(!text) throw new Error('Empty response');
+      if(!text) throw new Error('Empty response from AI');
       return text;
       
     } catch(e) {
-      if(e.message === 'ENABLE_API') {
-        throw new Error('ENABLE_API');
-      }
       if(attempt === retries) throw e;
-      if(e.message.includes('wait 1 min')) throw e;
-      await new Promise(r => setTimeout(r, 2000));
+      if(e.message === 'rate_limit') throw e;
+      await new Promise(r => setTimeout(r, 3000));
     }
   }
 }
