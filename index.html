@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>ImpulseGuard — Your wallet's bestie</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,400;600;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 :root{
   --bg:#08090d;--s1:#0f1117;--s2:#161b27;--s3:#1c2333;
@@ -16,7 +16,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{height:100%;overflow:hidden;}
-body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt);font-size:14px;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);font-size:14px;}
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:var(--s1);}
 ::-webkit-scrollbar-thumb{background:var(--b2);border-radius:4px;}
@@ -33,12 +33,12 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
   background:rgba(8,9,13,.8);backdrop-filter:blur(12px);
   border-bottom:1px solid rgba(35,45,66,.4);
 }
-.land-logo{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;}
+.land-logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;}
 .land-logo em{color:var(--lime);font-style:normal;}
 .land-nav-btns{display:flex;gap:12px;align-items:center;}
-.btn-ghost-sm{padding:8px 20px;border:1px solid var(--b2);border-radius:9px;background:none;color:var(--txt2);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;}
+.btn-ghost-sm{padding:8px 20px;border:1px solid var(--b2);border-radius:9px;background:none;color:var(--txt2);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;}
 .btn-ghost-sm:hover{color:var(--txt);border-color:var(--txt3);}
-.btn-lime-sm{padding:8px 20px;border:none;border-radius:9px;background:var(--lime);color:#0a0d08;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;}
+.btn-lime-sm{padding:8px 20px;border:none;border-radius:9px;background:var(--lime);color:#0a0d08;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;}
 .btn-lime-sm:hover{background:var(--lime2);}
 .hero{
   flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -54,7 +54,7 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
   animation:fadeup .6s ease both;
 }
 .hero-title{
-  font-family:'Bricolage Grotesque',sans-serif;
+  font-family:'Syne',sans-serif;
   font-size:clamp(42px,6vw,80px);font-weight:800;
   line-height:1.05;letter-spacing:-2px;
   margin-bottom:24px;
@@ -63,9 +63,9 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
 .hero-title .line2{color:var(--lime);}
 .hero-sub{font-size:16px;color:var(--txt2);max-width:480px;line-height:1.7;margin-bottom:40px;animation:fadeup .6s .2s ease both;}
 .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:60px;animation:fadeup .6s .3s ease both;}
-.btn-hero-main{padding:14px 36px;background:var(--lime);border:none;border-radius:12px;color:#0a0d08;font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:800;cursor:pointer;transition:.2s;}
+.btn-hero-main{padding:14px 36px;background:var(--lime);border:none;border-radius:12px;color:#0a0d08;font-family:'Syne',sans-serif;font-size:16px;font-weight:800;cursor:pointer;transition:.2s;}
 .btn-hero-main:hover{background:var(--lime2);transform:translateY(-2px);}
-.btn-hero-ghost{padding:14px 36px;background:none;border:1px solid var(--b2);border-radius:12px;color:var(--txt);font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;}
+.btn-hero-ghost{padding:14px 36px;background:none;border:1px solid var(--b2);border-radius:12px;color:var(--txt);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:.2s;}
 .btn-hero-ghost:hover{border-color:var(--txt3);}
 .float-cards{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;animation:fadeup .6s .4s ease both;margin-bottom:60px;}
 .fcard{background:var(--s1);border:1px solid var(--b1);border-radius:16px;padding:18px 22px;min-width:180px;text-align:left;position:relative;overflow:hidden;}
@@ -75,7 +75,7 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
 .fcard.red::before{background:#ff6b6b;}
 .fcard.cyan::before{background:var(--cyan);}
 .fcard-label{font-size:10px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
-.fcard-val{font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:800;}
+.fcard-val{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;}
 .fcard-val.lime{color:var(--lime);}
 .fcard-val.red{color:#ff6b6b;}
 .fcard-val.purple{color:var(--purple);}
@@ -88,29 +88,29 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .features{padding:80px 60px;background:var(--s1);}
 .sec-label{font-size:11px;font-weight:700;color:var(--lime);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;text-align:center;}
-.sec-title{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:800;text-align:center;margin-bottom:50px;letter-spacing:-.5px;}
+.sec-title{font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:800;text-align:center;margin-bottom:50px;letter-spacing:-.5px;}
 .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px;margin:0 auto;}
 .feat-card{background:var(--s2);border:1px solid var(--b1);border-radius:20px;padding:28px;}
 .feat-icon{font-size:36px;margin-bottom:16px;}
-.feat-title{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:700;margin-bottom:8px;}
+.feat-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:8px;}
 .feat-desc{font-size:13px;color:var(--txt2);line-height:1.6;}
 .meme-sec{padding:80px 60px;text-align:center;background:var(--bg);}
 .meme-grid{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:40px;}
 .meme-card{background:var(--s1);border:1px solid var(--b1);border-radius:16px;padding:24px 20px;width:200px;}
 .meme-emoji{font-size:48px;margin-bottom:12px;}
 .meme-top{font-size:11px;font-weight:700;color:var(--txt3);text-transform:uppercase;margin-bottom:6px;}
-.meme-txt{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;color:var(--txt);}
+.meme-txt{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--txt);}
 .meme-sub{font-size:11px;color:var(--txt3);margin-top:4px;}
 .stats-sec{padding:60px;background:var(--s1);display:flex;gap:0;border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);}
 .stat-item{flex:1;text-align:center;padding:20px;border-right:1px solid var(--b1);}
 .stat-item:last-child{border-right:none;}
-.stat-num{font-family:'Bricolage Grotesque',sans-serif;font-size:42px;font-weight:800;color:var(--lime);}
+.stat-num{font-family:'Syne',sans-serif;font-size:42px;font-weight:800;color:var(--lime);}
 .stat-lbl{font-size:13px;color:var(--txt2);margin-top:6px;}
 .cta-sec{padding:100px 60px;text-align:center;background:radial-gradient(ellipse at 50% 50%,rgba(198,241,53,.08) 0%,transparent 60%);}
-.cta-title{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(32px,5vw,60px);font-weight:800;letter-spacing:-.5px;margin-bottom:16px;}
+.cta-title{font-family:'Syne',sans-serif;font-size:clamp(32px,5vw,60px);font-weight:800;letter-spacing:-.5px;margin-bottom:16px;}
 .cta-sub{font-size:15px;color:var(--txt2);margin-bottom:40px;}
 .footer{padding:30px 60px;border-top:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;}
-.footer-logo{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:800;}
+.footer-logo{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;}
 .footer-logo em{color:var(--lime);font-style:normal;}
 .footer-txt{font-size:12px;color:var(--txt3);}
 @keyframes fadeup{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
@@ -136,10 +136,10 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
 .ai-card-label.good{color:#6ee7b7;}
 .ai-card-text{font-size:13px;color:var(--txt);line-height:1.6;}
 .ai-personality{background:linear-gradient(135deg,rgba(155,93,255,.15),rgba(0,212,255,.1));border:1px solid rgba(155,93,255,.3);border-radius:16px;padding:22px;margin-bottom:16px;text-align:center;}
-.ai-personality-title{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px;}
+.ai-personality-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px;}
 .ai-personality-sub{font-size:13px;color:var(--txt2);}
 .ai-score{display:flex;align-items:center;justify-content:center;gap:16px;background:var(--s2);border:1px solid var(--b1);border-radius:14px;padding:18px;margin-bottom:12px;}
-.ai-score-num{font-family:'Bricolage Grotesque',sans-serif;font-size:48px;font-weight:800;}
+.ai-score-num{font-family:'Syne',sans-serif;font-size:48px;font-weight:800;}
 .ai-score-num.good{color:var(--lime);}
 .ai-score-num.mid{color:var(--orange);}
 .ai-score-num.bad{color:#ff6b6b;}
@@ -150,18 +150,18 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
 #authScreen{display:none;align-items:center;justify-content:center;height:100vh;background:radial-gradient(ellipse at 20% 50%,rgba(155,93,255,.12) 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(0,212,255,.08) 0%,transparent 40%),var(--bg);}
 .auth-box{background:var(--s1);border:1px solid var(--b1);border-radius:24px;padding:48px 44px;width:420px;position:relative;overflow:hidden;}
 .auth-box::before{content:'';position:absolute;top:-80px;right:-80px;width:220px;height:220px;background:radial-gradient(circle,rgba(198,241,53,.07),transparent 70%);pointer-events:none;}
-.logo{font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:800;margin-bottom:6px;}
+.logo{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;margin-bottom:6px;}
 .logo em{color:var(--lime);font-style:normal;}
 .auth-back{font-size:12px;color:var(--txt3);margin-bottom:20px;cursor:pointer;display:inline-block;}
 .auth-back:hover{color:var(--lime);}
 .tabs{display:flex;background:var(--bg);border-radius:10px;padding:4px;gap:4px;margin-bottom:28px;}
-.tab{flex:1;padding:9px;border:none;background:none;color:var(--txt2);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;border-radius:7px;cursor:pointer;transition:.2s;}
+.tab{flex:1;padding:9px;border:none;background:none;color:var(--txt2);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;border-radius:7px;cursor:pointer;transition:.2s;}
 .tab.on{background:var(--lime);color:#0a0d08;}
 .field{margin-bottom:16px;}
 .field label{display:block;font-size:11px;font-weight:700;color:var(--txt3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em;}
-.field input,.field select{width:100%;padding:11px 14px;background:var(--s2);border:1px solid var(--b1);border-radius:10px;color:var(--txt);font-family:'Space Grotesk',sans-serif;font-size:14px;outline:none;transition:.2s;}
+.field input,.field select{width:100%;padding:11px 14px;background:var(--s2);border:1px solid var(--b1);border-radius:10px;color:var(--txt);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:.2s;}
 .field input:focus,.field select:focus{border-color:var(--lime);box-shadow:0 0 0 3px rgba(198,241,53,.1);}
-.btn-main{width:100%;padding:13px;background:var(--lime);border:none;border-radius:10px;color:#0a0d08;font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:.15s;margin-top:6px;}
+.btn-main{width:100%;padding:13px;background:var(--lime);border:none;border-radius:10px;color:#0a0d08;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:.15s;margin-top:6px;}
 .btn-main:hover{background:var(--lime2);transform:translateY(-1px);}
 .err-msg{color:#ff6b6b;font-size:12px;margin-top:8px;display:none;padding:8px 12px;background:rgba(255,107,107,.1);border-radius:8px;}
 
@@ -169,9 +169,9 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
 #app{display:none;height:100vh;flex-direction:row;}
 #app.show{display:flex;}
 .sidebar{width:230px;background:var(--s1);border-right:1px solid var(--b1);display:flex;flex-direction:column;flex-shrink:0;}
-.sb-logo{font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:800;padding:24px 22px 20px;border-bottom:1px solid var(--b1);}
+.sb-logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;padding:24px 22px 20px;border-bottom:1px solid var(--b1);}
 .sb-logo em{color:var(--lime);font-style:normal;}
-.sb-mood{font-size:11px;color:var(--txt3);font-weight:400;display:block;margin-top:2px;font-family:'Space Grotesk',sans-serif;}
+.sb-mood{font-size:11px;color:var(--txt3);font-weight:400;display:block;margin-top:2px;font-family:'DM Sans',sans-serif;}
 .nav{padding:12px 0;flex:1;}
 .nav-item{display:flex;align-items:center;gap:11px;padding:11px 22px;color:var(--txt2);cursor:pointer;transition:.15s;font-size:13px;font-weight:500;border-left:3px solid transparent;}
 .nav-item:hover{color:var(--txt);background:rgba(255,255,255,.03);}
@@ -179,14 +179,14 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
 .nav-icon{font-size:17px;}
 .sb-user{padding:16px 22px;border-top:1px solid var(--b1);display:flex;align-items:center;gap:10px;cursor:pointer;}
 .sb-user:hover .user-name{color:var(--lime);}
-.avi{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;}
+.avi{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;}
 .user-name{font-size:13px;font-weight:600;color:var(--txt);transition:.15s;}
 .user-hint{font-size:11px;color:var(--txt3);}
 .main{flex:1;overflow-y:auto;padding:32px 36px;}
 .page{display:none;}
 .page.on{display:block;}
 .ph{margin-bottom:28px;}
-.ph-title{font-family:'Bricolage Grotesque',sans-serif;font-size:30px;font-weight:800;letter-spacing:-.5px;}
+.ph-title{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;letter-spacing:-.5px;}
 .ph-sub{color:var(--txt2);font-size:13px;margin-top:4px;}
 .alert-strip{padding:12px 18px;border-radius:12px;display:flex;align-items:center;gap:10px;font-size:13px;margin-bottom:20px;font-weight:500;}
 .alert-strip.warn{background:rgba(255,122,53,.1);border:1px solid rgba(255,122,53,.25);color:var(--orange);}
@@ -195,7 +195,7 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
 .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;}
 .scard{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r2);padding:20px;}
 .scard-label{font-size:11px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
-.scard-val{font-family:'Bricolage Grotesque',sans-serif;font-size:26px;font-weight:800;color:var(--txt);}
+.scard-val{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--txt);}
 .scard-val.green{color:var(--lime);}
 .scard-val.red{color:#ff6b6b;}
 .scard-val.purple{color:var(--purple);}
@@ -224,7 +224,7 @@ tr:hover td{background:rgba(198,241,53,.03);}
 .badge.impulse{background:rgba(255,107,107,.15);color:#ff6b6b;}
 .badge.need{background:rgba(198,241,53,.12);color:var(--lime);}
 .badge.want{background:rgba(155,93,255,.15);color:var(--purple);}
-.btn{padding:9px 18px;border:none;border-radius:9px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:.15s;}
+.btn{padding:9px 18px;border:none;border-radius:9px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:.15s;}
 .btn.primary{background:var(--lime);color:#0a0d08;}
 .btn.primary:hover{background:var(--lime2);}
 .btn.ghost{background:var(--s2);color:var(--txt);border:1px solid var(--b1);}
@@ -232,15 +232,15 @@ tr:hover td{background:rgba(198,241,53,.03);}
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:999;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
 .modal{background:var(--s1);border:1px solid var(--b1);border-radius:24px;padding:32px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;}
-.modal h3{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;margin-bottom:24px;}
+.modal h3{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:24px;}
 .modal-footer{display:flex;gap:10px;justify-content:flex-end;margin-top:24px;}
 .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px;}
-.cat-opt{padding:11px 6px;border:1px solid var(--b1);border-radius:10px;background:var(--s2);color:var(--txt2);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:.15s;text-align:center;}
+.cat-opt{padding:11px 6px;border:1px solid var(--b1);border-radius:10px;background:var(--s2);color:var(--txt2);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:.15s;text-align:center;}
 .cat-opt:hover{border-color:var(--b2);color:var(--txt);}
 .cat-opt.on{border-color:var(--lime);background:rgba(198,241,53,.1);color:var(--lime);}
 .cat-emo{font-size:20px;display:block;margin-bottom:3px;}
 .type-row{display:flex;gap:8px;margin-top:6px;}
-.type-opt{flex:1;padding:12px 6px;border:1px solid var(--b1);border-radius:10px;background:var(--s2);color:var(--txt2);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:.15s;text-align:center;}
+.type-opt{flex:1;padding:12px 6px;border:1px solid var(--b1);border-radius:10px;background:var(--s2);color:var(--txt2);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:.15s;text-align:center;}
 .type-opt.on.need{border-color:var(--lime);background:rgba(198,241,53,.1);color:var(--lime);}
 .type-opt.on.want{border-color:var(--purple);background:rgba(155,93,255,.1);color:var(--purple);}
 .type-opt.on.impulse{border-color:#ff6b6b;background:rgba(255,107,107,.1);color:#ff6b6b;}
@@ -261,7 +261,7 @@ tr:hover td{background:rgba(198,241,53,.03);}
 .prog-fill.hot{background:linear-gradient(90deg,var(--orange),#ff6b6b);}
 .sett-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
 .sett-card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r2);padding:22px;}
-.sett-card h4{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:700;margin-bottom:18px;}
+.sett-card h4{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:18px;}
 .toast{position:fixed;bottom:24px;right:24px;z-index:9999;background:var(--s2);border:1px solid var(--b2);border-radius:12px;padding:12px 18px;font-size:13px;font-weight:600;opacity:0;transform:translateY(8px);transition:.25s;pointer-events:none;}
 .toast.show{opacity:1;transform:translateY(0);}
 .toast.ok{color:var(--lime);border-color:rgba(198,241,53,.3);}
@@ -272,23 +272,23 @@ tr:hover td{background:rgba(198,241,53,.03);}
 /* --- ROAST MY SPENDING --- */
 .roast-feature-card{background:var(--s2);border:1px solid rgba(255,107,107,.25);border-radius:20px;padding:24px;margin-bottom:20px;}
 .roast-feature-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
-.roast-feature-header h3{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;margin:0;}
+.roast-feature-header h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;margin:0;}
 .roast-feature-header p{font-size:12px;color:var(--txt3);margin:2px 0 0;}
 .roast-fire{font-size:28px;}
-.btn-roast{padding:10px 22px;background:linear-gradient(135deg,#ff5fa3,#ff7a35);border:none;border-radius:10px;color:#fff;font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:.2s;}
+.btn-roast{padding:10px 22px;background:linear-gradient(135deg,#ff5fa3,#ff7a35);border:none;border-radius:10px;color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:.2s;}
 .btn-roast:hover{opacity:.9;transform:scale(1.02);}
 .btn-roast:disabled{opacity:.5;cursor:not-allowed;transform:none;}
 .roast-output-box{margin-top:14px;background:rgba(255,107,107,.06);border:1px solid rgba(255,107,107,.2);border-radius:14px;padding:18px;display:none;animation:fadeup .3s ease;}
 .roast-output-text{font-size:14px;line-height:1.7;font-style:italic;color:var(--txt);margin-bottom:8px;}
 .roast-credit{font-size:11px;color:var(--txt3);}
 .roast-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;}
-.btn-share-roast{padding:8px 18px;background:transparent;border:1px solid rgba(255,107,107,.4);border-radius:9px;color:#ff6b6b;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;}
+.btn-share-roast{padding:8px 18px;background:transparent;border:1px solid rgba(255,107,107,.4);border-radius:9px;color:#ff6b6b;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;}
 .btn-share-roast:hover{background:rgba(255,107,107,.1);}
 
 /* --- SPENDING WRAPPED --- */
 .wrapped-feature-card{background:var(--s2);border:1px solid var(--b1);border-radius:20px;padding:24px;margin-bottom:20px;}
 .wrapped-feature-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px;}
-.wrapped-feature-header h3{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;margin:0;}
+.wrapped-feature-header h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;margin:0;}
 .wrapped-card-inner{
   background:linear-gradient(160deg,#0f0a1e 0%,#1a0a1f 50%,#0a1020 100%);
   border:1px solid #2e1a4e;border-radius:16px;padding:24px 20px;text-align:center;
@@ -300,7 +300,7 @@ tr:hover td{background:rgba(198,241,53,.03);}
 .wrapped-year-text{color:var(--txt3);}
 .wrapped-hero-amt{margin-bottom:16px;}
 .wrapped-hero-lbl{font-size:11px;color:var(--txt3);margin-bottom:4px;}
-.wrapped-big-num{font-family:'Bricolage Grotesque',sans-serif;font-size:2.4rem;font-weight:800;background:linear-gradient(90deg,var(--purple),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.wrapped-big-num{font-family:'Syne',sans-serif;font-size:2.4rem;font-weight:800;background:linear-gradient(90deg,var(--purple),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .wrapped-big-sub{font-size:12px;color:var(--txt3);margin-top:2px;}
 .wrapped-stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
 .wrapped-stat-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:12px 10px;text-align:center;}
@@ -310,19 +310,19 @@ tr:hover td{background:rgba(198,241,53,.03);}
 .wrapped-stat-sub{font-size:10px;color:var(--txt3);}
 .wrapped-personality-box{background:linear-gradient(135deg,rgba(155,93,255,.15),rgba(255,95,163,.1));border:1px solid rgba(155,93,255,.25);border-radius:12px;padding:16px;margin-bottom:14px;}
 .wrapped-personality-lbl{font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
-.wrapped-personality-type{font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:4px;}
+.wrapped-personality-type{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:4px;}
 .wrapped-personality-desc{font-size:12px;color:var(--txt3);font-style:italic;}
 .wrapped-footer-text{font-size:10px;color:rgba(255,255,255,.2);}
 .wrapped-action-btns{display:flex;gap:10px;margin-top:14px;}
-.btn-wrapped-share{flex:1;padding:10px;background:linear-gradient(135deg,var(--purple),var(--pink));border:none;border-radius:10px;color:#fff;font-family:'Bricolage Grotesque',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;}
+.btn-wrapped-share{flex:1;padding:10px;background:linear-gradient(135deg,var(--purple),var(--pink));border:none;border-radius:10px;color:#fff;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;}
 .btn-wrapped-share:hover{opacity:.9;}
-.btn-wrapped-copy{flex:1;padding:10px;background:transparent;border:1px solid var(--b2);border-radius:10px;color:var(--txt);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;}
+.btn-wrapped-copy{flex:1;padding:10px;background:transparent;border:1px solid var(--b2);border-radius:10px;color:var(--txt);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;}
 .btn-wrapped-copy:hover{background:var(--s3);}
 
 /* --- IMPULSE SCORE GAUGE --- */
 .score-feature-card{background:var(--s2);border:1px solid var(--b1);border-radius:20px;padding:24px;margin-bottom:20px;}
 .score-feature-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
-.score-feature-header h3{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;margin:0;}
+.score-feature-header h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;margin:0;}
 .gauge-container{display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
 .gauge-svg-wrap{flex-shrink:0;text-align:center;}
 .gauge-svg{width:180px;height:110px;overflow:visible;}
@@ -341,7 +341,7 @@ tr:hover td{background:rgba(198,241,53,.03);}
 /* --- MOOD TRACKER --- */
 .mood-feature-card{background:var(--s2);border:1px solid var(--b1);border-radius:20px;padding:24px;margin-bottom:20px;}
 .mood-feature-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
-.mood-feature-header h3{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;margin:0;}
+.mood-feature-header h3{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;margin:0;}
 .mood-chart-area{margin-bottom:16px;}
 .mood-chart-title{font-size:11px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
 .mood-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
@@ -413,6 +413,185 @@ tr:hover td{background:rgba(198,241,53,.03);}
   .hero-title{font-size:30px;}
   .scard-val{font-size:20px;}
 }
+
+/* ===== UI POLISH ===== */
+:root {
+  --lime:#c6f135;--lime2:#a8d820;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.25);
+  --shadow-md: 0 4px 20px rgba(0,0,0,.35);
+}
+
+/* Smoother cards */
+.scard, .chart-box, .tbl-wrap, .feat-card, .fcard {
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow .2s, transform .2s;
+}
+.scard:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+
+/* Better nav */
+.nav-item { letter-spacing: .01em; }
+.nav-item.on { font-weight: 600; }
+
+/* Better headings */
+.ph-title { letter-spacing: -.03em; }
+.hero-title { letter-spacing: -.04em; }
+
+/* Lime accent glow on active elements */
+.btn.primary, .btn-main, .btn-hero-main, .btn-lime-sm {
+  box-shadow: 0 0 0 0 rgba(198,241,53,0);
+  transition: all .2s;
+}
+.btn.primary:hover, .btn-main:hover, .btn-hero-main:hover {
+  box-shadow: 0 4px 20px rgba(198,241,53,.25);
+}
+
+/* Monospace for amounts */
+.scard-val, .fcard-val, .ai-score-num {
+  font-family: 'DM Mono', monospace !important;
+  letter-spacing: -.02em;
+}
+
+/* Better table */
+td { letter-spacing: .01em; }
+th { letter-spacing: .08em; }
+
+/* Sidebar polish */
+.sb-logo { letter-spacing: -.02em; }
+
+/* Better modal */
+.modal { box-shadow: 0 8px 40px rgba(0,0,0,.6); }
+
+/* Install banner */
+#installBanner {
+  display: none;
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9998;
+  background: linear-gradient(135deg, #1c2333, #232d42);
+  border: 1px solid rgba(198,241,53,.3);
+  border-radius: 16px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.5);
+  max-width: 380px;
+  width: calc(100% - 40px);
+  animation: slideUp .4s ease;
+}
+#installBanner.hidden { display: none !important; }
+@keyframes slideUp { from{opacity:0;transform:translateX(-50%) translateY(20px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+.install-icon { font-size: 2rem; flex-shrink: 0; }
+.install-text strong { display: block; font-size: 14px; font-weight: 700; color: var(--txt); font-family: 'Syne', sans-serif; }
+.install-text small { font-size: 12px; color: var(--txt3); }
+.btn-install {
+  padding: 9px 18px; background: var(--lime); border: none; border-radius: 10px;
+  color: #0a0d08; font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+  cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: .2s;
+}
+.btn-install:hover { background: var(--lime2); }
+.btn-install-close {
+  background: none; border: none; color: var(--txt3); font-size: 18px;
+  cursor: pointer; padding: 4px; line-height: 1; flex-shrink: 0;
+}
+
+/* Landing install button */
+.hero-install-btn {
+  display: none;
+  padding: 10px 24px; background: var(--s2); border: 1px solid var(--b2);
+  border-radius: 10px; color: var(--txt2); font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 600; cursor: pointer; transition: .2s;
+  align-items: center; gap: 8px;
+}
+.hero-install-btn:hover { border-color: var(--lime); color: var(--lime); }
+
+/* ===== GOALS PAGE ===== */
+.goals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.goal-card {
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 20px;
+  padding: 20px; position: relative; overflow: hidden;
+}
+.goal-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
+.goal-name { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; }
+.goal-emoji { font-size: 1.8rem; }
+.goal-target { font-size: 11px; color: var(--txt3); margin-bottom: 10px; }
+.goal-prog { height: 8px; background: var(--b1); border-radius: 8px; overflow: hidden; margin-bottom: 8px; }
+.goal-prog-fill { height: 100%; border-radius: 8px; background: var(--lime); transition: width .6s ease; }
+.goal-prog-fill.hot { background: linear-gradient(90deg, var(--orange), #ff6b6b); }
+.goal-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--txt3); }
+.goal-amount { font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 500; color: var(--lime); margin-bottom: 4px; }
+.goal-add-btn { padding: 7px 14px; font-size: 12px; }
+.btn-add-goal {
+  width: 100%; padding: 14px; background: var(--s2); border: 2px dashed var(--b2);
+  border-radius: 16px; color: var(--txt3); font-family: 'DM Sans', sans-serif;
+  font-size: 14px; cursor: pointer; transition: .2s; margin-bottom: 20px;
+}
+.btn-add-goal:hover { border-color: var(--lime); color: var(--lime); }
+
+/* ===== BILLS PAGE ===== */
+.bill-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.bill-row {
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 14px;
+  padding: 16px 20px; display: flex; align-items: center; gap: 14px;
+}
+.bill-row.due-soon { border-color: rgba(255,122,53,.3); background: rgba(255,122,53,.04); }
+.bill-row.overdue { border-color: rgba(255,107,107,.3); background: rgba(255,107,107,.04); }
+.bill-emoji { font-size: 1.6rem; flex-shrink: 0; }
+.bill-info { flex: 1; min-width: 0; }
+.bill-name { font-size: 14px; font-weight: 600; font-family: 'Syne', sans-serif; }
+.bill-date { font-size: 11px; color: var(--txt3); margin-top: 2px; }
+.bill-amount { font-family: 'DM Mono', monospace; font-size: 16px; font-weight: 500; color: var(--txt); flex-shrink: 0; }
+.bill-status { font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; flex-shrink: 0; }
+.bill-status.due-soon { background: rgba(255,122,53,.15); color: var(--orange); }
+.bill-status.overdue { background: rgba(255,107,107,.15); color: #ff6b6b; }
+.bill-status.ok { background: rgba(198,241,53,.1); color: var(--lime); }
+.bill-delete { background: none; border: none; color: var(--txt3); font-size: 16px; cursor: pointer; padding: 4px; transition: .15s; }
+.bill-delete:hover { color: #ff6b6b; }
+
+/* ===== LEADERBOARD ===== */
+.leaderboard-card {
+  background: var(--s1); border: 1px solid var(--b1); border-radius: 20px;
+  padding: 24px; margin-bottom: 20px;
+}
+.lb-row {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 0; border-bottom: 1px solid rgba(35,45,66,.5);
+}
+.lb-row:last-child { border-bottom: none; }
+.lb-rank { font-family: 'DM Mono', monospace; font-size: 18px; font-weight: 500; width: 32px; flex-shrink: 0; color: var(--txt3); }
+.lb-rank.gold { color: #ffd700; }
+.lb-rank.silver { color: #c0c0c0; }
+.lb-rank.bronze { color: #cd7f32; }
+.lb-avi { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--purple), var(--pink)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 800; color: #fff; flex-shrink: 0; }
+.lb-avi.you { background: linear-gradient(135deg, var(--lime), #4caf50); color: #0a0d08; }
+.lb-info { flex: 1; }
+.lb-name { font-size: 14px; font-weight: 600; }
+.lb-name.you::after { content: ' (you)'; color: var(--lime); font-size: 11px; }
+.lb-sub { font-size: 11px; color: var(--txt3); margin-top: 1px; }
+.lb-score { font-family: 'DM Mono', monospace; font-size: 15px; font-weight: 500; flex-shrink: 0; }
+.lb-score.good { color: var(--lime); }
+.lb-score.mid { color: var(--orange); }
+.lb-score.bad { color: #ff6b6b; }
+.lb-invite-box {
+  background: var(--s2); border: 1px dashed var(--b2); border-radius: 14px;
+  padding: 20px; text-align: center; margin-top: 14px;
+}
+.lb-invite-box p { font-size: 13px; color: var(--txt3); margin-bottom: 12px; }
+.lb-share-link {
+  background: var(--bg); border: 1px solid var(--b1); border-radius: 10px;
+  padding: 10px 14px; font-family: 'DM Mono', monospace; font-size: 12px;
+  color: var(--txt2); width: 100%; text-align: left; cursor: pointer;
+  transition: .2s; margin-bottom: 10px;
+}
+.lb-share-link:hover { border-color: var(--lime); color: var(--lime); }
+
+@media(max-width:768px) {
+  .goals-grid { grid-template-columns: 1fr; }
+  #installBanner { bottom: 90px; }
+}
+
 </style>
 </head>
 <body>
@@ -536,6 +715,9 @@ tr:hover td{background:rgba(198,241,53,.03);}
       <div class="nav-item" onclick="showPage('transactions')"><span class="nav-icon">💳</span> Transactions</div>
       <div class="nav-item" onclick="showPage('reports')"><span class="nav-icon">📈</span> Reports</div>
       <div class="nav-item" onclick="showPage('vibes')"><span class="nav-icon">✨</span> Vibes</div>
+      <div class="nav-item" onclick="showPage('goals')"><span class="nav-icon">🎯</span> Goals</div>
+      <div class="nav-item" onclick="showPage('bills')"><span class="nav-icon">🔔</span> Bills</div>
+      <div class="nav-item" onclick="showPage('leaderboard')"><span class="nav-icon">🏆</span> Leaderboard</div>
       <div class="nav-item" onclick="showPage('settings')"><span class="nav-icon">⚙️</span> Settings</div>
     </div>
     <div class="sb-user" onclick="doLogout()">
@@ -709,6 +891,43 @@ tr:hover td{background:rgba(198,241,53,.03);}
       </div>
     </div>
 
+
+    <!-- GOALS PAGE -->
+    <div class="page" id="pg-goals">
+      <div class="ph" style="display:flex;align-items:flex-start;justify-content:space-between">
+        <div><div class="ph-title">savings goals 🎯</div><div class="ph-sub">what are you saving up for bestie</div></div>
+        <button class="btn primary" onclick="openGoalModal()">+ add goal</button>
+      </div>
+      <div class="goals-grid" id="goalsGrid"></div>
+      <div class="chart-box">
+        <div class="chart-title">goals overview 📊</div>
+        <div id="goalsOverview" style="color:var(--txt3);font-size:13px;text-align:center;padding:20px;">add goals to see overview</div>
+      </div>
+    </div>
+
+    <!-- BILLS PAGE -->
+    <div class="page" id="pg-bills">
+      <div class="ph" style="display:flex;align-items:flex-start;justify-content:space-between">
+        <div><div class="ph-title">bills & reminders 🔔</div><div class="ph-sub">never miss a payment again</div></div>
+        <button class="btn primary" onclick="openBillModal()">+ add bill</button>
+      </div>
+      <div class="alert-strip hide" id="billAlert"></div>
+      <div class="bill-list" id="billList"></div>
+    </div>
+
+    <!-- LEADERBOARD PAGE -->
+    <div class="page" id="pg-leaderboard">
+      <div class="ph"><div class="ph-title">squad leaderboard 🏆</div><div class="ph-sub">who's the most financially responsible? (probably not you)</div></div>
+      <div class="leaderboard-card">
+        <div id="lbList"></div>
+      </div>
+      <div class="lb-invite-box">
+        <p>invite friends to compare spending habits 👀</p>
+        <button class="lb-share-link" onclick="copyInviteLink()">🔗 impulseguard.dev — tap to copy invite link</button>
+        <button class="btn primary" style="width:100%" onclick="copyInviteLink()">Share with Squad 🚀</button>
+      </div>
+    </div>
+
     <!-- SETTINGS -->
     <div class="page" id="pg-settings">
       <div class="ph"><div class="ph-title">settings ⚙️</div><div class="ph-sub">you're in control. allegedly.</div></div>
@@ -754,6 +973,60 @@ tr:hover td{background:rgba(198,241,53,.03);}
 </div>
 
 <!-- ADD TRANSACTION MODAL -->
+
+<!-- GOAL MODAL -->
+<div class="overlay" id="goalModal">
+  <div class="modal">
+    <h3>new savings goal 🎯</h3>
+    <div class="field"><label>what are you saving for</label><input type="text" id="gName" placeholder="e.g. iPhone 16, Trip to Dubai"/></div>
+    <div class="field"><label>target amount (PKR)</label><input type="number" id="gTarget" placeholder="e.g. 150000"/></div>
+    <div class="field"><label>already saved (PKR)</label><input type="number" id="gSaved" placeholder="0"/></div>
+    <div class="field"><label>emoji</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px" id="goalEmojiPicker">
+        ${['🏖️','📱','✈️','👗','🎮','🏠','🚗','💍','📚','💄','🎓','💪'].map(e=>`<button onclick="pickGoalEmoji(this,'${e}')" style="font-size:24px;background:var(--s2);border:1px solid var(--b1);border-radius:8px;padding:8px;cursor:pointer;transition:.15s" data-e="${e}">${e}</button>`).join('')}
+      </div>
+      <input type="hidden" id="gEmoji" value="🎯"/>
+    </div>
+    <div class="modal-footer">
+      <button class="btn ghost" onclick="closeGoalModal()">cancel</button>
+      <button class="btn primary" onclick="addGoal()">add goal 🎯</button>
+    </div>
+  </div>
+</div>
+
+<!-- BILL MODAL -->
+<div class="overlay" id="billModal">
+  <div class="modal">
+    <h3>add a bill reminder 🔔</h3>
+    <div class="field"><label>bill name</label><input type="text" id="bName" placeholder="e.g. Netflix, Electricity, Rent"/></div>
+    <div class="field"><label>amount (PKR)</label><input type="number" id="bAmount" placeholder="e.g. 3500"/></div>
+    <div class="field"><label>due date</label><input type="date" id="bDate"/></div>
+    <div class="field"><label>category</label>
+      <select id="bCat" style="width:100%;padding:11px 14px;background:var(--s2);border:1px solid var(--b1);border-radius:10px;color:var(--txt);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;">
+        <option value="📄 Bills">📄 Bills</option>
+        <option value="💡 Utilities">💡 Utilities</option>
+        <option value="🏠 Rent">🏠 Rent</option>
+        <option value="📱 Subscriptions">📱 Subscriptions</option>
+        <option value="💊 Health">💊 Health</option>
+        <option value="📚 Education">📚 Education</option>
+        <option value="📦 Other">📦 Other</option>
+      </select>
+    </div>
+    <div class="field"><label>repeat</label>
+      <select id="bRepeat" style="width:100%;padding:11px 14px;background:var(--s2);border:1px solid var(--b1);border-radius:10px;color:var(--txt);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;">
+        <option value="once">one time only</option>
+        <option value="monthly">every month</option>
+        <option value="weekly">every week</option>
+        <option value="yearly">every year</option>
+      </select>
+    </div>
+    <div class="modal-footer">
+      <button class="btn ghost" onclick="closeBillModal()">cancel</button>
+      <button class="btn primary" onclick="addBill()">add bill 🔔</button>
+    </div>
+  </div>
+</div>
+
 <div class="overlay" id="modal">
   <div class="modal">
     <h3>add a transaction 💸</h3>
@@ -798,6 +1071,18 @@ tr:hover td{background:rgba(198,241,53,.03);}
       <button class="btn primary" onclick="addTx()">add it 💸</button>
     </div>
   </div>
+</div>
+
+
+<!-- PWA INSTALL BANNER -->
+<div id="installBanner" class="hidden">
+  <span class="install-icon">⚡</span>
+  <div class="install-text">
+    <strong>Install ImpulseGuard</strong>
+    <small>add to home screen — it's free!</small>
+  </div>
+  <button class="btn-install" id="installBtn">Install</button>
+  <button class="btn-install-close" onclick="document.getElementById('installBanner').classList.add('hidden')">×</button>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -961,12 +1246,15 @@ window.showPage=(p)=>{
   document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('on'));
   $('pg-'+p).classList.add('on');
   const navItems=document.querySelectorAll('.nav-item');
-  const map={dashboard:0,transactions:1,reports:2,vibes:3,settings:4};
+  const map={dashboard:0,transactions:1,reports:2,vibes:3,goals:4,bills:5,leaderboard:6,settings:7};
   if(map[p]!==undefined) navItems[map[p]].classList.add('on');
   if(p==='dashboard') renderDash();
   if(p==='transactions') renderTx();
   if(p==='reports') renderReports();
   if(p==='vibes') renderVibes();
+  if(p==='goals'){loadGoals().then(renderGoals);}
+  if(p==='bills'){loadBills().then(renderBills);}
+  if(p==='leaderboard') renderLeaderboard();
 };
 
 // ===== DASHBOARD =====
@@ -998,14 +1286,14 @@ function renderDash(){
   const tbody=$('dashTbody');
   const rec=allTxs.slice(0,5);
   if(!rec.length){tbody.innerHTML='<tr><td colspan="5"><div class="empty-state"><div class="e-icon">👻</div><p>no transactions yet bestie</p></div></td></tr>';return;}
-  tbody.innerHTML=rec.map(t=>`<tr><td>${t.desc}</td><td>${t.cat}</td><td><span class="badge ${t.type}">${t.type}</span></td><td style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700">PKR ${t.amt.toLocaleString()}</td><td style="color:var(--txt3)">${t.date}</td></tr>`).join('');
+  tbody.innerHTML=rec.map(t=>`<tr><td>${t.desc}</td><td>${t.cat}</td><td><span class="badge ${t.type}">${t.type}</span></td><td style="font-family:'Syne',sans-serif;font-weight:700">PKR ${t.amt.toLocaleString()}</td><td style="color:var(--txt3)">${t.date}</td></tr>`).join('');
 }
 
 // ===== TRANSACTIONS =====
 function renderTx(){
   const tbody=$('txTbody');
   if(!allTxs.length){tbody.innerHTML='<tr><td colspan="6"><div class="empty-state"><div class="e-icon">🫙</div><p>empty. great self control or no money. either way.</p></div></td></tr>';return;}
-  tbody.innerHTML=allTxs.map(t=>`<tr><td>${t.desc}</td><td>${t.cat}</td><td><span class="badge ${t.type}">${t.type}</span></td><td style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700">PKR ${t.amt.toLocaleString()}</td><td style="color:var(--txt3)">${t.date}</td><td><button class="btn danger" onclick="delTx('${t.id}')" style="padding:5px 12px;font-size:11px">delete</button></td></tr>`).join('');
+  tbody.innerHTML=allTxs.map(t=>`<tr><td>${t.desc}</td><td>${t.cat}</td><td><span class="badge ${t.type}">${t.type}</span></td><td style="font-family:'Syne',sans-serif;font-weight:700">PKR ${t.amt.toLocaleString()}</td><td style="color:var(--txt3)">${t.date}</td><td><button class="btn danger" onclick="delTx('${t.id}')" style="padding:5px 12px;font-size:11px">delete</button></td></tr>`).join('');
 }
 
 // ===== REPORTS =====
@@ -1063,9 +1351,7 @@ Score 0-100 (financial health score). Be specific to their data. Use Gen Z langu
     const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${GEMINI_KEY}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})});
     const data=await res.json();
     const text=data.candidates?.[0]?.content?.parts?.[0]?.text||'';
-    let ai;
-    try { ai=JSON.parse(text.replace(/```json|```/g,'').trim()); }
-    catch(pe){ throw new Error('JSON parse failed: '+text.substring(0,200)); }
+    const ai=JSON.parse(text.replace(/```json|```/g,'').trim());
     const scoreClass=ai.score>=70?'good':ai.score>=40?'mid':'bad';
     const scoreLabel=ai.score>=70?'financially stable ngl 💚':ai.score>=40?'mid era financially 😬':'broke behavior detected 💀';
     $('aiResult').innerHTML=`
@@ -1079,8 +1365,8 @@ Score 0-100 (financial health score). Be specific to their data. Use Gen Z langu
     $('aiLoading').style.display='none';$('aiResult').style.display='block';toast('AI insights ready 💡','ok');
   }catch(e){
     $('aiLoading').style.display='none';$('aiEmpty').style.display='block';
-    $('aiEmpty').innerHTML=`<div style="font-size:36px;margin-bottom:10px;">😭</div><div style="font-size:13px;color:#ff6b6b;">error: ${e.message}</div>`;
-    toast('AI error 😭 try again','err');console.error('AI ERROR:',e);
+    $('aiEmpty').innerHTML='<div style="font-size:36px;margin-bottom:10px;">😭</div><div style="font-size:13px;color:#ff6b6b;">could not load insights. try again!</div>';
+    toast('AI error 😭 try again','err');console.error(e);
   }finally{$('aiBtn').disabled=false;$('aiBtn').textContent='analyse again 🤖';}
 };
 
@@ -1440,6 +1726,284 @@ window.toast=(msg,type)=>{
   const t=$('toast');t.textContent=msg;t.className='toast show '+(type||'');
   setTimeout(()=>t.className='toast',2800);
 };
+
+// ============================================================
+// ===== GOALS FEATURE =====
+// ============================================================
+let allGoals = [];
+let allBills = [];
+
+async function loadGoals() {
+  allGoals = [];
+  try {
+    const q = query(collection(db,'goals'), where('uid','==',currentUser.uid));
+    const snap = await getDocs(q);
+    snap.forEach(d => allGoals.push({id:d.id,...d.data()}));
+  } catch(e) { console.error(e); }
+}
+
+async function loadBills() {
+  allBills = [];
+  try {
+    const q = query(collection(db,'bills'), where('uid','==',currentUser.uid));
+    const snap = await getDocs(q);
+    snap.forEach(d => allBills.push({id:d.id,...d.data()}));
+    allBills.sort((a,b) => new Date(a.dueDate) - new Date(b.dueDate));
+  } catch(e) { console.error(e); }
+}
+
+window.openGoalModal = () => {
+  $('gName').value=''; $('gTarget').value=''; $('gSaved').value=''; $('gEmoji').value='🎯';
+  document.querySelectorAll('#goalEmojiPicker button').forEach(b => b.style.borderColor='var(--b1)');
+  $('goalModal').classList.add('show');
+};
+window.closeGoalModal = () => $('goalModal').classList.remove('show');
+
+window.pickGoalEmoji = (btn, emoji) => {
+  document.querySelectorAll('#goalEmojiPicker button').forEach(b => b.style.borderColor='var(--b1)');
+  btn.style.borderColor = 'var(--lime)';
+  $('gEmoji').value = emoji;
+};
+
+window.addGoal = async () => {
+  const name=$('gName').value.trim(), target=parseFloat($('gTarget').value)||0, saved=parseFloat($('gSaved').value)||0, emoji=$('gEmoji').value;
+  if(!name||!target){toast('fill in the goal details bestie 😭','err');return;}
+  try {
+    const ref = await addDoc(collection(db,'goals'), {uid:currentUser.uid, name, target, saved, emoji, createdAt: new Date().toISOString()});
+    allGoals.unshift({id:ref.id, uid:currentUser.uid, name, target, saved, emoji});
+    closeGoalModal();
+    renderGoals();
+    toast('goal added! 🎯','ok');
+  } catch(e) { toast('error saving goal 😭','err'); }
+};
+
+window.addToGoal = async (id) => {
+  const amt = parseFloat(prompt('how much did you save? (PKR)'));
+  if(!amt||isNaN(amt)) return;
+  const goal = allGoals.find(g=>g.id===id);
+  if(!goal) return;
+  const newSaved = Math.min(goal.target, goal.saved + amt);
+  await updateDoc(doc(db,'goals',id), {saved: newSaved});
+  goal.saved = newSaved;
+  renderGoals();
+  if(newSaved >= goal.target) toast(`goal reached! ${goal.emoji} congrats bestie 🎉`,'ok');
+  else toast(`PKR ${amt.toLocaleString()} added to ${goal.name}! 💰`,'ok');
+};
+
+window.deleteGoal = async (id) => {
+  if(!confirm('delete this goal?')) return;
+  await deleteDoc(doc(db,'goals',id));
+  allGoals = allGoals.filter(g=>g.id!==id);
+  renderGoals();
+  toast('goal deleted 🗑️','ok');
+};
+
+function renderGoals() {
+  const grid = $('goalsGrid');
+  if(!allGoals.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--txt3);font-size:13px;">no goals yet — add one and start saving! 🎯</div>';
+    $('goalsOverview').innerHTML = '<div style="color:var(--txt3);font-size:13px;text-align:center;padding:20px;">add goals to see overview</div>';
+    return;
+  }
+  grid.innerHTML = allGoals.map(g => {
+    const pct = Math.min(100, Math.round((g.saved/g.target)*100));
+    const remaining = Math.max(0, g.target - g.saved);
+    const isHot = pct >= 80;
+    return `<div class="goal-card">
+      <div class="goal-card-top">
+        <div>
+          <div class="goal-name">${g.name}</div>
+          <div class="goal-target">target: PKR ${g.target.toLocaleString()}</div>
+        </div>
+        <span class="goal-emoji">${g.emoji}</span>
+      </div>
+      <div class="goal-amount">PKR ${g.saved.toLocaleString()}</div>
+      <div class="goal-prog"><div class="goal-prog-fill ${isHot?'hot':''}" style="width:${pct}%"></div></div>
+      <div class="goal-meta">
+        <span>${pct}% saved</span>
+        <span>PKR ${remaining.toLocaleString()} left</span>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button class="btn primary goal-add-btn" onclick="addToGoal('${g.id}')">+ add savings</button>
+        <button class="btn danger goal-add-btn" onclick="deleteGoal('${g.id}')">🗑️</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Overview
+  const totalTarget = allGoals.reduce((s,g)=>s+g.target,0);
+  const totalSaved = allGoals.reduce((s,g)=>s+g.saved,0);
+  const overallPct = totalTarget>0?Math.round((totalSaved/totalTarget)*100):0;
+  $('goalsOverview').innerHTML = `
+    <div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-bottom:16px">
+      <div style="text-align:center"><div style="font-family:'DM Mono',monospace;font-size:28px;font-weight:500;color:var(--lime)">PKR ${totalSaved.toLocaleString()}</div><div style="font-size:11px;color:var(--txt3)">total saved</div></div>
+      <div style="text-align:center"><div style="font-family:'DM Mono',monospace;font-size:28px;font-weight:500;color:var(--purple)">${allGoals.length}</div><div style="font-size:11px;color:var(--txt3)">active goals</div></div>
+      <div style="text-align:center"><div style="font-family:'DM Mono',monospace;font-size:28px;font-weight:500;color:var(--cyan)">${overallPct}%</div><div style="font-size:11px;color:var(--txt3)">overall progress</div></div>
+    </div>
+    <div class="prog"><div class="prog-fill ${overallPct>=80?'hot':''}" style="width:${overallPct}%"></div></div>`;
+}
+
+// ============================================================
+// ===== BILLS FEATURE =====
+// ============================================================
+window.openBillModal = () => {
+  $('bName').value=''; $('bAmount').value=''; $('bDate').value=new Date().toISOString().split('T')[0];
+  $('billModal').classList.add('show');
+};
+window.closeBillModal = () => $('billModal').classList.remove('show');
+
+window.addBill = async () => {
+  const name=$('bName').value.trim(), amount=parseFloat($('bAmount').value), dueDate=$('bDate').value, cat=$('bCat').value, repeat=$('bRepeat').value;
+  if(!name||!amount||!dueDate){toast('fill everything in bestie 😭','err');return;}
+  try {
+    const ref = await addDoc(collection(db,'bills'), {uid:currentUser.uid, name, amount, dueDate, cat, repeat, paid:false});
+    allBills.push({id:ref.id, uid:currentUser.uid, name, amount, dueDate, cat, repeat, paid:false});
+    allBills.sort((a,b) => new Date(a.dueDate)-new Date(b.dueDate));
+    closeBillModal();
+    renderBills();
+    toast('bill reminder added! 🔔','ok');
+  } catch(e) { toast('error saving bill 😭','err'); }
+};
+
+window.markBillPaid = async (id) => {
+  await updateDoc(doc(db,'bills',id), {paid:true});
+  const bill = allBills.find(b=>b.id===id);
+  if(bill) bill.paid = true;
+  // if monthly, create next month's bill
+  if(bill?.repeat==='monthly') {
+    const next = new Date(bill.dueDate);
+    next.setMonth(next.getMonth()+1);
+    const nextDate = next.toISOString().split('T')[0];
+    const ref = await addDoc(collection(db,'bills'), {...bill, id:undefined, dueDate:nextDate, paid:false});
+    allBills.push({...bill, id:ref.id, dueDate:nextDate, paid:false});
+    allBills.sort((a,b)=>new Date(a.dueDate)-new Date(b.dueDate));
+    toast('paid! next month's bill scheduled 🔄','ok');
+  } else {
+    toast('bill marked as paid ✅','ok');
+  }
+  renderBills();
+};
+
+window.deleteBill = async (id) => {
+  await deleteDoc(doc(db,'bills',id));
+  allBills = allBills.filter(b=>b.id!==id);
+  renderBills();
+  toast('removed 🗑️','ok');
+};
+
+function getBillStatus(dueDate) {
+  const today = new Date(); today.setHours(0,0,0,0);
+  const due = new Date(dueDate); due.setHours(0,0,0,0);
+  const diff = Math.round((due-today)/(1000*60*60*24));
+  if(diff < 0) return {label:'overdue!', cls:'overdue'};
+  if(diff <= 3) return {label:`due in ${diff}d`, cls:'due-soon'};
+  return {label:`in ${diff} days`, cls:'ok'};
+}
+
+function renderBills() {
+  const list = $('billList');
+  const unpaid = allBills.filter(b=>!b.paid);
+  const alert = $('billAlert');
+
+  const overdue = unpaid.filter(b=>new Date(b.dueDate)<new Date());
+  const dueSoon = unpaid.filter(b=>{const d=new Date(b.dueDate);const t=new Date();return d>=t && (d-t)/(1000*60*60*24)<=3;});
+
+  if(overdue.length>0){alert.className='alert-strip warn';alert.textContent=`⚠️ ${overdue.length} bill(s) are overdue! pay ASAP bestie`;}
+  else if(dueSoon.length>0){alert.className='alert-strip warn';alert.textContent=`🔔 ${dueSoon.length} bill(s) due in the next 3 days!`;}
+  else{alert.className='alert-strip hide';}
+
+  if(!unpaid.length) {
+    list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--txt3);font-size:13px;">no upcoming bills! you're all caught up ✨</div>';
+    return;
+  }
+  list.innerHTML = unpaid.map(b => {
+    const status = getBillStatus(b.dueDate);
+    return `<div class="bill-row ${status.cls}">
+      <span class="bill-emoji">${b.cat.split(' ')[0]}</span>
+      <div class="bill-info">
+        <div class="bill-name">${b.name}</div>
+        <div class="bill-date">due ${b.dueDate} · ${b.repeat}</div>
+      </div>
+      <div class="bill-amount">PKR ${b.amount.toLocaleString()}</div>
+      <span class="bill-status ${status.cls}">${status.label}</span>
+      <button class="btn primary" style="padding:6px 12px;font-size:11px" onclick="markBillPaid('${b.id}')">✓ paid</button>
+      <button class="bill-delete" onclick="deleteBill('${b.id}')">🗑️</button>
+    </div>`;
+  }).join('');
+}
+
+// ============================================================
+// ===== LEADERBOARD FEATURE =====
+// ============================================================
+function renderLeaderboard() {
+  const {score} = getImpulseScore();
+  const myName = userProfile.name;
+
+  // Mock friends + real user score
+  const entries = [
+    {name:'Zara A.',    score:92, you:false},
+    {name:'Ahmed K.',   score:78, you:false},
+    {name: myName,      score: Math.max(0,100-score), you:true},
+    {name:'Fatima S.',  score:55, you:false},
+    {name:'Usman M.',   score:41, you:false},
+  ].sort((a,b)=>b.score-a.score);
+
+  const rankEmojis = ['🥇','🥈','🥉','4.','5.'];
+  const rankCls = ['gold','silver','bronze','',''];
+
+  $('lbList').innerHTML = entries.map((e,i) => {
+    const scoreCls = e.score>=70?'good':e.score>=40?'mid':'bad';
+    return `<div class="lb-row">
+      <div class="lb-rank ${rankCls[i]}">${rankEmojis[i]}</div>
+      <div class="lb-avi ${e.you?'you':''}">${e.name[0].toUpperCase()}</div>
+      <div class="lb-info">
+        <div class="lb-name ${e.you?'you':''}">${e.name}</div>
+        <div class="lb-sub">${e.score>=70?'financially responsible 💚':e.score>=40?'mid spender 😅':'chaos spender 💀'}</div>
+      </div>
+      <div class="lb-score ${scoreCls}">${e.score}/100</div>
+    </div>`;
+  }).join('');
+}
+
+window.copyInviteLink = () => {
+  navigator.clipboard.writeText('Hey! Track your spending with ImpulseGuard 🛡️ impulseguard.dev — let's see who spends less 👀');
+  toast('invite link copied! 🔗','ok');
+};
+
+// ============================================================
+// ===== PWA INSTALL =====
+// ============================================================
+let deferredInstallPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  // Show banner only when user is logged in
+  if(currentUser) {
+    const banner = $('installBanner');
+    if(banner) banner.classList.remove('hidden');
+  }
+});
+
+window.addEventListener('appinstalled', () => {
+  $('installBanner')?.classList.add('hidden');
+  toast('ImpulseGuard installed! 🎉','ok');
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const installBtn = $('installBtn');
+  if(installBtn) {
+    installBtn.addEventListener('click', async () => {
+      if(!deferredInstallPrompt) return;
+      deferredInstallPrompt.prompt();
+      const {outcome} = await deferredInstallPrompt.userChoice;
+      if(outcome==='accepted') toast('installing... 🚀','ok');
+      deferredInstallPrompt = null;
+      $('installBanner')?.classList.add('hidden');
+    });
+  }
+});
+
 </script>
 </body>
 </html>
