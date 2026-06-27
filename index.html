@@ -463,7 +463,7 @@ th { letter-spacing: .08em; }
 
 /* Install banner */
 #installBanner {
-  display: flex;
+  display: none;
   position: fixed;
   bottom: 80px;
   left: 50%;
@@ -724,7 +724,12 @@ th { letter-spacing: .08em; }
       <div class="nav-item" onclick="showPage('leaderboard')"><span class="nav-icon">🏆</span> Leaderboard</div>
       <div class="nav-item" onclick="showPage('settings')"><span class="nav-icon">⚙️</span> Settings</div>
     </div>
-    <div class="sb-user" onclick="doLogout()">
+    <div style="padding:12px 22px;border-top:1px solid var(--b1)">
+  <button onclick="triggerInstall()" style="width:100%;padding:9px;background:rgba(198,241,53,.08);border:1px solid rgba(198,241,53,.2);border-radius:10px;color:var(--lime);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;justify-content:center;">
+    📲 install app
+  </button>
+</div>
+<div class="sb-user" onclick="doLogout()">
       <div class="avi" id="avInit">U</div>
       <div><div class="user-name" id="sbName">User</div><div class="user-hint">tap to logout →</div></div>
     </div>
@@ -1090,7 +1095,7 @@ th { letter-spacing: .08em; }
 
 
 <!-- PWA INSTALL BANNER -->
-<div id="installBanner" class="hidden">
+<div id="installBanner">
   <span class="install-icon">⚡</span>
   <div class="install-text">
     <strong>Install ImpulseGuard</strong>
@@ -1101,6 +1106,49 @@ th { letter-spacing: .08em; }
 </div>
 
 <div class="toast" id="toast"></div>
+
+<script>
+// pre-load dispatcher — module loads async so we need these available immediately
+function goAuth(tab){ if(window._goAuth) window._goAuth(tab); else setTimeout(()=>goAuth(tab),100); }
+function goLanding(){ if(window._goLanding) window._goLanding(); else setTimeout(()=>goLanding(),100); }
+function switchTab(t){ if(window._switchTab) window._switchTab(t); else setTimeout(()=>switchTab(t),100); }
+function doLogin(){ if(window._doLogin) window._doLogin(); }
+function doRegister(){ if(window._doRegister) window._doRegister(); }
+function doLogout(){ if(window._doLogout) window._doLogout(); }
+function showPage(p){ if(window._showPage) window._showPage(p); }
+function openModal(){ if(window._openModal) window._openModal(); }
+function closeModal(){ if(window._closeModal) window._closeModal(); }
+function pickCat(b){ if(window._pickCat) window._pickCat(b); }
+function pickType(b){ if(window._pickType) window._pickType(b); }
+function addTx(){ if(window._addTx) window._addTx(); }
+function delTx(id){ if(window._delTx) window._delTx(id); }
+function saveProfile(){ if(window._saveProfile) window._saveProfile(); }
+function saveBudget(){ if(window._saveBudget) window._saveBudget(); }
+function changePass(){ if(window._changePass) window._changePass(); }
+function clearTxs(){ if(window._clearTxs) window._clearTxs(); }
+function deleteAcc(){ if(window._deleteAcc) window._deleteAcc(); }
+function scanReceipt(i){ if(window._scanReceipt) window._scanReceipt(i); }
+function resetScanner(){ if(window._resetScanner) window._resetScanner(); }
+function getAIInsights(){ if(window._getAIInsights) window._getAIInsights(); }
+function doRoast(){ if(window._doRoast) window._doRoast(); }
+function renderWrapped(){ if(window._renderWrapped) window._renderWrapped(); }
+function shareWrapped(){ if(window._shareWrapped) window._shareWrapped(); }
+function copyWrapped(){ if(window._copyWrapped) window._copyWrapped(); }
+function tagMood(id,k,b){ if(window._tagMood) window._tagMood(id,k,b); }
+function openGoalModal(){ if(window._openGoalModal) window._openGoalModal(); }
+function closeGoalModal(){ if(window._closeGoalModal) window._closeGoalModal(); }
+function pickGoalEmoji(b,e){ if(window._pickGoalEmoji) window._pickGoalEmoji(b,e); }
+function addGoal(){ if(window._addGoal) window._addGoal(); }
+function addToGoal(id){ if(window._addToGoal) window._addToGoal(id); }
+function deleteGoal(id){ if(window._deleteGoal) window._deleteGoal(id); }
+function openBillModal(){ if(window._openBillModal) window._openBillModal(); }
+function closeBillModal(){ if(window._closeBillModal) window._closeBillModal(); }
+function addBill(){ if(window._addBill) window._addBill(); }
+function markBillPaid(id){ if(window._markBillPaid) window._markBillPaid(id); }
+function deleteBill(id){ if(window._deleteBill) window._deleteBill(id); }
+function copyInviteLink(){ if(window._copyInviteLink) window._copyInviteLink(); }
+function triggerInstall(){ if(window._triggerInstall) window._triggerInstall(); }
+</script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
@@ -1158,34 +1206,34 @@ setTimeout(()=>{
 },500);
 
 // ===== LANDING/AUTH =====
-window.goAuth=(tab)=>{ $('landingScreen').style.display='none'; $('authScreen').style.display='flex'; switchTab(tab); };
-window.goLanding=()=>{ $('authScreen').style.display='none'; $('landingScreen').style.display='flex'; };
+window._goAuth=window.goAuth=(tab)=>{ $('landingScreen').style.display='none'; $('authScreen').style.display='flex'; switchTab(tab); };
+window._goLanding=window.goLanding=()=>{ $('authScreen').style.display='none'; $('landingScreen').style.display='flex'; };
 
 onAuthStateChanged(auth,async(user)=>{
   if(user){ currentUser=user; await loadProfile(); bootApp(); }
   else { currentUser=null; if($('app').classList.contains('show')){ $('app').classList.remove('show'); $('landingScreen').style.display='flex'; } }
 });
 
-window.switchTab=(t)=>{
+window._switchTab=window.switchTab=(t)=>{
   $('loginF').style.display=t==='login'?'block':'none';
   $('registerF').style.display=t==='register'?'block':'none';
   document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('on',(t==='login'&&i===0)||(t==='register'&&i===1)));
 };
 
-window.doRegister=async()=>{
+window._doRegister=window.doRegister=async()=>{
   const name=$('rName').value.trim(),email=$('rEmail').value.trim(),pass=$('rPass').value,budget=parseInt($('rBudget').value)||50000;
   if(!name||!email||pass.length<6){$('rErr').style.display='block';return;}
   try{ const cred=await createUserWithEmailAndPassword(auth,email,pass); await setDoc(doc(db,'users',cred.user.uid),{name,email,budget,threshold:70}); toast('account created! 🚀','ok'); }
   catch(e){$('rErr').textContent=e.message;$('rErr').style.display='block';}
 };
 
-window.doLogin=async()=>{
+window._doLogin=window.doLogin=async()=>{
   const email=$('lEmail').value.trim(),pass=$('lPass').value;
   try{await signInWithEmailAndPassword(auth,email,pass);}
   catch(e){$('lErr').style.display='block';}
 };
 
-window.doLogout=async()=>{await signOut(auth);};
+window._doLogout=window.doLogout=async()=>{await signOut(auth);};
 
 async function loadProfile(){
   const snap=await getDoc(doc(db,'users',currentUser.uid));
@@ -1220,7 +1268,7 @@ async function loadTxs(){
 }
 
 // ===== MODAL =====
-window.openModal=()=>{
+window._openModal=window.openModal=()=>{
   $('mDate').value=new Date().toISOString().split('T')[0];
   $('mDesc').value='';$('mAmt').value='';$('mCat').value='';$('mType').value='need';
   document.querySelectorAll('.cat-opt').forEach(b=>b.classList.remove('on'));
@@ -1229,11 +1277,11 @@ window.openModal=()=>{
   resetScanner();
   $('modal').classList.add('show');
 };
-window.closeModal=()=>$('modal').classList.remove('show');
-window.pickCat=(b)=>{ document.querySelectorAll('.cat-opt').forEach(x=>x.classList.remove('on')); b.classList.add('on'); $('mCat').value=b.dataset.v; };
-window.pickType=(b)=>{ document.querySelectorAll('.type-opt').forEach(x=>x.classList.remove('on')); b.classList.add('on'); $('mType').value=b.dataset.v; };
+window._closeModal=window.closeModal=()=>$('modal').classList.remove('show');
+window._pickCat=window.pickCat=(b)=>{ document.querySelectorAll('.cat-opt').forEach(x=>x.classList.remove('on')); b.classList.add('on'); $('mCat').value=b.dataset.v; };
+window._pickType=window.pickType=(b)=>{ document.querySelectorAll('.type-opt').forEach(x=>x.classList.remove('on')); b.classList.add('on'); $('mType').value=b.dataset.v; };
 
-window.addTx=async()=>{
+window._addTx=window.addTx=async()=>{
   const desc=$('mDesc').value.trim(),amt=parseFloat($('mAmt').value),cat=$('mCat').value,type=$('mType').value,date=$('mDate').value;
   if(!desc||!amt||!cat||!date){toast('fill everything in bestie 😭','err');return;}
   try{
@@ -1245,7 +1293,7 @@ window.addTx=async()=>{
   }catch(e){toast('error saving 😭','err');}
 };
 
-window.delTx=async(id)=>{
+window._delTx=window.delTx=async(id)=>{
   if(!confirm('delete this transaction?'))return;
   try{
     await deleteDoc(doc(db,'transactions',id));
@@ -1256,7 +1304,7 @@ window.delTx=async(id)=>{
 };
 
 // ===== PAGE ROUTING =====
-window.showPage=(p)=>{
+window._showPage=window.showPage=(p)=>{
   document.querySelectorAll('.page').forEach(el=>el.classList.remove('on'));
   document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('on'));
   $('pg-'+p).classList.add('on');
@@ -1336,7 +1384,7 @@ function renderReports(){
 }
 
 // ===== AI INSIGHTS (existing) =====
-window.getAIInsights=async()=>{
+window._getAIInsights=window.getAIInsights=async()=>{
   if(!allTxs.length){toast('add some transactions first bestie 😭','err');return;}
   $('aiEmpty').style.display='none';$('aiResult').style.display='none';$('aiLoading').style.display='block';
   $('aiBtn').disabled=true;$('aiBtn').textContent='analysing... 🤖';
@@ -1386,9 +1434,9 @@ Score 0-100 (financial health score). Be specific to their data. Use Gen Z langu
 };
 
 // ===== RECEIPT SCANNER =====
-window.handleDrop=(e)=>{e.preventDefault();const file=e.dataTransfer.files[0];if(file&&file.type.startsWith('image/'))processReceipt(file);};
-window.scanReceipt=(input)=>{if(input.files[0])processReceipt(input.files[0]);};
-window.resetScanner=()=>{
+window._handleDrop=window.handleDrop=(e)=>{e.preventDefault();const file=e.dataTransfer.files[0];if(file&&file.type.startsWith('image/'))processReceipt(file);};
+window._scanReceipt=window.scanReceipt=(input)=>{if(input.files[0])processReceipt(input.files[0]);};
+window._resetScanner=window.resetScanner=()=>{
   $('scannerIdle').style.display='block';
   $('scannerLoading').style.display='none';
   $('scannerDone').style.display='none';
@@ -1525,7 +1573,7 @@ function renderImpulseScore(){
 }
 
 // ----- 2. SPENDING WRAPPED -----
-window.renderWrapped=()=>{
+window._renderWrapped=window.renderWrapped=()=>{
   if(!allTxs.length){toast('add some transactions first bestie 😭','err');return;}
   const total=allTxs.reduce((s,t)=>s+t.amt,0);
   const byCategory=allTxs.reduce((acc,t)=>{acc[t.cat]=(acc[t.cat]||0)+t.amt;return acc;},{});
@@ -1554,7 +1602,7 @@ window.renderWrapped=()=>{
   $('wrappedEmpty').style.display='none';
 };
 
-window.shareWrapped=()=>{
+window._shareWrapped=window.shareWrapped=()=>{
   const total=allTxs.reduce((s,t)=>s+t.amt,0);
   const {score}=getImpulseScore();
   const personality=getPersonality(score);
@@ -1563,7 +1611,7 @@ window.shareWrapped=()=>{
   else{navigator.clipboard.writeText(text);toast('Wrapped copied! Paste it bestie 🚀','ok');}
 };
 
-window.copyWrapped=()=>{
+window._copyWrapped=window.copyWrapped=()=>{
   const total=allTxs.reduce((s,t)=>s+t.amt,0);
   const {score}=getImpulseScore();
   const personality=getPersonality(score);
@@ -1575,7 +1623,7 @@ window.copyWrapped=()=>{
 };
 
 // ----- 3. ROAST MY SPENDING -----
-window.doRoast=async()=>{
+window._doRoast=window.doRoast=async()=>{
   if(!allTxs.length){toast('add some transactions first bestie 😭','err');return;}
   const btn=$('roastBtn');
   btn.textContent='Roasting you... 🍳';btn.disabled=true;
@@ -1642,7 +1690,7 @@ function renderMoodTracker(){
   updateMoodInsight();
 }
 
-window.tagMood=async(txId, moodKey, btn)=>{
+window._tagMood=window.tagMood=async(txId, moodKey, btn)=>{
   // update UI
   const row=btn.closest('.mood-btn-row');
   row.querySelectorAll('.mood-emoji-btn').forEach(b=>b.classList.remove('active'));
@@ -1700,34 +1748,34 @@ function updateMoodInsight(){
 }
 
 // ===== SETTINGS =====
-window.saveProfile=async()=>{
+window._saveProfile=window.saveProfile=async()=>{
   const name=$('sName').value.trim()||userProfile.name;
   await updateDoc(doc(db,'users',currentUser.uid),{name});
   userProfile.name=name;$('sbName').textContent=name;$('avInit').textContent=name[0].toUpperCase();
   toast('profile saved ✨','ok');
 };
-window.saveBudget=async()=>{
+window._saveBudget=window.saveBudget=async()=>{
   const budget=parseInt($('sBudget').value)||userProfile.budget;
   const threshold=parseInt($('sThresh').value)||70;
   await updateDoc(doc(db,'users',currentUser.uid),{budget,threshold});
   userProfile.budget=budget;userProfile.threshold=threshold;
   toast('budget updated 💰','ok');
 };
-window.changePass=async()=>{
+window._changePass=window.changePass=async()=>{
   const np=$('nPass').value,cp=$('cPass').value;
   if(np.length<6){toast('password too short 😭','err');return;}
   if(np!==cp){toast("they don't match bestie 💀",'err');return;}
   try{await updatePassword(currentUser,np);toast('password updated 🔐','ok');}
   catch(e){toast('re-login first then try again','err');}
 };
-window.clearTxs=async()=>{
+window._clearTxs=window.clearTxs=async()=>{
   if(!confirm('clear ALL transactions? no take-backs!'))return;
   const q=query(collection(db,'transactions'),where('uid','==',currentUser.uid));
   const snap=await getDocs(q);
   await Promise.all(snap.docs.map(d=>deleteDoc(d.ref)));
   allTxs=[];moodData={};renderTx();renderDash();toast('cleared 🗑️','ok');
 };
-window.deleteAcc=async()=>{
+window._deleteAcc=window.deleteAcc=async()=>{
   if(!confirm('delete your whole account? for real?'))return;
   const q=query(collection(db,'transactions'),where('uid','==',currentUser.uid));
   const snap=await getDocs(q);
@@ -1737,7 +1785,7 @@ window.deleteAcc=async()=>{
   toast('account deleted. era over 💀','ok');
 };
 
-window.toast=(msg,type)=>{
+window._toast=window.toast=(msg,type)=>{
   const t=$('toast');t.textContent=msg;t.className='toast show '+(type||'');
   setTimeout(()=>t.className='toast',2800);
 };
@@ -1892,7 +1940,7 @@ window.markBillPaid = async (id) => {
     const ref = await addDoc(collection(db,'bills'), {...bill, id:undefined, dueDate:nextDate, paid:false});
     allBills.push({...bill, id:ref.id, dueDate:nextDate, paid:false});
     allBills.sort((a,b)=>new Date(a.dueDate)-new Date(b.dueDate));
-    toast('paid! next month's bill scheduled 🔄','ok');
+    toast('paid! next bill scheduled 🔄','ok');
   } else {
     toast('bill marked as paid ✅','ok');
   }
