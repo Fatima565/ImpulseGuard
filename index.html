@@ -821,7 +821,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-const GEMINI_KEY = 'AIzaSyBJM3oMBEVpYf9Z5_0A0JjEKZN_jEQ8Rf4';
+const GEMINI_KEY = 'AQ.Ab8RN6K-CYpRxlLKwDLoRH6Y5m4pDjq-l3R_TQPAdELIeDJ6NQ';
 const MOODS=['saving szn 💸','broke but cute','budget era activated','no spend challenge (lying)','financially healing'];
 const ROASTS=["babe you've spent {pct}% of your budget 💀","your bank account is not ur enemy. YOU are. ({pct}% spent)","{pct}% gone. main character behavior? debatable."];
 const GREENS=["you're doing amazing sweetie ✨ only {pct}% spent","financially responsible era activated 🌱 {pct}% spent","budget looking clean fr fr. {pct}% spent 💚"];
@@ -1060,7 +1060,7 @@ SPENDING DATA:
 Give a response in this EXACT JSON format (no markdown, no backticks, just raw JSON):
 {"score":75,"personality":"The Foodie Spender 🍔","personality_desc":"one line funny description","roast":"funny but kind roast (2 sentences, Gen Z tone)","warning":"biggest spending risk (1-2 sentences)","tip1":"specific actionable tip","tip2":"another specific tip","positive":"something genuinely good about their spending"}
 Score 0-100 (financial health score). Be specific to their data. Use Gen Z language.`;
-    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})});
+    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':GEMINI_KEY},body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})});
     const data=await res.json();
     const text=data.candidates?.[0]?.content?.parts?.[0]?.text||'';
     const ai=JSON.parse(text.replace(/```json|```/g,'').trim());
@@ -1097,8 +1097,8 @@ async function processReceipt(file){
   $('scannerDone').style.display='none';$('scannerErr').style.display='none';
   try{
     const base64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(file);});
-    const response=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`,{
-      method:'POST',headers:{'Content-Type':'application/json'},
+    const response=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`,{
+      method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':GEMINI_KEY},
       body:JSON.stringify({contents:[{parts:[
         {text:`You are a receipt scanner for a finance app. Analyze this receipt image and extract:
 1. Store/vendor name and what was purchased (short description, max 40 chars)
@@ -1291,8 +1291,8 @@ Their data:
 - Top category: ${topCatEntry[0]} (PKR ${topCatEntry[1].toLocaleString()})
 - Biggest splurge: ${topTx.desc} — PKR ${topTx.amt.toLocaleString()}
 - Transactions: ${allTxs.length}`;
-    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`,{
-      method:'POST',headers:{'Content-Type':'application/json'},
+    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`,{
+      method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':GEMINI_KEY},
       body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})
     });
     const data=await res.json();
