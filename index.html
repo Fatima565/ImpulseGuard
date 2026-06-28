@@ -1639,9 +1639,10 @@ Their data:
     try {
       roastText = await callGemini(prompt);
     } catch(re) {
-      roastText = re.message.includes('Rate limit') 
+      console.error('Roast error:', re.message);
+      roastText = re.message.includes('rate_limit') 
         ? "AI is catching its breath 😮‍💨 wait 1 min and try again!" 
-        : "Your spending is so bad even AI gave up trying to roast it. 💀";
+        : "AI got shy 😅 try again in a sec!";
     }
     $('roastText').textContent=roastText;
     $('roastOutput').style.display='block';
@@ -1795,14 +1796,16 @@ async function callGemini(prompt, imageData=null, mimeType=null, retries=3) {
   for(let attempt=1; attempt<=retries; attempt++) {
     try {
       // Build message content
-      const msgContent = [];
+      // Build message - string for text only, array for image+text
+      let msgContent;
       if(imageData && mimeType) {
-        msgContent.push({
-          type: 'image_url',
-          image_url: { url: `data:${mimeType};base64,${imageData}` }
-        });
+        msgContent = [
+          { type: 'image_url', image_url: { url: `data:${mimeType};base64,${imageData}` } },
+          { type: 'text', text: prompt }
+        ];
+      } else {
+        msgContent = prompt; // plain string for text-only
       }
-      msgContent.push({ type: 'text', text: prompt });
 
       const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
@@ -1813,9 +1816,10 @@ async function callGemini(prompt, imageData=null, mimeType=null, retries=3) {
           'X-Title': 'ImpulseGuard'
         },
         body: JSON.stringify({
-          model: imageData ? 'google/gemini-2.0-flash-exp:free' : 'google/gemini-2.0-flash-lite:free',
+          model: imageData ? 'google/gemini-2.0-flash-exp:free' : 'mistralai/mistral-7b-instruct:free',
           messages: [{ role: 'user', content: msgContent }],
-          max_tokens: 800
+          max_tokens: 800,
+          temperature: 0.9
         })
       });
 
@@ -2124,39 +2128,70 @@ window.addEventListener('appinstalled', () => {
 });
 
 window._triggerInstall = window.triggerInstall = async () => {
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  
+  if(isStandalone) {
+    toast('Already installed on your device! ✅','ok');
+    return;
+  }
+  
   if(deferredInstallPrompt) {
-    // Chrome/Android — direct install prompt
     try {
-      await deferredInstallPrompt.prompt();
+      deferredInstallPrompt.prompt();
       const { outcome } = await deferredInstallPrompt.userChoice;
-      console.log('PWA install outcome:', outcome);
       if(outcome === 'accepted') {
-        toast('Installing... check your home screen! 🚀','ok');
+        toast('ImpulseGuard installed! 🎉','ok');
+        $('installBanner')?.classList.add('hidden');
+      } else {
+        toast('Installation cancelled','ok');
       }
       deferredInstallPrompt = null;
-      $('installBanner')?.classList.add('hidden');
     } catch(err) {
       console.error('Install error:', err);
+      showInstallHelp(isIOS);
     }
   } else {
-    // iOS Safari or prompt not available
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-    
-    if(isStandalone) {
-      toast('Already installed! ✅','ok');
-    } else if(isIOS) {
-      // Show iOS specific instructions as a toast
-      toast('iOS: Tap Share ↑ → "Add to Home Screen" → Add','ok');
-      // Also show a more visible alert
-      setTimeout(() => {
-        alert("To install on iPhone/iPad:\n\n1. Tap Share button (\u25a1\u2191) at bottom of Safari\n2. Tap \"Add to Home Screen\"\n3. Tap Add");
-      }, 500);
-    } else {
-      toast('Open in Chrome and tap the install icon in address bar 🌐','ok');
-    }
+    showInstallHelp(isIOS);
   }
 };
+
+function showInstallHelp(isIOS) {
+  if(isIOS) {
+    // Create a nice modal for iOS
+    const div = document.createElement('div');
+    div.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:99999;display:flex;align-items:flex-end;justify-content:center;padding:20px;';
+    div.innerHTML = `<div style="background:#1c2333;border:1px solid #c6f135;border-radius:20px;padding:28px;max-width:380px;width:100%;text-align:center;">
+      <div style="font-size:40px;margin-bottom:12px">📲</div>
+      <h3 style="font-family:Bricolage Grotesque,sans-serif;font-size:20px;font-weight:800;color:#f0f4ff;margin-bottom:8px">Install ImpulseGuard</h3>
+      <p style="font-size:14px;color:#8896b0;margin-bottom:20px;line-height:1.6">Tap the <strong style="color:#f0f4ff">Share button ↑</strong> at the bottom of Safari, then tap <strong style="color:#c6f135">"Add to Home Screen"</strong></p>
+      <div style="background:#0f1117;border-radius:12px;padding:14px;margin-bottom:16px;font-size:13px;color:#8896b0;text-align:left">
+        1️⃣ Tap <strong style="color:#f0f4ff">Share ↑</strong> (bottom bar)<br>
+        2️⃣ Scroll → tap <strong style="color:#f0f4ff">"Add to Home Screen"</strong><br>
+        3️⃣ Tap <strong style="color:#c6f135">Add ✅</strong>
+      </div>
+      <button onclick="this.parentElement.parentElement.remove()" style="width:100%;padding:12px;background:#c6f135;border:none;border-radius:10px;font-family:Bricolage Grotesque,sans-serif;font-size:15px;font-weight:700;color:#0a0d08;cursor:pointer;">Got it!</button>
+    </div>`;
+    document.body.appendChild(div);
+    div.addEventListener('click', e => { if(e.target === div) div.remove(); });
+  } else {
+    // Chrome desktop/Android without prompt
+    const div = document.createElement('div');
+    div.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;';
+    div.innerHTML = `<div style="background:#1c2333;border:1px solid #c6f135;border-radius:20px;padding:28px;max-width:380px;width:100%;text-align:center;">
+      <div style="font-size:40px;margin-bottom:12px">💻</div>
+      <h3 style="font-family:Bricolage Grotesque,sans-serif;font-size:20px;font-weight:800;color:#f0f4ff;margin-bottom:8px">Install ImpulseGuard</h3>
+      <p style="font-size:14px;color:#8896b0;margin-bottom:20px;line-height:1.6">Look for the <strong style="color:#c6f135">install icon ⊕</strong> in your Chrome address bar and click it!</p>
+      <div style="background:#0f1117;border-radius:12px;padding:14px;margin-bottom:16px;font-size:13px;color:#8896b0;text-align:left">
+        📱 <strong style="color:#f0f4ff">Android:</strong> Chrome menu ⋮ → "Add to Home Screen"<br><br>
+        💻 <strong style="color:#f0f4ff">Desktop:</strong> Click ⊕ icon in address bar
+      </div>
+      <button onclick="this.parentElement.parentElement.remove()" style="width:100%;padding:12px;background:#c6f135;border:none;border-radius:10px;font-family:Bricolage Grotesque,sans-serif;font-size:15px;font-weight:700;color:#0a0d08;cursor:pointer;">Got it!</button>
+    </div>`;
+    document.body.appendChild(div);
+    div.addEventListener('click', e => { if(e.target === div) div.remove(); });
+  }
+}
 
 // Register service worker
 if('serviceWorker' in navigator) {
