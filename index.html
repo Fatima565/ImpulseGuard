@@ -2150,11 +2150,7 @@ window._triggerInstall = window.triggerInstall = async () => {
       toast('iOS: Tap Share ↑ → "Add to Home Screen" → Add','ok');
       // Also show a more visible alert
       setTimeout(() => {
-        alert('To install on iPhone/iPad:
-
-1. Tap the Share button (□↑) at bottom of Safari
-2. Scroll down and tap "Add to Home Screen"
-3. Tap "Add" ✅');
+        alert("To install on iPhone/iPad:\n\n1. Tap Share button (\u25a1\u2191) at bottom of Safari\n2. Tap \"Add to Home Screen\"\n3. Tap Add");
       }, 500);
     } else {
       toast('Open in Chrome and tap the install icon in address bar 🌐','ok');
