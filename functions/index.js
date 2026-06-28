@@ -4,19 +4,14 @@ const admin = require('firebase-admin');
 
 admin.initializeApp();
 
-const OPENROUTER_API_KEY = defineSecret('OPENROUTER_API_KEY');
+const GEMINI_API_KEY = defineSecret('GEMINI_API_KEY');
 
-function cleanApiKey(value) {
-  let key = String(value || '');
-
-  // Remove accidental line breaks, spaces, zero-width chars, and wrapping quotes.
-  key = key
+function cleanSecret(value) {
+  return String(value || '')
     .replace(/[\u200B-\u200D\uFEFF]/g, '')
     .trim()
     .replace(/^['"]|['"]$/g, '')
     .replace(/\s+/g, '');
-
-  return key;
 }
 
 exports.ai = onRequest(
@@ -27,7 +22,7 @@ exports.ai = onRequest(
       'https://www.impulseguard.dev',
       'https://fatima565.github.io'
     ],
-    secrets: [OPENROUTER_API_KEY],
+    secrets: [GEMINI_API_KEY],
     timeoutSeconds: 60,
     memory: '256MiB',
     maxInstances: 2
@@ -40,6 +35,7 @@ exports.ai = onRequest(
     }
 
     try {
+      // Only signed-in ImpulseGuard users may call the AI backend.
       const authHeader = req.get('authorization') || '';
       if (!authHeader.startsWith('Bearer ')) {
         return res.status(401).json({ error: 'Please log in again.' });
@@ -62,89 +58,95 @@ exports.ai = onRequest(
         return res.status(400).json({ error: 'Invalid receipt image.' });
       }
 
+      // Base64 is larger than the original image; keep requests well below Gemini's inline limit.
       if (imageData && imageData.length > 10_000_000) {
         return res.status(413).json({
-          error: 'Receipt image is too large. Use an image under about 7 MB.'
+          error: 'Receipt image is too large. Please use an image under about 7 MB.'
         });
       }
 
-      const apiKey = cleanApiKey(OPENROUTER_API_KEY.value());
+      const apiKey = cleanSecret(GEMINI_API_KEY.value());
 
-      if (!apiKey.startsWith('sk-or-') || apiKey.length < 40) {
-        console.error('OpenRouter secret is malformed', {
-          length: apiKey.length,
-          startsCorrectly: apiKey.startsWith('sk-or-')
-        });
-
+      if (apiKey.length < 30) {
+        console.error('Gemini secret is malformed', { length: apiKey.length });
         return res.status(500).json({
-          error: 'The saved OpenRouter key is malformed. Please save it again.'
+          error: 'The saved Gemini API key is malformed. Please save it again.'
         });
       }
 
-      const content = imageData && mimeType
-        ? [
-            { type: 'text', text: prompt },
-            {
-              type: 'image_url',
-              image_url: {
-                url: `data:${mimeType};base64,${imageData}`
-              }
-            }
-          ]
-        : prompt;
+      const parts = [{ text: prompt }];
 
-      const openRouterResponse = await fetch(
-        'https://openrouter.ai/api/v1/chat/completions',
+      if (imageData && mimeType) {
+        parts.push({
+          inline_data: {
+            mime_type: mimeType,
+            data: imageData
+          }
+        });
+      }
+
+      const wantsJson =
+        /exact json|only in json|respond only in json|raw json/i.test(prompt);
+
+      const geminiResponse = await fetch(
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent',
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey}`,
-            'HTTP-Referer': 'https://impulseguard.dev',
-            'X-Title': 'ImpulseGuard'
+            'x-goog-api-key': apiKey
           },
           body: JSON.stringify({
-            model: 'openrouter/free',
-            messages: [{ role: 'user', content }],
-            max_tokens: 800,
-            temperature: imageData ? 0.2 : 0.8
+            contents: [
+              {
+                role: 'user',
+                parts
+              }
+            ],
+            generationConfig: {
+              maxOutputTokens: 1000,
+              temperature: imageData ? 0.2 : wantsJson ? 0.3 : 0.8,
+              ...(wantsJson
+                ? { responseMimeType: 'application/json' }
+                : {})
+            }
           })
         }
       );
 
-      const raw = await openRouterResponse.text();
+      const raw = await geminiResponse.text();
       let data = {};
 
       try {
         data = raw ? JSON.parse(raw) : {};
       } catch {
-        data = {
-          error: {
-            message: raw || 'Invalid OpenRouter response'
-          }
-        };
+        data = { error: { message: raw || 'Invalid Gemini response' } };
       }
 
-      if (!openRouterResponse.ok) {
-        console.error('OpenRouter error', {
-          status: openRouterResponse.status,
-          message: data?.error?.message,
-          keyLength: apiKey.length,
-          keyLast4: apiKey.slice(-4)
+      if (!geminiResponse.ok) {
+        const message =
+          data?.error?.message ||
+          `Gemini request failed (${geminiResponse.status})`;
+
+        console.error('Gemini API error', {
+          status: geminiResponse.status,
+          message
         });
 
-        return res.status(openRouterResponse.status).json({
-          error:
-            data?.error?.message ||
-            `OpenRouter request failed (${openRouterResponse.status})`
-        });
+        return res.status(geminiResponse.status).json({ error: message });
       }
 
-      const text = data?.choices?.[0]?.message?.content;
+      const text = (data?.candidates?.[0]?.content?.parts || [])
+        .map((part) => part?.text || '')
+        .join('')
+        .trim();
 
       if (!text) {
+        const blockReason = data?.promptFeedback?.blockReason;
         return res.status(502).json({
-          error: 'The AI returned an empty response.'
+          error: blockReason
+            ? `Gemini blocked the request: ${blockReason}`
+            : 'The AI returned an empty response.'
         });
       }
 
