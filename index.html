@@ -603,6 +603,49 @@ th { letter-spacing: .08em; }
 .gemoji-btn{font-size:22px;background:var(--s2);border:1px solid var(--b1);border-radius:8px;padding:7px;cursor:pointer;transition:.15s;}
 .gemoji-btn:hover{border-color:var(--lime);}
 .gemoji-btn.sel{border-color:var(--lime);background:rgba(198,241,53,.1);}
+
+
+/* ===== CUSTOM SHARE HUB ===== */
+.share-modal{max-width:560px;}
+.share-modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:18px;}
+.share-modal-head h3{margin:0 0 5px;}
+.share-modal-head p{font-size:12px;color:var(--txt2);line-height:1.5;}
+.share-close{background:var(--s2);border:1px solid var(--b1);color:var(--txt2);width:34px;height:34px;border-radius:10px;cursor:pointer;font-size:18px;flex-shrink:0;}
+.share-close:hover{color:var(--txt);border-color:var(--b2);}
+.share-preview{background:linear-gradient(135deg,rgba(155,93,255,.12),rgba(198,241,53,.06));border:1px solid rgba(155,93,255,.25);border-radius:14px;padding:14px 16px;margin-bottom:16px;}
+.share-preview-label{font-size:10px;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;font-weight:700;}
+.share-preview-text{font-size:12px;color:var(--txt2);line-height:1.55;max-height:76px;overflow:hidden;white-space:pre-line;}
+.share-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.share-option{display:flex;align-items:center;gap:11px;padding:13px 14px;background:var(--s2);border:1px solid var(--b1);border-radius:12px;color:var(--txt);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:650;cursor:pointer;text-align:left;transition:.18s;}
+.share-option:hover{border-color:var(--lime);background:rgba(198,241,53,.06);transform:translateY(-1px);}
+.share-option .share-ico{font-size:21px;width:26px;text-align:center;flex-shrink:0;}
+.share-option small{display:block;font-size:10px;color:var(--txt3);font-weight:500;margin-top:2px;}
+.share-note{margin-top:14px;padding:10px 12px;border-radius:10px;background:rgba(0,212,255,.05);border:1px solid rgba(0,212,255,.15);font-size:11px;color:var(--txt3);line-height:1.5;}
+
+/* ===== BILL SCANNER + PAYMENT ACTIONS ===== */
+.bill-scanner-wrap{margin-bottom:20px;}
+.bill-scanner-label{font-size:11px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+.bill-scanner-box{border:2px dashed var(--b2);border-radius:14px;padding:20px;text-align:center;cursor:pointer;transition:.2s;background:rgba(255,255,255,.015);}
+.bill-scanner-box:hover{border-color:var(--lime);background:rgba(198,241,53,.035);}
+.bill-scan-icon{font-size:32px;margin-bottom:8px;}
+.bill-scan-title{font-size:13px;font-weight:650;color:var(--txt2);}
+.bill-scan-sub{font-size:11px;color:var(--txt3);margin-top:4px;}
+.bill-ref{font-size:10px;color:var(--txt3);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.bill-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end;}
+.bill-pay-log{padding:7px 11px!important;font-size:11px!important;white-space:nowrap;}
+.bill-paid-only{padding:7px 9px;background:transparent;border:1px solid var(--b2);border-radius:8px;color:var(--txt2);font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;cursor:pointer;white-space:nowrap;}
+.bill-paid-only:hover{color:var(--lime);border-color:var(--lime);}
+
+@media(max-width:768px){
+  .share-grid{grid-template-columns:1fr 1fr;}
+  .bill-row{align-items:flex-start;flex-wrap:wrap;}
+  .bill-info{min-width:160px;}
+  .bill-actions{width:100%;justify-content:flex-start;padding-left:42px;}
+}
+@media(max-width:420px){
+  .share-grid{grid-template-columns:1fr;}
+}
+
 </style>
 </head>
 <body>
@@ -925,8 +968,8 @@ th { letter-spacing: .08em; }
     <!-- BILLS PAGE -->
     <div class="page" id="pg-bills">
       <div class="ph" style="display:flex;align-items:flex-start;justify-content:space-between">
-        <div><div class="ph-title">bills & reminders 🔔</div><div class="ph-sub">never miss a payment again</div></div>
-        <button class="btn primary" onclick="openBillModal()">+ add bill</button>
+        <div><div class="ph-title">bills & reminders 🔔</div><div class="ph-sub">scan a bill, save the due date, then log it when paid</div></div>
+        <button class="btn primary" onclick="openBillModal()">📸 scan / add bill</button>
       </div>
       <div class="alert-strip hide" id="billAlert"></div>
       <div class="bill-list" id="billList"></div>
@@ -1025,10 +1068,42 @@ th { letter-spacing: .08em; }
 <!-- BILL MODAL -->
 <div class="overlay" id="billModal">
   <div class="modal">
-    <h3>add a bill reminder 🔔</h3>
-    <div class="field"><label>bill name</label><input type="text" id="bName" placeholder="e.g. Netflix, Electricity, Rent"/></div>
-    <div class="field"><label>amount (PKR)</label><input type="number" id="bAmount" placeholder="e.g. 3500"/></div>
+    <h3>scan or add a bill 🔔</h3>
+
+    <div class="bill-scanner-wrap">
+      <div class="bill-scanner-label">📄 scan bill / invoice (optional)</div>
+      <div id="billScannerBox" class="bill-scanner-box"
+           onclick="document.getElementById('billScanInput').click()"
+           ondragover="event.preventDefault()"
+           ondrop="handleBillDrop(event)">
+        <div id="billScannerIdle">
+          <div class="bill-scan-icon">📸</div>
+          <div class="bill-scan-title">upload a bill or take a photo</div>
+          <div class="bill-scan-sub">AI will fill provider, payable amount, due date, category and reference number</div>
+        </div>
+        <div id="billScannerLoading" style="display:none">
+          <div class="bill-scan-icon">⏳</div>
+          <div class="bill-scan-title" style="color:var(--lime)">reading your bill... 🤖</div>
+          <div class="bill-scan-sub">finding the amount and due date</div>
+        </div>
+        <div id="billScannerDone" style="display:none">
+          <div class="bill-scan-icon">✅</div>
+          <div class="bill-scan-title" style="color:var(--lime)">bill scanned! check the details below 👇</div>
+          <div class="bill-scan-sub" onclick="event.stopPropagation();resetBillScanner()">scan another →</div>
+        </div>
+        <div id="billScannerErr" style="display:none">
+          <div class="bill-scan-icon">😭</div>
+          <div class="bill-scan-title" style="color:#ff6b6b" id="billScanErrTxt">could not read this bill</div>
+          <div class="bill-scan-sub" onclick="event.stopPropagation();resetBillScanner()">try another image →</div>
+        </div>
+      </div>
+      <input type="file" id="billScanInput" accept="image/*" capture="environment" style="display:none" onchange="scanBill(this)"/>
+    </div>
+
+    <div class="field"><label>provider / bill name</label><input type="text" id="bName" placeholder="e.g. K-Electric, Netflix, Rent"/></div>
+    <div class="field"><label>total payable (PKR)</label><input type="number" id="bAmount" placeholder="e.g. 3500"/></div>
     <div class="field"><label>due date</label><input type="date" id="bDate"/></div>
+    <div class="field"><label>consumer / reference number (optional)</label><input type="text" id="bRef" placeholder="e.g. consumer ID, invoice or account number"/></div>
     <div class="field"><label>category</label>
       <select id="bCat" style="width:100%;padding:11px 14px;background:var(--s2);border:1px solid var(--b1);border-radius:10px;color:var(--txt);font-family:'Space Grotesk',sans-serif;font-size:14px;outline:none;">
         <option value="📄 Bills">📄 Bills</option>
@@ -1048,10 +1123,41 @@ th { letter-spacing: .08em; }
         <option value="yearly">every year</option>
       </select>
     </div>
+    <div style="font-size:11px;color:var(--txt3);line-height:1.5;padding:10px 12px;background:rgba(198,241,53,.04);border:1px solid rgba(198,241,53,.12);border-radius:10px;">
+      💡 Saving a bill creates a reminder only. When you pay it, choose <strong style="color:var(--lime)">paid + log expense</strong> to add it to Transactions.
+    </div>
     <div class="modal-footer">
       <button class="btn ghost" onclick="closeBillModal()">cancel</button>
-      <button class="btn primary" onclick="addBill()">add bill 🔔</button>
+      <button class="btn primary" onclick="addBill()">save bill reminder 🔔</button>
     </div>
+  </div>
+</div>
+
+<!-- CUSTOM SHARE MENU -->
+<div class="overlay" id="shareModal" onclick="if(event.target===this)closeShareMenu()">
+  <div class="modal share-modal">
+    <div class="share-modal-head">
+      <div>
+        <h3 id="shareModalTitle">share your money lore 🚀</h3>
+        <p id="shareModalSub">choose where you want to share it</p>
+      </div>
+      <button class="share-close" onclick="closeShareMenu()" aria-label="Close">×</button>
+    </div>
+    <div class="share-preview">
+      <div class="share-preview-label">caption preview</div>
+      <div class="share-preview-text" id="sharePreviewText"></div>
+    </div>
+    <div class="share-grid">
+      <button class="share-option" onclick="shareToWhatsApp()"><span class="share-ico">🟢</span><span>WhatsApp<small>send caption + link</small></span></button>
+      <button class="share-option" onclick="shareStoryImage()"><span class="share-ico">📲</span><span>Instagram / Story<small>share or download a story image</small></span></button>
+      <button class="share-option" onclick="shareToLinkedIn()"><span class="share-ico">💼</span><span>LinkedIn<small>copy caption and open LinkedIn</small></span></button>
+      <button class="share-option" onclick="shareToX()"><span class="share-ico">𝕏</span><span>X / Twitter<small>post caption + link</small></span></button>
+      <button class="share-option" onclick="shareToFacebook()"><span class="share-ico">🔵</span><span>Facebook<small>share ImpulseGuard link</small></span></button>
+      <button class="share-option" onclick="copyShareCaption()"><span class="share-ico">📋</span><span>Copy Caption<small>paste anywhere you like</small></span></button>
+      <button class="share-option" onclick="copyShareLink()"><span class="share-ico">🔗</span><span>Copy Link<small>copy impulseguard.dev</small></span></button>
+      <button class="share-option" onclick="nativeShareCurrent()"><span class="share-ico">✨</span><span>More Options<small>open your device share panel</small></span></button>
+    </div>
+    <div class="share-note">Instagram does not let websites publish directly. On mobile, “Instagram / Story” will open file sharing when supported; otherwise it downloads a ready-to-post story image and copies the caption.</div>
   </div>
 </div>
 
@@ -1154,8 +1260,20 @@ function deleteGoal(id){ if(window._deleteGoal) window._deleteGoal(id); }
 function openBillModal(){ if(window._openBillModal) window._openBillModal(); }
 function closeBillModal(){ if(window._closeBillModal) window._closeBillModal(); }
 function addBill(){ if(window._addBill) window._addBill(); }
-function markBillPaid(id){ if(window._markBillPaid) window._markBillPaid(id); }
+function scanBill(i){ if(window._scanBill) window._scanBill(i); }
+function resetBillScanner(){ if(window._resetBillScanner) window._resetBillScanner(); }
+function handleBillDrop(e){ if(window._handleBillDrop) window._handleBillDrop(e); }
+function markBillPaid(id,logExpense){ if(window._markBillPaid) window._markBillPaid(id,logExpense); }
 function deleteBill(id){ if(window._deleteBill) window._deleteBill(id); }
+function closeShareMenu(){ if(window._closeShareMenu) window._closeShareMenu(); }
+function shareToWhatsApp(){ if(window._shareToWhatsApp) window._shareToWhatsApp(); }
+function shareStoryImage(){ if(window._shareStoryImage) window._shareStoryImage(); }
+function shareToLinkedIn(){ if(window._shareToLinkedIn) window._shareToLinkedIn(); }
+function shareToX(){ if(window._shareToX) window._shareToX(); }
+function shareToFacebook(){ if(window._shareToFacebook) window._shareToFacebook(); }
+function copyShareCaption(){ if(window._copyShareCaption) window._copyShareCaption(); }
+function copyShareLink(){ if(window._copyShareLink) window._copyShareLink(); }
+function nativeShareCurrent(){ if(window._nativeShareCurrent) window._nativeShareCurrent(); }
 function copyInviteLink(){ if(window._copyInviteLink) window._copyInviteLink(); }
 function triggerInstall(){ if(window._triggerInstall) window._triggerInstall(); }
 
@@ -1441,6 +1559,46 @@ Score 0-100 (financial health score). Be specific to their data. Use Gen Z langu
   }finally{$('aiBtn').disabled=false;$('aiBtn').textContent='analyse again 🤖';}
 };
 
+// ===== IMAGE HELPERS FOR RECEIPT + BILL SCANNING =====
+async function prepareImageForAI(file, maxDimension=1600, quality=.84){
+  if(!file || !file.type?.startsWith('image/')) throw new Error('Please choose an image file.');
+
+  const dataUrl = await new Promise((resolve,reject)=>{
+    const reader = new FileReader();
+    reader.onload = ()=>resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+
+  const img = await new Promise((resolve,reject)=>{
+    const image = new Image();
+    image.onload = ()=>resolve(image);
+    image.onerror = reject;
+    image.src = dataUrl;
+  });
+
+  let width=img.naturalWidth||img.width, height=img.naturalHeight||img.height;
+  const scale=Math.min(1,maxDimension/Math.max(width,height));
+  width=Math.max(1,Math.round(width*scale));
+  height=Math.max(1,Math.round(height*scale));
+
+  const canvas=document.createElement('canvas');
+  canvas.width=width;canvas.height=height;
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,width,height);
+  ctx.drawImage(img,0,0,width,height);
+
+  const output=canvas.toDataURL('image/jpeg',quality);
+  return {base64:output.split(',')[1],mimeType:'image/jpeg'};
+}
+
+function parseAIJson(raw){
+  const cleaned=String(raw||'').replace(/```json|```/gi,'').trim();
+  const start=cleaned.indexOf('{'),end=cleaned.lastIndexOf('}');
+  if(start<0||end<start) throw new Error('AI did not return valid JSON.');
+  return JSON.parse(cleaned.slice(start,end+1));
+}
+
 // ===== RECEIPT SCANNER =====
 window._handleDrop=window.handleDrop=(e)=>{e.preventDefault();const file=e.dataTransfer.files[0];if(file&&file.type.startsWith('image/'))processReceipt(file);};
 window._scanReceipt=window.scanReceipt=(input)=>{if(input.files[0])processReceipt(input.files[0]);};
@@ -1455,7 +1613,7 @@ async function processReceipt(file){
   $('scannerIdle').style.display='none';$('scannerLoading').style.display='block';
   $('scannerDone').style.display='none';$('scannerErr').style.display='none';
   try{
-    const base64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(file);});
+    const prepared=await prepareImageForAI(file);
     const scanPrompt = `You are a receipt scanner. Extract from this receipt image:
 1. Store/item description (max 40 chars)
 2. Total amount (number only)
@@ -1463,8 +1621,8 @@ async function processReceipt(file){
 4. Date YYYY-MM-DD (use ${new Date().toISOString().split('T')[0]} if not visible)
 5. Type: need/want/impulse
 Respond ONLY in JSON: {"desc":"...","amount":1234,"category":"Food","date":"2024-01-01","type":"need"}`;
-    const scanText = await callGemini(scanPrompt, base64, file.type);
-    const parsed = JSON.parse(scanText.replace(/\`\`\`json|\`\`\`/g,'').trim());
+    const scanText = await callGemini(scanPrompt, prepared.base64, prepared.mimeType);
+    const parsed = parseAIJson(scanText);
     $('mDesc').value=parsed.desc||'';
     $('mAmt').value=parsed.amount||'';
     $('mDate').value=parsed.date||new Date().toISOString().split('T')[0];
@@ -1479,6 +1637,223 @@ Respond ONLY in JSON: {"desc":"...","amount":1234,"category":"Food","date":"2024
     $('scanErrTxt').textContent='could not read receipt 😭 fill manually';console.error(e);
   }
 }
+
+// ============================================================
+// ===== CUSTOM SHARE HUB =====
+// ============================================================
+let currentSharePayload=null;
+
+function shareUrl(){
+  return 'https://impulseguard.dev';
+}
+
+async function copyTextSafe(value){
+  try{
+    await navigator.clipboard.writeText(value);
+  }catch(e){
+    const ta=document.createElement('textarea');
+    ta.value=value;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();
+  }
+}
+
+function openPopup(url){
+  const w=window.open(url,'_blank','noopener,noreferrer,width=720,height=720');
+  if(!w) toast('popup blocked — allow popups and try again','err');
+}
+
+window._openShareMenu=window.openShareMenu=(payload)=>{
+  currentSharePayload={url:shareUrl(),...payload};
+  $('shareModalTitle').textContent=payload.kind==='wrapped'?'share your Spending Wrapped 🎁':'share your roast 🔥';
+  $('shareModalSub').textContent=payload.kind==='wrapped'?'show the world where your money went':'let your friends witness the financial violence';
+  $('sharePreviewText').textContent=payload.text||'';
+  $('shareModal').classList.add('show');
+};
+
+window._closeShareMenu=window.closeShareMenu=()=>{
+  $('shareModal').classList.remove('show');
+};
+
+window._copyShareCaption=window.copyShareCaption=async()=>{
+  if(!currentSharePayload)return;
+  await copyTextSafe(currentSharePayload.text);
+  toast('caption copied! 📋','ok');
+};
+
+window._copyShareLink=window.copyShareLink=async()=>{
+  await copyTextSafe(shareUrl());
+  toast('ImpulseGuard link copied 🔗','ok');
+};
+
+window._shareToWhatsApp=window.shareToWhatsApp=()=>{
+  if(!currentSharePayload)return;
+  openPopup(`https://wa.me/?text=${encodeURIComponent(currentSharePayload.text+'\n\n'+currentSharePayload.url)}`);
+};
+
+window._shareToX=window.shareToX=()=>{
+  if(!currentSharePayload)return;
+  const compact=(currentSharePayload.shortText||currentSharePayload.text).slice(0,220);
+  openPopup(`https://twitter.com/intent/tweet?text=${encodeURIComponent(compact)}&url=${encodeURIComponent(currentSharePayload.url)}`);
+};
+
+window._shareToFacebook=window.shareToFacebook=()=>{
+  if(!currentSharePayload)return;
+  openPopup(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentSharePayload.url)}`);
+};
+
+window._shareToLinkedIn=window.shareToLinkedIn=async()=>{
+  if(!currentSharePayload)return;
+  await copyTextSafe(currentSharePayload.text);
+  toast('caption copied — paste it on LinkedIn 💼','ok');
+  openPopup(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentSharePayload.url)}`);
+};
+
+window._nativeShareCurrent=window.nativeShareCurrent=async()=>{
+  if(!currentSharePayload)return;
+  if(navigator.share){
+    try{
+      await navigator.share({title:currentSharePayload.title,text:currentSharePayload.text,url:currentSharePayload.url});
+    }catch(e){if(e?.name!=='AbortError')toast('share cancelled or unavailable','err');}
+  }else{
+    await copyTextSafe(currentSharePayload.text+'\n'+currentSharePayload.url);
+    toast('share text copied!','ok');
+  }
+};
+
+function roundRectCanvas(ctx,x,y,w,h,r,fill,stroke=null){
+  const radius=Math.min(r,w/2,h/2);
+  ctx.beginPath();
+  ctx.moveTo(x+radius,y);
+  ctx.arcTo(x+w,y,x+w,y+h,radius);
+  ctx.arcTo(x+w,y+h,x,y+h,radius);
+  ctx.arcTo(x,y+h,x,y,radius);
+  ctx.arcTo(x,y,x+w,y,radius);
+  ctx.closePath();
+  if(fill){ctx.fillStyle=fill;ctx.fill();}
+  if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke();}
+}
+
+function wrapCanvasText(ctx,text,x,y,maxWidth,lineHeight,maxLines=12){
+  const paragraphs=String(text||'').split('\n');
+  let lineCount=0;
+  for(const paragraph of paragraphs){
+    const words=paragraph.split(/\s+/).filter(Boolean);
+    let line='';
+    if(!words.length){y+=lineHeight;lineCount++;continue;}
+    for(let n=0;n<words.length;n++){
+      const test=line?line+' '+words[n]:words[n];
+      if(ctx.measureText(test).width>maxWidth && line){
+        ctx.fillText(line,x,y);y+=lineHeight;lineCount++;
+        if(lineCount>=maxLines)return y;
+        line=words[n];
+      }else line=test;
+    }
+    if(line && lineCount<maxLines){ctx.fillText(line,x,y);y+=lineHeight;lineCount++;}
+    if(lineCount>=maxLines)return y;
+  }
+  return y;
+}
+
+function buildStoryCanvas(payload){
+  const canvas=document.createElement('canvas');
+  canvas.width=1080;canvas.height=1920;
+  const ctx=canvas.getContext('2d');
+
+  const bg=ctx.createLinearGradient(0,0,1080,1920);
+  bg.addColorStop(0,'#08090d');bg.addColorStop(.55,'#140d24');bg.addColorStop(1,'#07131a');
+  ctx.fillStyle=bg;ctx.fillRect(0,0,1080,1920);
+
+  ctx.globalAlpha=.28;
+  let glow=ctx.createRadialGradient(900,220,20,900,220,420);
+  glow.addColorStop(0,'#9b5dff');glow.addColorStop(1,'rgba(155,93,255,0)');
+  ctx.fillStyle=glow;ctx.fillRect(450,-150,750,750);
+  glow=ctx.createRadialGradient(180,1580,20,180,1580,380);
+  glow.addColorStop(0,'#c6f135');glow.addColorStop(1,'rgba(198,241,53,0)');
+  ctx.fillStyle=glow;ctx.fillRect(-200,1200,760,760);
+  ctx.globalAlpha=1;
+
+  ctx.fillStyle='#c6f135';ctx.font='700 36px Space Grotesk, Arial';
+  ctx.fillText('⚡ ImpulseGuard',72,110);
+  ctx.fillStyle='#8896b0';ctx.font='500 25px Space Grotesk, Arial';
+  ctx.textAlign='right';ctx.fillText('impulseguard.dev',1008,108);ctx.textAlign='left';
+
+  roundRectCanvas(ctx,62,170,956,1540,44,'rgba(15,17,23,.92)','rgba(155,93,255,.42)');
+
+  const isWrapped=payload.kind==='wrapped';
+  ctx.textAlign='center';
+  ctx.fillStyle='#f0f4ff';
+  ctx.font='800 76px Bricolage Grotesque, Arial';
+  ctx.fillText(isWrapped?'MY SPENDING WRAPPED':'IMPULSEGUARD ROASTED ME',540,300);
+
+  if(isWrapped){
+    const d=payload.data||{};
+    ctx.fillStyle='#8896b0';ctx.font='600 30px Space Grotesk, Arial';ctx.fillText('I SPENT A TOTAL OF',540,410);
+    const amtGrad=ctx.createLinearGradient(250,0,830,0);
+    amtGrad.addColorStop(0,'#9b5dff');amtGrad.addColorStop(1,'#ff5fa3');
+    ctx.fillStyle=amtGrad;ctx.font='800 96px Bricolage Grotesque, Arial';
+    ctx.fillText(`PKR ${Number(d.total||0).toLocaleString()}`,540,525);
+
+    const cards=[
+      ['🏆 TOP CATEGORY',d.topCat||'—'],
+      ['💸 BIGGEST SPLURGE',d.biggest||'—'],
+      ['⚡ IMPULSE SCORE',`${d.score||0}/100`],
+      ['🎭 PERSONALITY',d.personality||'—']
+    ];
+    cards.forEach((card,i)=>{
+      const col=i%2,row=Math.floor(i/2),x=105+col*450,y=630+row*250;
+      roundRectCanvas(ctx,x,y,420,205,28,'rgba(255,255,255,.045)','rgba(255,255,255,.09)');
+      ctx.fillStyle='#8896b0';ctx.font='700 23px Space Grotesk, Arial';ctx.fillText(card[0],x+210,y+55);
+      ctx.fillStyle='#f0f4ff';ctx.font='800 38px Bricolage Grotesque, Arial';
+      wrapCanvasText(ctx,card[1],x+210,y+118,350,45,2);
+    });
+
+    ctx.fillStyle='#c6f135';ctx.font='800 48px Bricolage Grotesque, Arial';
+    ctx.fillText('where did your money go? 👀',540,1300);
+    ctx.fillStyle='#8896b0';ctx.font='500 30px Space Grotesk, Arial';
+    ctx.fillText('make yours at impulseguard.dev',540,1370);
+  }else{
+    ctx.textAlign='left';
+    ctx.fillStyle='#ff7a35';ctx.font='800 42px Bricolage Grotesque, Arial';
+    ctx.fillText('🔥 THE VERDICT',115,430);
+    roundRectCanvas(ctx,100,490,880,850,34,'rgba(255,95,163,.065)','rgba(255,95,163,.30)');
+    ctx.fillStyle='#f0f4ff';ctx.font='italic 600 43px Space Grotesk, Arial';
+    wrapCanvasText(ctx,`“${payload.primary||payload.text||''}”`,150,590,780,62,11);
+    ctx.textAlign='center';ctx.fillStyle='#8896b0';ctx.font='500 29px Space Grotesk, Arial';
+    ctx.fillText('— ImpulseGuard AI 🤖🔥',540,1435);
+    ctx.fillStyle='#c6f135';ctx.font='800 48px Bricolage Grotesque, Arial';
+    ctx.fillText('brave enough to get roasted?',540,1540);
+  }
+
+  ctx.textAlign='center';ctx.fillStyle='#4a5a78';ctx.font='500 25px Space Grotesk, Arial';
+  ctx.fillText('Track it. Face it. Fix it. 🛡️',540,1810);
+  return canvas;
+}
+
+window._shareStoryImage=window.shareStoryImage=async()=>{
+  if(!currentSharePayload)return;
+  try{
+    const canvas=buildStoryCanvas(currentSharePayload);
+    const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));
+    if(!blob)throw new Error('Could not create image.');
+    const filename=`ImpulseGuard-${currentSharePayload.kind||'share'}-${Date.now()}.png`;
+    const file=new File([blob],filename,{type:'image/png'});
+
+    if(navigator.share && navigator.canShare?.({files:[file]})){
+      await navigator.share({title:currentSharePayload.title,text:currentSharePayload.text,files:[file]});
+    }else{
+      const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;
+      document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1500);
+      await copyTextSafe(currentSharePayload.text);
+      toast('story image downloaded + caption copied 📲','ok');
+    }
+  }catch(e){
+    if(e?.name!=='AbortError'){console.error(e);toast('could not create story image 😭','err');}
+  }
+};
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape' && $('shareModal')?.classList.contains('show')) window.closeShareMenu();
+});
 
 // ============================================
 // ===== ✨ VIBES PAGE — 4 NEW FEATURES =====
@@ -1611,12 +1986,21 @@ window._renderWrapped=window.renderWrapped=()=>{
 };
 
 window._shareWrapped=window.shareWrapped=()=>{
+  if(!allTxs.length){toast('add some transactions first bestie 😭','err');return;}
   const total=allTxs.reduce((s,t)=>s+t.amt,0);
+  const byCategory=allTxs.reduce((acc,t)=>{acc[t.cat]=(acc[t.cat]||0)+t.amt;return acc;},{});
+  const [topCat]=Object.entries(byCategory).sort((a,b)=>b[1]-a[1])[0]||['—'];
+  const biggest=[...allTxs].sort((a,b)=>b.amt-a.amt)[0]||{desc:'—'};
   const {score}=getImpulseScore();
   const personality=getPersonality(score);
-  const text=`My ImpulseGuard Spending Wrapped 🔥\n\n💸 Total Spent: PKR ${total.toLocaleString()}\n⚡ Impulse Score: ${score}/100\n🎭 I'm "${personality.emoji} ${personality.type}"\n\nCheck yours at impulseguard.dev`;
-  if(navigator.share){navigator.share({title:'My Spending Wrapped ⚡',text});}
-  else{navigator.clipboard.writeText(text);toast('Wrapped copied! Paste it bestie 🚀','ok');}
+  const text=`My ImpulseGuard Spending Wrapped 🎁\n\n💸 Total Spent: PKR ${total.toLocaleString()}\n🏆 Top Category: ${topCat}\n🛍️ Biggest Splurge: ${biggest.desc}\n⚡ Impulse Score: ${score}/100\n🎭 I'm "${personality.emoji} ${personality.type}"\n\nMake yours at impulseguard.dev`;
+  window.openShareMenu({
+    kind:'wrapped',
+    title:'My ImpulseGuard Spending Wrapped',
+    text,
+    shortText:`My spending personality is ${personality.emoji} ${personality.type} and my Impulse Score is ${score}/100 👀`,
+    data:{total,topCat,biggest:biggest.desc,score,personality:`${personality.emoji} ${personality.type}`}
+  });
 };
 
 window._copyWrapped=window.copyWrapped=()=>{
@@ -1662,9 +2046,14 @@ Their data:
     $('roastText').textContent=roastText;
     $('roastOutput').style.display='block';
     $('roastShareBtn').onclick=()=>{
-      const shareText=`"${roastText}"\n— ImpulseGuard AI 🤖🔥\nimpulseguard.dev`;
-      if(navigator.share){navigator.share({title:'ImpulseGuard roasted me 🔥',text:shareText});}
-      else{navigator.clipboard.writeText(shareText);toast('roast copied! 🔥','ok');}
+      const shareText=`ImpulseGuard roasted my spending 🔥\n\n"${roastText}"\n\n— ImpulseGuard AI 🤖🔥\nMake yours at impulseguard.dev`;
+      window.openShareMenu({
+        kind:'roast',
+        title:'ImpulseGuard roasted me 🔥',
+        text:shareText,
+        shortText:`ImpulseGuard roasted my spending 😭🔥 "${roastText.slice(0,150)}..."`,
+        primary:roastText
+      });
     };
     toast('you got roasted 🔥','ok');
   }catch(e){
@@ -1803,7 +2192,7 @@ window._toast=window.toast=(msg,type)=>{
 
 
 // ============================================================
-// AI API HELPER — Firebase Function keeps the OpenRouter key private
+// AI API HELPER — Firebase Function keeps the Gemini key private
 // ============================================================
 async function callGemini(prompt, imageData=null, mimeType=null, retries=3) {
   if(!currentUser) throw new Error('Please log in again.');
@@ -1962,88 +2351,260 @@ function renderGoals() {
 // ============================================================
 // ===== BILLS FEATURE =====
 // ============================================================
-window.openBillModal = () => {
-  $('bName').value=''; $('bAmount').value=''; $('bDate').value=new Date().toISOString().split('T')[0];
-  $('billModal').classList.add('show');
-};
-window.closeBillModal = () => $('billModal').classList.remove('show');
+const billPaymentLocks=new Set();
 
-window.addBill = async () => {
-  const name=$('bName').value.trim(), amount=parseFloat($('bAmount').value), dueDate=$('bDate').value, cat=$('bCat').value, repeat=$('bRepeat').value;
-  if(!name||!amount||!dueDate){toast('fill everything in bestie 😭','err');return;}
-  try {
-    const ref = await addDoc(collection(db,'bills'), {uid:currentUser.uid, name, amount, dueDate, cat, repeat, paid:false});
-    allBills.push({id:ref.id, uid:currentUser.uid, name, amount, dueDate, cat, repeat, paid:false});
-    allBills.sort((a,b) => new Date(a.dueDate)-new Date(b.dueDate));
-    closeBillModal();
-    renderBills();
-    toast('bill reminder added! 🔔','ok');
-  } catch(e) { toast('error saving bill 😭','err'); }
+window._resetBillScanner=window.resetBillScanner=()=>{
+  $('billScannerIdle').style.display='block';
+  $('billScannerLoading').style.display='none';
+  $('billScannerDone').style.display='none';
+  $('billScannerErr').style.display='none';
+  $('billScanInput').value='';
 };
 
-window.markBillPaid = async (id) => {
-  await updateDoc(doc(db,'bills',id), {paid:true});
-  const bill = allBills.find(b=>b.id===id);
-  if(bill) bill.paid = true;
-  // if monthly, create next month's bill
-  if(bill?.repeat==='monthly') {
-    const next = new Date(bill.dueDate);
-    next.setMonth(next.getMonth()+1);
-    const nextDate = next.toISOString().split('T')[0];
-    const ref = await addDoc(collection(db,'bills'), {...bill, id:undefined, dueDate:nextDate, paid:false});
-    allBills.push({...bill, id:ref.id, dueDate:nextDate, paid:false});
-    allBills.sort((a,b)=>new Date(a.dueDate)-new Date(b.dueDate));
-    toast('paid! next bill scheduled 🔄','ok');
-  } else {
-    toast('bill marked as paid ✅','ok');
-  }
-  renderBills();
+window._scanBill=window.scanBill=(input)=>{
+  if(input.files?.[0]) processBillImage(input.files[0]);
 };
 
-window.deleteBill = async (id) => {
-  await deleteDoc(doc(db,'bills',id));
-  allBills = allBills.filter(b=>b.id!==id);
-  renderBills();
-  toast('removed 🗑️','ok');
+window._handleBillDrop=window.handleBillDrop=(e)=>{
+  e.preventDefault();
+  const file=e.dataTransfer?.files?.[0];
+  if(file?.type?.startsWith('image/')) processBillImage(file);
+  else toast('please drop an image of the bill','err');
 };
 
-function getBillStatus(dueDate) {
-  const today = new Date(); today.setHours(0,0,0,0);
-  const due = new Date(dueDate); due.setHours(0,0,0,0);
-  const diff = Math.round((due-today)/(1000*60*60*24));
-  if(diff < 0) return {label:'overdue!', cls:'overdue'};
-  if(diff <= 3) return {label:`due in ${diff}d`, cls:'due-soon'};
-  return {label:`in ${diff} days`, cls:'ok'};
+function normalizeBillCategory(value){
+  const v=String(value||'').toLowerCase();
+  if(v.includes('util')||v.includes('electric')||v.includes('gas')||v.includes('water')||v.includes('internet'))return '💡 Utilities';
+  if(v.includes('rent'))return '🏠 Rent';
+  if(v.includes('sub'))return '📱 Subscriptions';
+  if(v.includes('health')||v.includes('medical')||v.includes('hospital'))return '💊 Health';
+  if(v.includes('educ')||v.includes('school')||v.includes('university'))return '📚 Education';
+  if(v.includes('other'))return '📦 Other';
+  return '📄 Bills';
 }
 
-function renderBills() {
-  const list = $('billList');
-  const unpaid = allBills.filter(b=>!b.paid);
-  const alert = $('billAlert');
+async function processBillImage(file){
+  $('billScannerIdle').style.display='none';
+  $('billScannerLoading').style.display='block';
+  $('billScannerDone').style.display='none';
+  $('billScannerErr').style.display='none';
 
-  const overdue = unpaid.filter(b=>new Date(b.dueDate)<new Date());
-  const dueSoon = unpaid.filter(b=>{const d=new Date(b.dueDate);const t=new Date();return d>=t && (d-t)/(1000*60*60*24)<=3;});
+  try{
+    const prepared=await prepareImageForAI(file);
+    const today=new Date().toISOString().split('T')[0];
+    const prompt=`You are an accurate bill and invoice scanner for Pakistan.
+Read the image and extract:
+1. providerName: company, institution or biller name, max 45 characters
+2. amount: current total amount payable as a number only (do not use previous balance if a current payable total exists)
+3. dueDate: YYYY-MM-DD. Return an empty string if no due date is visible.
+4. category: one of Bills, Utilities, Rent, Subscriptions, Health, Education, Other
+5. referenceNumber: consumer number, account number, invoice number or reference ID. Return an empty string if not visible.
+6. repeat: one of once, monthly, weekly, yearly. Utility, rent and subscription bills are usually monthly; ordinary invoices are usually once.
+Today is ${today}.
+Respond ONLY as JSON:
+{"providerName":"...","amount":1234,"dueDate":"YYYY-MM-DD","category":"Utilities","referenceNumber":"...","repeat":"monthly"}`;
 
-  if(overdue.length>0){alert.className='alert-strip warn';alert.textContent=`⚠️ ${overdue.length} bill(s) are overdue! pay ASAP bestie`;}
-  else if(dueSoon.length>0){alert.className='alert-strip warn';alert.textContent=`🔔 ${dueSoon.length} bill(s) due in the next 3 days!`;}
-  else{alert.className='alert-strip hide';}
+    const raw=await callGemini(prompt,prepared.base64,prepared.mimeType);
+    const parsed=parseAIJson(raw);
 
-  if(!unpaid.length) {
-    list.innerHTML = `<div style="text-align:center;padding:40px;color:var(--txt3);font-size:13px;">no upcoming bills! you're all caught up ✨</div>`;
+    $('bName').value=String(parsed.providerName||'').slice(0,60);
+    $('bAmount').value=Number(parsed.amount)||'';
+    if(/^\d{4}-\d{2}-\d{2}$/.test(parsed.dueDate||'')) $('bDate').value=parsed.dueDate;
+    $('bRef').value=String(parsed.referenceNumber||'').slice(0,80);
+    $('bCat').value=normalizeBillCategory(parsed.category);
+    $('bRepeat').value=['once','monthly','weekly','yearly'].includes(parsed.repeat)?parsed.repeat:'once';
+
+    $('billScannerLoading').style.display='none';
+    $('billScannerDone').style.display='block';
+    toast('bill scanned! please verify the amount and due date ✅','ok');
+  }catch(e){
+    console.error('bill scanner error',e);
+    $('billScannerLoading').style.display='none';
+    $('billScannerErr').style.display='block';
+    $('billScanErrTxt').textContent=e?.message?.includes('large')?'image is too large — try a smaller one':'could not read this bill 😭';
+    toast('bill scan failed — you can still fill it manually','err');
+  }
+}
+
+window._openBillModal=window.openBillModal=()=>{
+  $('bName').value='';
+  $('bAmount').value='';
+  $('bDate').value=new Date().toISOString().split('T')[0];
+  $('bRef').value='';
+  $('bCat').value='📄 Bills';
+  $('bRepeat').value='once';
+  window.resetBillScanner();
+  $('billModal').classList.add('show');
+};
+
+window._closeBillModal=window.closeBillModal=()=>$('billModal').classList.remove('show');
+
+window._addBill=window.addBill=async()=>{
+  const name=$('bName').value.trim();
+  const amount=parseFloat($('bAmount').value);
+  const dueDate=$('bDate').value;
+  const refNo=$('bRef').value.trim();
+  const cat=$('bCat').value;
+  const repeat=$('bRepeat').value;
+
+  if(!name||!amount||amount<=0||!dueDate){toast('check the bill name, amount and due date 😭','err');return;}
+
+  const payload={uid:currentUser.uid,name,amount,dueDate,refNo,cat,repeat,paid:false,createdAt:new Date().toISOString()};
+  try{
+    const ref=await addDoc(collection(db,'bills'),payload);
+    allBills.push({id:ref.id,...payload});
+    allBills.sort((a,b)=>new Date(a.dueDate)-new Date(b.dueDate));
+    closeBillModal();renderBills();
+    toast('bill reminder saved! 🔔','ok');
+  }catch(e){
+    console.error(e);toast('error saving bill 😭','err');
+  }
+};
+
+function billToTransactionCategory(cat){
+  if(String(cat).includes('Health'))return 'Health';
+  if(String(cat).includes('Education'))return 'Education';
+  if(String(cat).includes('Other'))return 'Other';
+  return 'Bills';
+}
+
+function nextRecurringDate(dateString,repeat){
+  const d=new Date(`${dateString}T12:00:00`);
+  if(repeat==='weekly')d.setDate(d.getDate()+7);
+  else if(repeat==='monthly'){
+    const originalDay=d.getDate();
+    d.setDate(1);d.setMonth(d.getMonth()+1);
+    const lastDay=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();
+    d.setDate(Math.min(originalDay,lastDay));
+  }else if(repeat==='yearly')d.setFullYear(d.getFullYear()+1);
+  return d.toISOString().split('T')[0];
+}
+
+window._markBillPaid=window.markBillPaid=async(id,logExpense=true)=>{
+  if(billPaymentLocks.has(id))return;
+  const bill=allBills.find(b=>b.id===id);
+  if(!bill)return;
+
+  const confirmText=logExpense
+    ?`Mark "${bill.name}" paid and add PKR ${Number(bill.amount).toLocaleString()} to Transactions?`
+    :`Mark "${bill.name}" as paid without adding a transaction?`;
+  if(!confirm(confirmText))return;
+
+  billPaymentLocks.add(id);
+  try{
+    let loggedTransactionId=null;
+    if(logExpense){
+      const date=new Date().toISOString().split('T')[0];
+      const txPayload={
+        uid:currentUser.uid,
+        desc:`${bill.name} bill paid`,
+        amt:Number(bill.amount)||0,
+        cat:billToTransactionCategory(bill.cat),
+        type:'need',
+        date,
+        mood:null,
+        source:'bill',
+        billId:id
+      };
+      const txRef=await addDoc(collection(db,'transactions'),txPayload);
+      loggedTransactionId=txRef.id;
+      allTxs.unshift({id:txRef.id,...txPayload});
+    }
+
+    await updateDoc(doc(db,'bills',id),{
+      paid:true,
+      paidAt:new Date().toISOString(),
+      loggedTransactionId
+    });
+    bill.paid=true;
+    bill.loggedTransactionId=loggedTransactionId;
+
+    if(['monthly','weekly','yearly'].includes(bill.repeat)){
+      const nextDate=nextRecurringDate(bill.dueDate,bill.repeat);
+      const nextPayload={
+        uid:currentUser.uid,
+        name:bill.name,
+        amount:Number(bill.amount)||0,
+        dueDate:nextDate,
+        refNo:bill.refNo||'',
+        cat:bill.cat,
+        repeat:bill.repeat,
+        paid:false,
+        createdAt:new Date().toISOString()
+      };
+      const ref=await addDoc(collection(db,'bills'),nextPayload);
+      allBills.push({id:ref.id,...nextPayload});
+      allBills.sort((a,b)=>new Date(a.dueDate)-new Date(b.dueDate));
+    }
+
+    renderBills();renderTx();renderDash();
+    toast(logExpense?'paid + added to Transactions ✅':'bill marked paid ✅','ok');
+  }catch(e){
+    console.error('mark bill paid error',e);
+    toast('could not finish the payment update 😭','err');
+  }finally{
+    billPaymentLocks.delete(id);
+  }
+};
+
+window._deleteBill=window.deleteBill=async(id)=>{
+  if(!confirm('remove this bill reminder?'))return;
+  try{
+    await deleteDoc(doc(db,'bills',id));
+    allBills=allBills.filter(b=>b.id!==id);
+    renderBills();toast('removed 🗑️','ok');
+  }catch(e){toast('could not remove bill','err');}
+};
+
+function getBillStatus(dueDate){
+  const today=new Date();today.setHours(0,0,0,0);
+  const due=new Date(`${dueDate}T00:00:00`);due.setHours(0,0,0,0);
+  const diff=Math.round((due-today)/(1000*60*60*24));
+  if(diff<0)return {label:'overdue!',cls:'overdue'};
+  if(diff===0)return {label:'due today',cls:'due-soon'};
+  if(diff<=3)return {label:`due in ${diff}d`,cls:'due-soon'};
+  return {label:`in ${diff} days`,cls:'ok'};
+}
+
+function renderBills(){
+  const list=$('billList');
+  const unpaid=allBills.filter(b=>!b.paid);
+  const alert=$('billAlert');
+  const today=new Date();today.setHours(0,0,0,0);
+
+  const overdue=unpaid.filter(b=>new Date(`${b.dueDate}T00:00:00`)<today);
+  const dueSoon=unpaid.filter(b=>{
+    const d=new Date(`${b.dueDate}T00:00:00`);
+    const days=(d-today)/(1000*60*60*24);
+    return days>=0&&days<=3;
+  });
+
+  if(overdue.length){alert.className='alert-strip warn';alert.textContent=`⚠️ ${overdue.length} bill(s) overdue — time to pay, bestie`;}
+  else if(dueSoon.length){alert.className='alert-strip warn';alert.textContent=`🔔 ${dueSoon.length} bill(s) due in the next 3 days`;}
+  else alert.className='alert-strip hide';
+
+  if(!unpaid.length){
+    list.innerHTML='<div style="text-align:center;padding:40px;color:var(--txt3);font-size:13px;">no upcoming bills! you’re all caught up ✨</div>';
     return;
   }
-  list.innerHTML = unpaid.map(b => {
-    const status = getBillStatus(b.dueDate);
+
+  list.innerHTML=unpaid.map(b=>{
+    const status=getBillStatus(b.dueDate);
+    const ref=b.refNo?`<div class="bill-ref">ref: ${b.refNo}</div>`:'';
     return `<div class="bill-row ${status.cls}">
-      <span class="bill-emoji">${b.cat.split(' ')[0]}</span>
+      <span class="bill-emoji">${String(b.cat||'📄').split(' ')[0]}</span>
       <div class="bill-info">
         <div class="bill-name">${b.name}</div>
         <div class="bill-date">due ${b.dueDate} · ${b.repeat}</div>
+        ${ref}
       </div>
-      <div class="bill-amount">PKR ${b.amount.toLocaleString()}</div>
+      <div class="bill-amount">PKR ${Number(b.amount||0).toLocaleString()}</div>
       <span class="bill-status ${status.cls}">${status.label}</span>
-      <button class="btn primary" style="padding:6px 12px;font-size:11px" onclick="markBillPaid('${b.id}')">✓ paid</button>
-      <button class="bill-delete" onclick="deleteBill('${b.id}')">🗑️</button>
+      <div class="bill-actions">
+        <button class="btn primary bill-pay-log" onclick="markBillPaid('${b.id}',true)">✓ paid + log</button>
+        <button class="bill-paid-only" onclick="markBillPaid('${b.id}',false)">paid only</button>
+        <button class="bill-delete" onclick="deleteBill('${b.id}')">🗑️</button>
+      </div>
     </div>`;
   }).join('');
 }
