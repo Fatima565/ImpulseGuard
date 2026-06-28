@@ -1,7 +1,10 @@
-const CACHE_NAME = 'impulseguard-v1';
+const CACHE_NAME = 'impulseguard-v2';
 const ASSETS = [
   '/',
-  '/index.html'
+  '/index.html',
+  '/icon-192.png',
+  '/icon-512.png',
+  '/manifest.json'
 ];
 
 // Install — cache core files
@@ -22,13 +25,32 @@ self.addEventListener('activate', e => {
   self.clients.claim();
 });
 
-// Fetch — network first, fallback to cache
+// Fetch — only cache GET requests, skip everything else
 self.addEventListener('fetch', e => {
+  // Skip non-GET requests (POST, PUT, etc)
+  if(e.request.method !== 'GET') return;
+  
+  // Skip chrome-extension and non-http requests
+  if(!e.request.url.startsWith('http')) return;
+  
+  // Skip API calls — never cache these
+  const url = e.request.url;
+  if(
+    url.includes('googleapis.com') ||
+    url.includes('openrouter.ai') ||
+    url.includes('firestore') ||
+    url.includes('firebase') ||
+    url.includes('identitytoolkit')
+  ) return;
+
   e.respondWith(
     fetch(e.request)
       .then(res => {
-        const clone = res.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
+        // Only cache valid responses
+        if(res && res.status === 200 && res.type === 'basic') {
+          const clone = res.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
+        }
         return res;
       })
       .catch(() => caches.match(e.request))
