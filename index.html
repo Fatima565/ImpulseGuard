@@ -4,6 +4,14 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>ImpulseGuard — Your wallet's bestie</title>
+<meta name="description" content="Track spending, control impulse purchases, and understand where your money goes."/>
+<meta name="theme-color" content="#c6f135"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<link rel="manifest" href="/manifest.json"/>
+<link rel="apple-touch-icon" href="/icon-192.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,400;600;800&display=swap" rel="stylesheet"/>
 <style>
 :root{
@@ -473,7 +481,6 @@ th { letter-spacing: .08em; }
   border: 1px solid rgba(198,241,53,.3);
   border-radius: 16px;
   padding: 14px 20px;
-  display: flex;
   align-items: center;
   gap: 14px;
   box-shadow: 0 8px 32px rgba(0,0,0,.5);
@@ -481,6 +488,7 @@ th { letter-spacing: .08em; }
   width: calc(100% - 40px);
   animation: slideUp .4s ease;
 }
+#installBanner.ready { display: flex; }
 #installBanner.hidden { display: none !important; }
 @keyframes slideUp { from{opacity:0;transform:translateX(-50%) translateY(20px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
 .install-icon { font-size: 2rem; flex-shrink: 0; }
@@ -725,7 +733,7 @@ th { letter-spacing: .08em; }
       <div class="nav-item" onclick="showPage('settings')"><span class="nav-icon">⚙️</span> Settings</div>
     </div>
     <div style="padding:12px 22px;border-top:1px solid var(--b1)">
-  <button onclick="triggerInstall()" class="pwa-install-btn" style="width:100%;padding:9px;background:rgba(198,241,53,.08);border:1px solid rgba(198,241,53,.2);border-radius:10px;color:var(--lime);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;justify-content:center;">
+  <button onclick="triggerInstall()" class="pwa-install-btn" style="width:100%;padding:9px;background:rgba(198,241,53,.08);border:1px solid rgba(198,241,53,.2);border-radius:10px;color:var(--lime);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;display:none;align-items:center;gap:8px;justify-content:center;">
     📲 install app
   </button>
 </div>
@@ -820,7 +828,7 @@ th { letter-spacing: .08em; }
           <div class="wrapped-card-inner" id="wrappedCard">
             <div class="wrapped-top-bar">
               <span class="wrapped-logo-text">⚡ ImpulseGuard</span>
-              <span class="wrapped-year-text" id="wrappedYear">2025 Wrapped</span>
+              <span class="wrapped-year-text" id="wrappedYear">2026 Wrapped</span>
             </div>
             <div class="wrapped-hero-amt">
               <div class="wrapped-hero-lbl">you spent a total of</div>
@@ -845,7 +853,7 @@ th { letter-spacing: .08em; }
             <button class="btn-wrapped-copy" onclick="copyWrapped()">Copy Stats 📋</button>
           </div>
         </div>
-        <div id="wrappedEmpty" style="text-align:center;padding:20px;color:var(--txt3);font-size:13px;">add some transactions then hit generate ✨</div>
+        <div id="wrappedEmpty" style="text-align:center;padding:20px;color:var(--txt3);font-size:13px;">your Wrapped will appear automatically after you add transactions ✨</div>
       </div>
 
       <!-- IMPULSE SCORE -->
@@ -1095,7 +1103,7 @@ th { letter-spacing: .08em; }
 
 
 <!-- PWA INSTALL BANNER -->
-<div id="installBanner">
+<div id="installBanner" class="hidden">
   <span class="install-icon">⚡</span>
   <div class="install-text">
     <strong>Install ImpulseGuard</strong>
@@ -1172,7 +1180,6 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-const GEMINI_KEY = 'AQ.Ab8RN6K-CYpRxlLKwDLoRH6Y5m4pDjq-l3R_TQPAdELIeDJ6NQ'; // kept for reference
 const MOODS=['saving szn 💸','broke but cute','budget era activated','no spend challenge (lying)','financially healing'];
 const ROASTS=["babe you've spent {pct}% of your budget 💀","your bank account is not ur enemy. YOU are. ({pct}% spent)","{pct}% gone. main character behavior? debatable."];
 const GREENS=["you're doing amazing sweetie ✨ only {pct}% spent","financially responsible era activated 🌱 {pct}% spent","budget looking clean fr fr. {pct}% spent 💚"];
@@ -1480,8 +1487,16 @@ Respond ONLY in JSON: {"desc":"...","amount":1234,"category":"Food","date":"2024
 function renderVibes(){
   renderImpulseScore();
   renderMoodTracker();
-  // Wrapped renders on button click
-  // Roast renders on button click
+
+  // Show Wrapped automatically when transactions already exist.
+  if(allTxs.length){
+    renderWrapped();
+  }else{
+    $('wrappedOutput').style.display='none';
+    $('wrappedEmpty').style.display='block';
+    $('wrappedEmpty').textContent='add a transaction and your Wrapped will appear here ✨';
+  }
+  // Roast still runs only when the user clicks the button.
 }
 
 // ----- HELPERS -----
@@ -1788,68 +1803,46 @@ window._toast=window.toast=(msg,type)=>{
 
 
 // ============================================================
-// GEMINI API HELPER — with retry on 429
+// AI API HELPER — Firebase Function keeps the OpenRouter key private
 // ============================================================
 async function callGemini(prompt, imageData=null, mimeType=null, retries=3) {
-  const OR_KEY = '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';
-  
+  if(!currentUser) throw new Error('Please log in again.');
+
   for(let attempt=1; attempt<=retries; attempt++) {
     try {
-      // Build message content
-      // Build message - string for text only, array for image+text
-      let msgContent;
-      if(imageData && mimeType) {
-        msgContent = [
-          { type: 'image_url', image_url: { url: `data:${mimeType};base64,${imageData}` } },
-          { type: 'text', text: prompt }
-        ];
-      } else {
-        msgContent = prompt; // plain string for text-only
-      }
-
-      const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      const idToken = await currentUser.getIdToken();
+      const res = await fetch('https://us-central1-impulseguard-bf9d8.cloudfunctions.net/ai', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + OR_KEY,
-          'HTTP-Referer': 'https://impulseguard.dev',
-          'X-Title': 'ImpulseGuard'
+          'Authorization': `Bearer ${idToken}`
         },
-        body: JSON.stringify({
-          model: imageData ? 'google/gemini-2.0-flash-exp:free' : 'mistralai/mistral-7b-instruct:free',
-          messages: [{ role: 'user', content: msgContent }],
-          max_tokens: 800,
-          temperature: 0.9
-        })
+        body: JSON.stringify({ prompt, imageData, mimeType })
       });
 
-      const data = await res.json();
-
-      if(res.status === 429) {
-        if(attempt < retries) {
-          await new Promise(r => setTimeout(r, attempt * 10000));
-          continue;
-        }
-        throw new Error('rate_limit');
-      }
+      const raw = await res.text();
+      let data = {};
+      try { data = raw ? JSON.parse(raw) : {}; }
+      catch { data = { error: raw || 'Invalid server response' }; }
 
       if(!res.ok) {
-        console.error('OpenRouter error:', res.status, data);
-        throw new Error(data?.error?.message || 'API error ' + res.status);
+        const message = data?.error || `AI request failed (${res.status})`;
+        const retryable = res.status === 429 || res.status >= 500;
+        if(retryable && attempt < retries) {
+          await new Promise(r => setTimeout(r, attempt * 2500));
+          continue;
+        }
+        throw new Error(message);
       }
 
-      const text = data.choices?.[0]?.message?.content || '';
-      if(!text) throw new Error('Empty response');
-      return text;
-
+      if(!data.text) throw new Error('Empty AI response');
+      return data.text;
     } catch(e) {
       if(attempt === retries) throw e;
-      if(e.message === 'rate_limit') throw e;
-      await new Promise(r => setTimeout(r, 2000));
+      await new Promise(r => setTimeout(r, attempt * 1500));
     }
   }
 }
-
 // ============================================================
 // ===== GOALS FEATURE =====
 // ============================================================
@@ -2114,12 +2107,13 @@ window.addEventListener('beforeinstallprompt', (e) => {
   
   // Show banner
   const banner = $('installBanner');
-  if(banner) banner.classList.remove('hidden');
+  if(banner){ banner.classList.remove('hidden'); banner.classList.add('ready'); }
 });
 
 window.addEventListener('appinstalled', () => {
   console.log('PWA: installed! 🎉');
   deferredInstallPrompt = null;
+  $('installBanner')?.classList.remove('ready');
   $('installBanner')?.classList.add('hidden');
   document.querySelectorAll('.pwa-install-btn').forEach(btn => {
     btn.style.display = 'none';
@@ -2142,6 +2136,7 @@ window._triggerInstall = window.triggerInstall = async () => {
       const { outcome } = await deferredInstallPrompt.userChoice;
       if(outcome === 'accepted') {
         toast('ImpulseGuard installed! 🎉','ok');
+        $('installBanner')?.classList.remove('ready');
         $('installBanner')?.classList.add('hidden');
       } else {
         toast('Installation cancelled','ok');

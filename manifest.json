@@ -21,7 +21,10 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["finance", "productivity"],
+  "categories": [
+    "finance",
+    "productivity"
+  ],
   "screenshots": [],
   "shortcuts": [
     {
@@ -29,14 +32,30 @@
       "short_name": "Add",
       "description": "Quickly add a new transaction",
       "url": "/?action=add",
-      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Dashboard",
       "short_name": "Dashboard",
       "description": "View your spending dashboard",
       "url": "/",
-      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
+  ],
+  "id": "/",
+  "scope": "/",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone"
   ]
 }
