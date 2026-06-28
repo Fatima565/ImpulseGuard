@@ -1,68 +1,75 @@
-const CACHE_NAME = 'impulseguard-v3';
-const CORE_ASSETS = [
+const CACHE_NAME = 'impulseguard-v5';
+const ASSETS = [
   '/',
   '/index.html',
-  '/manifest.json',
   '/icon-192.png',
-  '/icon-512.png'
+  '/icon-512.png',
+  '/manifest.json'
 ];
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS))
+// Install — cache core files
+self.addEventListener('install', e => {
+  e.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
   );
   self.skipWaiting();
 });
 
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)))
+// Activate — clean old caches
+self.addEventListener('activate', e => {
+  e.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
     )
   );
   self.clients.claim();
 });
 
-self.addEventListener('fetch', (event) => {
-  const request = event.request;
+// Fetch — only cache GET requests, skip everything else
+self.addEventListener('fetch', e => {
+  // Skip non-GET requests (POST, PUT, etc)
+  if(e.request.method !== 'GET') return;
+  
+  // Skip chrome-extension and non-http requests
+  if(!e.request.url.startsWith('http')) return;
+  
+  // Skip API calls — never cache these
+  const url = e.request.url;
+  if(
+    url.includes('googleapis.com') ||
+    url.includes('openrouter.ai') ||
+    url.includes('firestore') ||
+    url.includes('firebase') ||
+    url.includes('identitytoolkit')
+  ) return;
 
-  // Cache API only accepts GET requests. Ignore POST/API and browser-extension traffic.
-  if (request.method !== 'GET') return;
-
-  const url = new URL(request.url);
-  if (!['http:', 'https:'].includes(url.protocol)) return;
-  if (url.origin !== self.location.origin) return;
-  if (url.pathname.startsWith('/api/')) return;
-
-  event.respondWith(
-    fetch(request)
-      .then((response) => {
-        if (response && response.ok && response.type === 'basic') {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+  e.respondWith(
+    fetch(e.request)
+      .then(res => {
+        // Only cache valid responses
+        if(res && res.status === 200 && res.type === 'basic') {
+          const clone = res.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
         }
-        return response;
+        return res;
       })
-      .catch(() => caches.match(request).then((cached) => cached || caches.match('/index.html')))
+      .catch(() => caches.match(e.request))
   );
 });
 
-self.addEventListener('push', (event) => {
-  let data = {};
-  try { data = event.data?.json() || {}; } catch { data = {}; }
-
-  event.waitUntil(
-    self.registration.showNotification(data.title || 'ImpulseGuard 🛡️', {
-      body: data.body || 'Check your spending!',
-      icon: '/icon-192.png',
-      badge: '/icon-192.png',
-      vibrate: [200, 100, 200],
-      data: { url: data.url || '/' }
-    })
-  );
+// Push notifications
+self.addEventListener('push', e => {
+  const data = e.data?.json() || {};
+  self.registration.showNotification(data.title || 'ImpulseGuard 🛡️', {
+    body: data.body || 'Check your spending!',
+    icon: '/icon-192.png',
+    badge: '/icon-192.png',
+    vibrate: [200, 100, 200],
+    data: { url: data.url || '/' }
+  });
 });
 
-self.addEventListener('notificationclick', (event) => {
-  event.notification.close();
-  event.waitUntil(clients.openWindow(event.notification.data?.url || '/'));
+self.addEventListener('notificationclick', e => {
+  e.notification.close();
+  e.waitUntil(clients.openWindow(e.notification.data?.url || '/'));
 });
