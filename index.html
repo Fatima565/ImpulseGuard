@@ -8,6 +8,7 @@
 <meta name="theme-color" content="#c6f135"/>
 <meta name="application-name" content="ImpulseGuard"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="ImpulseGuard"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <link rel="manifest" href="/manifest.json"/>
 <link rel="apple-touch-icon" href="/icon-192.png"/>
@@ -647,6 +648,378 @@ th { letter-spacing: .08em; }
   .share-grid{grid-template-columns:1fr;}
 }
 
+
+/* ===== MOBILE APP EXPERIENCE — FINAL ===== */
+.mobile-app-header,
+.mobile-more-nav,
+.mobile-menu-overlay{display:none;}
+
+.land-logo{white-space:nowrap;}
+
+@media(max-width:768px){
+  :root{
+    --mobile-header-h:70px;
+    --mobile-nav-h:72px;
+  }
+
+  html,body{
+    height:100%;
+    min-height:100%;
+    overflow:hidden;
+    overscroll-behavior:none;
+  }
+
+  body.mobile-menu-open{overflow:hidden;}
+
+  #app.show{
+    display:flex;
+    height:100dvh;
+    min-height:100dvh;
+    flex-direction:column;
+    padding:0;
+  }
+
+  /* Mobile top header — logo, creator credit, install and logout */
+  .mobile-app-header{
+    display:flex;
+    position:fixed;
+    top:0;left:0;right:0;
+    min-height:calc(var(--mobile-header-h) + env(safe-area-inset-top));
+    padding:calc(10px + env(safe-area-inset-top)) 14px 10px;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    background:rgba(15,17,23,.97);
+    border-bottom:1px solid var(--b1);
+    box-shadow:0 8px 24px rgba(0,0,0,.28);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    z-index:450;
+  }
+
+  .mobile-brand{min-width:0;line-height:1.05;}
+  .mobile-brand-name{
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-size:18px;
+    font-weight:800;
+    letter-spacing:-.03em;
+    white-space:nowrap;
+  }
+  .mobile-brand-name em{color:var(--lime);font-style:normal;}
+  .mobile-brand-credit{
+    margin-top:4px;
+    font-size:10px;
+    color:var(--txt3);
+    white-space:nowrap;
+  }
+
+  .mobile-header-actions{display:flex;align-items:center;gap:7px;flex-shrink:0;}
+  .mobile-install-action,
+  .mobile-logout-action{
+    min-height:38px;
+    border-radius:10px;
+    font-family:'Space Grotesk',sans-serif;
+    font-size:11px;
+    font-weight:700;
+    cursor:pointer;
+  }
+  .mobile-install-action{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    padding:8px 10px;
+    border:1px solid rgba(198,241,53,.35);
+    background:rgba(198,241,53,.09);
+    color:var(--lime);
+  }
+  .mobile-logout-action{
+    padding:8px 11px;
+    border:1px solid rgba(255,107,107,.28);
+    background:rgba(255,107,107,.08);
+    color:#ff8b8b;
+  }
+
+  /* Bottom navigation — five evenly sized items, no clipping */
+  .sidebar{
+    display:flex!important;
+    position:fixed;
+    left:0;right:0;bottom:0;
+    width:100%;
+    height:calc(var(--mobile-nav-h) + env(safe-area-inset-bottom));
+    padding:0 0 env(safe-area-inset-bottom);
+    background:rgba(15,17,23,.98);
+    border:none;
+    border-top:1px solid var(--b1);
+    box-shadow:0 -10px 30px rgba(0,0,0,.42);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    z-index:460;
+  }
+
+  .sidebar > .sb-logo,
+  .sidebar > .sb-user,
+  .sidebar > div[style*="padding:12px 22px"]{
+    display:none!important;
+  }
+
+  .sidebar .nav{
+    display:grid!important;
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    width:100%;
+    height:var(--mobile-nav-h);
+    padding:0;
+    margin:0;
+    overflow:hidden!important;
+    flex:none;
+  }
+
+  .sidebar .nav-item{
+    min-width:0;
+    height:var(--mobile-nav-h);
+    padding:8px 2px 7px;
+    gap:2px;
+    border:none;
+    border-top:3px solid transparent;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    white-space:nowrap;
+    overflow:hidden;
+    color:var(--txt2);
+    font-size:9.5px;
+    line-height:1.05;
+  }
+
+  .sidebar .nav-item:hover{background:transparent;}
+  .sidebar .nav-item.on{
+    border:none;
+    border-top:3px solid var(--lime);
+    color:var(--lime);
+    background:rgba(198,241,53,.06);
+  }
+
+  .sidebar .nav-icon{
+    display:block;
+    font-size:19px;
+    line-height:1;
+    margin:0 0 3px;
+  }
+
+  .sidebar .nav-item:nth-child(5),
+  .sidebar .nav-item:nth-child(6),
+  .sidebar .nav-item:nth-child(7),
+  .sidebar .nav-item:nth-child(8){
+    display:none!important;
+  }
+  .sidebar .mobile-more-nav{display:flex!important;}
+
+  /* Main content now scrolls cleanly between fixed header/nav */
+  .main{
+    flex:1;
+    width:100%;
+    height:100dvh;
+    overflow-y:auto;
+    overflow-x:hidden;
+    -webkit-overflow-scrolling:touch;
+    padding:
+      calc(var(--mobile-header-h) + env(safe-area-inset-top) + 22px)
+      14px
+      calc(var(--mobile-nav-h) + env(safe-area-inset-bottom) + 28px);
+    scroll-padding-top:calc(var(--mobile-header-h) + 12px);
+  }
+
+  .ph{margin-bottom:20px;}
+  .ph-title{font-size:27px;line-height:1.1;}
+  .ph-sub{font-size:12px;line-height:1.45;}
+  .alert-strip{padding:13px 14px;line-height:1.45;}
+
+  /* Cards and grids */
+  .cards{grid-template-columns:1fr 1fr;gap:11px;}
+  .scard{padding:17px 15px;border-radius:17px;}
+  .scard-val{font-size:21px;}
+  .scard-label{font-size:9px;line-height:1.3;}
+  .chart-box,.tbl-wrap,.roast-feature-card,.wrapped-feature-card,
+  .score-feature-card,.mood-feature-card,.leaderboard-card,.sett-card{
+    border-radius:17px;
+  }
+
+  #pg-dashboard > div[style*="grid"]{
+    display:flex!important;
+    flex-direction:column;
+    gap:13px!important;
+  }
+
+  /* Mobile tables remain usable with a clear horizontal swipe */
+  .tbl-wrap{
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    touch-action:pan-x pan-y;
+  }
+  table{min-width:590px;}
+  th,td{padding-left:14px;padding-right:14px;}
+
+  /* Page headers with action buttons wrap instead of squeezing */
+  .page > .ph[style*="display:flex"]{
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .page > .ph[style*="display:flex"] .btn{
+    width:100%;
+    min-height:44px;
+  }
+
+  /* Mobile modals */
+  .overlay{
+    padding:
+      calc(14px + env(safe-area-inset-top))
+      12px
+      calc(14px + env(safe-area-inset-bottom));
+    align-items:flex-end;
+  }
+  .modal{
+    width:100%;
+    max-width:none;
+    max-height:88dvh;
+    padding:24px 18px calc(22px + env(safe-area-inset-bottom));
+    border-radius:22px 22px 14px 14px;
+  }
+
+  /* Mobile More sheet */
+  .mobile-menu-overlay{
+    position:fixed;
+    inset:0;
+    z-index:9000;
+    align-items:flex-end;
+    justify-content:center;
+    padding:12px 12px calc(12px + env(safe-area-inset-bottom));
+    background:rgba(0,0,0,.73);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+  }
+  .mobile-menu-overlay.show{display:flex;}
+
+  .mobile-menu-sheet{
+    width:100%;
+    max-width:520px;
+    max-height:82dvh;
+    overflow-y:auto;
+    background:linear-gradient(180deg,#1a2030,#10131b);
+    border:1px solid var(--b2);
+    border-radius:24px;
+    padding:10px 16px 18px;
+    box-shadow:0 24px 80px rgba(0,0,0,.7);
+    animation:mobileSheetUp .24s ease both;
+  }
+  @keyframes mobileSheetUp{
+    from{opacity:0;transform:translateY(28px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  .mobile-sheet-handle{
+    width:42px;height:4px;border-radius:99px;
+    margin:2px auto 15px;background:var(--b2);
+  }
+  .mobile-sheet-head{
+    display:flex;align-items:flex-start;justify-content:space-between;
+    gap:12px;margin-bottom:16px;
+  }
+  .mobile-sheet-title{
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-size:21px;font-weight:800;
+  }
+  .mobile-sheet-sub{font-size:11px;color:var(--txt3);margin-top:4px;}
+  .mobile-sheet-close{
+    width:36px;height:36px;border-radius:50%;
+    border:1px solid var(--b1);background:var(--s2);
+    color:var(--txt2);font-size:24px;line-height:1;cursor:pointer;
+  }
+
+  .mobile-more-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:13px;
+  }
+  .mobile-more-grid button{
+    min-height:104px;padding:14px 12px;
+    text-align:left;border-radius:15px;
+    border:1px solid var(--b1);background:rgba(255,255,255,.025);
+    color:var(--txt);font-family:'Space Grotesk',sans-serif;cursor:pointer;
+  }
+  .mobile-more-grid button span{display:block;font-size:25px;margin-bottom:8px;}
+  .mobile-more-grid button strong{display:block;font-size:13px;}
+  .mobile-more-grid button small{display:block;color:var(--txt3);font-size:10px;margin-top:3px;}
+
+  .mobile-sheet-install,
+  .mobile-sheet-logout{
+    width:100%;display:flex;align-items:center;gap:12px;
+    padding:14px;border-radius:14px;font-family:'Space Grotesk',sans-serif;
+    text-align:left;cursor:pointer;
+  }
+  .mobile-sheet-install{
+    margin-bottom:10px;border:1px solid rgba(198,241,53,.32);
+    background:rgba(198,241,53,.09);color:var(--lime);
+  }
+  .mobile-sheet-logout{
+    border:1px solid rgba(255,107,107,.25);
+    background:rgba(255,107,107,.07);color:#ff8b8b;
+  }
+  .mobile-sheet-install > span:first-child,
+  .mobile-sheet-logout > span:first-child{font-size:22px;}
+  .mobile-sheet-install > span:nth-child(2),
+  .mobile-sheet-logout > span:nth-child(2){flex:1;}
+  .mobile-sheet-install strong,
+  .mobile-sheet-logout strong{display:block;font-size:13px;}
+  .mobile-sheet-install small,
+  .mobile-sheet-logout small{display:block;color:var(--txt3);font-size:10px;margin-top:2px;}
+  .mobile-sheet-install b{font-size:20px;}
+
+  /* Landing page polish */
+  #landingScreen{min-height:100dvh;}
+  .land-nav{
+    padding:14px;
+    gap:8px;
+    align-items:center;
+  }
+  .land-logo{font-size:17px;flex-shrink:0;}
+  .land-nav-btns{gap:7px;min-width:0;}
+  .btn-ghost-sm,.btn-lime-sm{padding:9px 12px;font-size:11px;}
+  .hero{padding:42px 18px 30px;}
+  .hero-badge{font-size:10.5px;padding:7px 12px;}
+  .hero-title{font-size:38px;line-height:1.04;}
+  .hero-sub{font-size:14px;line-height:1.62;}
+  .hero-btns{width:100%;margin-bottom:45px;}
+  .hero-btns > button{
+    display:flex!important;
+    width:100%;
+    max-width:360px;
+    min-height:52px;
+    align-items:center;
+    justify-content:center;
+  }
+
+  #installBanner{bottom:calc(var(--mobile-nav-h) + env(safe-area-inset-bottom) + 14px);}
+}
+
+@media(max-width:420px){
+  .mobile-header-actions{gap:5px;}
+  .mobile-install-action span{display:none;}
+  .mobile-install-action{width:38px;justify-content:center;padding:7px;}
+  .mobile-logout-action{padding:7px 9px;font-size:10px;}
+
+  .cards{grid-template-columns:1fr;}
+  .hero-title{font-size:34px;}
+  .land-logo{font-size:16px;}
+  .btn-ghost-sm,.btn-lime-sm{padding:8px 10px;}
+}
+
+/* Avoid content hiding under iPhone home indicator in standalone mode */
+@media(display-mode:standalone){
+  @media(max-width:768px){
+    .main{
+      padding-bottom:calc(var(--mobile-nav-h) + env(safe-area-inset-bottom) + 34px);
+    }
+  }
+}
+
 </style>
 </head>
 <body>
@@ -764,6 +1137,17 @@ th { letter-spacing: .08em; }
 
 <!-- ===== APP ===== -->
 <div id="app">
+
+  <header class="mobile-app-header" aria-label="ImpulseGuard mobile header">
+    <div class="mobile-brand">
+      <div class="mobile-brand-name">Impulse<em>Guard</em></div>
+      <div class="mobile-brand-credit">by Fatima Kapadia</div>
+    </div>
+    <div class="mobile-header-actions">
+      <button class="mobile-install-action" type="button" onclick="triggerInstall()" aria-label="Install ImpulseGuard">📲 <span>Install</span></button>
+      <button class="mobile-logout-action" type="button" onclick="doLogout()" aria-label="Log out">Logout</button>
+    </div>
+  </header>
   <nav class="sidebar">
     <div class="sb-logo">Impulse<em>Guard</em><span class="sb-mood" id="moodLine">saving szn 💸</span><span style="font-size:9px;color:var(--txt3);font-weight:400;font-family:'Space Grotesk',sans-serif;display:block;margin-top:1px;">by Fatima Kapadia</span></div>
     <div class="nav">
@@ -775,6 +1159,7 @@ th { letter-spacing: .08em; }
       <div class="nav-item" onclick="showPage('bills')"><span class="nav-icon">🔔</span> Bills</div>
       <div class="nav-item" onclick="showPage('leaderboard')"><span class="nav-icon">🏆</span> Leaderboard</div>
       <div class="nav-item" onclick="showPage('settings')"><span class="nav-icon">⚙️</span> Settings</div>
+      <div class="nav-item mobile-more-nav" onclick="openMobileMenu()"><span class="nav-icon">☰</span> More</div>
     </div>
     <div style="padding:12px 22px;border-top:1px solid var(--b1)">
   <button onclick="triggerInstall()" class="pwa-install-btn" style="width:100%;padding:9px;background:rgba(198,241,53,.08);border:1px solid rgba(198,241,53,.2);border-radius:10px;color:var(--lime);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;justify-content:center;">
@@ -786,6 +1171,37 @@ th { letter-spacing: .08em; }
       <div><div class="user-name" id="sbName">User</div><div class="user-hint">tap to logout →</div></div>
     </div>
   </nav>
+
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu(event)">
+    <section class="mobile-menu-sheet" role="dialog" aria-modal="true" aria-label="More options" onclick="event.stopPropagation()">
+      <div class="mobile-sheet-handle"></div>
+      <div class="mobile-sheet-head">
+        <div>
+          <div class="mobile-sheet-title">more options ✨</div>
+          <div class="mobile-sheet-sub">ImpulseGuard • by Fatima Kapadia</div>
+        </div>
+        <button class="mobile-sheet-close" type="button" onclick="closeMobileMenu()">×</button>
+      </div>
+
+      <div class="mobile-more-grid">
+        <button type="button" onclick="mobileGo('goals')"><span>🎯</span><strong>Goals</strong><small>save with purpose</small></button>
+        <button type="button" onclick="mobileGo('bills')"><span>🔔</span><strong>Bills</strong><small>scan & remember</small></button>
+        <button type="button" onclick="mobileGo('leaderboard')"><span>🏆</span><strong>Leaderboard</strong><small>compare scores</small></button>
+        <button type="button" onclick="mobileGo('settings')"><span>⚙️</span><strong>Settings</strong><small>budget & profile</small></button>
+      </div>
+
+      <button class="mobile-sheet-install" type="button" onclick="closeMobileMenu();triggerInstall();">
+        <span>📲</span>
+        <span><strong>Install ImpulseGuard</strong><small>add it to your Home Screen</small></span>
+        <b>→</b>
+      </button>
+
+      <button class="mobile-sheet-logout" type="button" onclick="closeMobileMenu();doLogout();">
+        <span>↪</span>
+        <span><strong>Log out</strong><small>securely leave this account</small></span>
+      </button>
+    </section>
+  </div>
   <main class="main">
 
     <!-- DASHBOARD -->
@@ -1278,6 +1694,24 @@ function nativeShareCurrent(){ if(window._nativeShareCurrent) window._nativeShar
 function copyInviteLink(){ if(window._copyInviteLink) window._copyInviteLink(); }
 function triggerInstall(){ if(window._triggerInstall) window._triggerInstall(); }
 
+function openMobileMenu(){
+  const menu=document.getElementById('mobileMenuOverlay');
+  if(menu){
+    menu.classList.add('show');
+    document.body.classList.add('mobile-menu-open');
+  }
+}
+function closeMobileMenu(event){
+  if(event && event.target && event.target.id!=='mobileMenuOverlay') return;
+  const menu=document.getElementById('mobileMenuOverlay');
+  if(menu) menu.classList.remove('show');
+  document.body.classList.remove('mobile-menu-open');
+}
+function mobileGo(page){
+  closeMobileMenu();
+  showPage(page);
+}
+
 </script>
 
 <script type="module">
@@ -1440,6 +1874,14 @@ window._showPage=window.showPage=(p)=>{
   const navItems=document.querySelectorAll('.nav-item');
   const map={dashboard:0,transactions:1,reports:2,vibes:3,goals:4,bills:5,leaderboard:6,settings:7};
   if(map[p]!==undefined) navItems[map[p]].classList.add('on');
+
+  const mobileMore=document.querySelector('.mobile-more-nav');
+  const secondaryPages=['goals','bills','leaderboard','settings'];
+  if(window.innerWidth<=768 && mobileMore && secondaryPages.includes(p)){
+    if(map[p]!==undefined) navItems[map[p]].classList.remove('on');
+    mobileMore.classList.add('on');
+  }
+  closeMobileMenu();
   if(p==='dashboard') renderDash();
   if(p==='transactions') renderTx();
   if(p==='reports') renderReports();

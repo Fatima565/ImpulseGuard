@@ -1,4 +1,4 @@
-const CACHE_NAME = 'impulseguard-v5';
+const CACHE_NAME = 'impulseguard-v8-mobile';
 const ASSETS = [
   '/',
   '/index.html',
