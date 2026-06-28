@@ -9,6 +9,11 @@ const OPENROUTER_API_KEY = defineSecret('OPENROUTER_API_KEY');
 exports.ai = onRequest(
   {
     region: 'us-central1',
+    cors: [
+      'https://impulseguard.dev',
+      'https://www.impulseguard.dev',
+      'https://fatima565.github.io'
+    ],
     secrets: [OPENROUTER_API_KEY],
     timeoutSeconds: 60,
     memory: '256MiB',
